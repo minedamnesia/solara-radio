@@ -1,4 +1,3 @@
-// solara-radio-app/src/components/Sidebar.jsx
 import { NavLink } from 'react-router-dom';
 
 export default function Sidebar() {
@@ -22,9 +21,8 @@ export default function Sidebar() {
             key={index}
             to={link.path}
             className={({ isActive }) =>
-              `block text-xl font-heading font-medium ${isActive ? 'text-amber-400' : 'hover:text-amber-400'}`
+              `block text-2xl font-heading tracking-wide py-2 px-4 rounded-lg transition-colors duration-300 ${isActive ? 'bg-amber-400 text-green-950' : 'hover:bg-amber-200 hover:text-green-950'}`
             }
-
           >
             {link.label}
           </NavLink>
