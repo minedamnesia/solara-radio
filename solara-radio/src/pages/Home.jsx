@@ -2,7 +2,7 @@ import Widget from '../components/Widget';
 
 export default function Home() {
   return (
-    <div className="grid grid-cols-3 grid-rows-2 gap-6">
+    <div className="grid grid-cols-3 grid-rows-3 gap-6">
     <Widget title="Online Radio Contacts" description="Track active frequencies and connect worldwide." />
     <Widget
       title="About Me"
@@ -13,6 +13,9 @@ export default function Home() {
     <Widget title="Radio Guides" description="Quick reference for bands, modes, and emergency protocols." />
     <Widget title="Hiking Maps" description="Explore radio-friendly trails." />
     <Widget title="Solar Positions" description="Real-time sun tracking for optimal signals." />
+    <Widget title="Local Plant Info" description="Identify flora along your radio expeditions." />
+    <Widget title="Photo Archive" description="Gallery of fieldwork and antenna setups." />
+    <Widget title="Creative" description="Creative projects and visual explorations." />
   </div>
   );
 }
