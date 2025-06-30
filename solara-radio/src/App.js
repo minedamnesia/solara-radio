@@ -7,7 +7,7 @@ import Page from './pages/Page';
 
 export default function App() {
   return (
-    <div className="bg-green-950 text-amber-200 min-h-screen flex">
+    <div className="bg-gunmetal text-persian-orange min-h-screen flex">
       <div className="flex-1 p-6">
         <Header />
         <Routes>
