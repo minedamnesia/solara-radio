@@ -10,6 +10,7 @@ export default function Home() {
         customClass="row-span-2"
         nestedWidget={{ title: 'Coding Projects', description: 'Scripts and software for radio tracking.', link: '/projects' }}
         link="/about"
+        image="/qsl.png" // <-- add this line
       />
       <Widget title="Radio Guides" description="Quick reference for bands, modes, and emergency protocols." link="/guides" />
       <Widget title="Hiking Maps" description="Explore radio-friendly trails." link="/hiking-maps" />
