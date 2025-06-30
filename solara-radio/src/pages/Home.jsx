@@ -8,7 +8,7 @@ export default function Home() {
       title="About Me"
       description="Learn more about the operator."
       customClass="row-span-2"
-      nestedWidget={{ title: 'Coding Projects', description: 'Scripts and software for radio tracking.' }}
+      nestedWidget={{ title: 'Coding Projects', description: 'Scripts and software for radio tracking.', link: '/projects' }}
     />
     <Widget title="Radio Guides" description="Quick reference for bands, modes, and emergency protocols." />
     <Widget title="Hiking Maps" description="Explore radio-friendly trails." />
