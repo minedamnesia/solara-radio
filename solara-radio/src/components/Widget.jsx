@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 
-export default function Widget({ title, description, customClass, nestedWidget }) {
+export default function Widget({ title, description, customClass, nestedWidget, link }) {
   return (
     <div className={`bg-coffee p-4 rounded-2xl shadow-lg ${customClass || ''}`}>
-      <h2 className="text-3xl font-heading tracking-wide mb-4 text-persian-orange">{title}</h2>
+      <h2 className="text-3xl font-heading tracking-wide mb-4 text-persian-orange">
+        <Link to={link} className="hover:underline">
+          {title}
+        </Link>
+      </h2>
       <p className="font-sans mb-4 text-tan">{description}</p>
       {nestedWidget && (
         <div className="bg-sage p-4 rounded-xl shadow-md">
