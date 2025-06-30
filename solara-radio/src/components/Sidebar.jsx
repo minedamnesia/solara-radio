@@ -5,13 +5,14 @@ export default function Sidebar() {
     { path: '/', label: 'Home' },
     { path: '/radio-contacts', label: 'Radio Contacts' },
     { path: '/guides', label: 'Guides' },
+    { path: '/hiking-maps', label: 'Hiking Maps' },
     { path: '/solar-positions', label: 'Solar Positions' },
-    { path: '/maps', label: 'Maps' },
     { path: '/plant-info', label: 'Plant Info' },
     { path: '/photos', label: 'Photos' },
-    { path: '/projects', label: 'Projects' },
+    { path: '/creative', label: 'Creative' },
     { path: '/about', label: 'About' }
   ];
+  
 
   return (
     <aside className="w-64 bg-feldgrau p-6 flex flex-col justify-between">
