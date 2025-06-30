@@ -20,6 +20,7 @@ export default function App() {
           <Route path="/photos" element={<Page title="Photos" />} />
           <Route path="/creative" element={<Page title="Creative" />} />
           <Route path="/about" element={<Page title="About" />} />
+          <Route path="/projects" element={<Page title="Coding Projects" />} />
         </Routes>
       </div>
       <Sidebar />
