@@ -14,14 +14,14 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="w-64 bg-green-900 p-6 flex flex-col justify-between">
+    <aside className="w-64 bg-feldgrau p-6 flex flex-col justify-between">
       <nav className="space-y-4">
         {links.map((link, index) => (
           <NavLink
             key={index}
             to={link.path}
             className={({ isActive }) =>
-              `block text-2xl font-heading tracking-wide py-2 px-4 rounded-lg transition-colors duration-300 ${isActive ? 'bg-amber-400 text-green-950' : 'hover:bg-amber-200 hover:text-green-950'}`
+              `block text-2xl font-heading tracking-wide py-2 px-4 rounded-lg transition-colors duration-300 ${isActive ? 'bg-persian-orange text-gunmetal' : 'hover:bg-tan hover:text-gunmetal'}`
             }
           >
             {link.label}
