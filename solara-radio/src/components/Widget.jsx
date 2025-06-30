@@ -1,8 +1,16 @@
 import { Link } from 'react-router-dom';
 
-export default function Widget({ title, description, customClass, nestedWidget, link }) {
+export default function Widget({ title, description, customClass, nestedWidget, link, image }) {
+
   return (
     <div className={`bg-coffee p-4 rounded-2xl shadow-lg ${customClass || ''}`}>
+      {image && (
+        <img
+          src={image}
+          alt={`${title} QSL Card`}
+          className="w-32 h-auto mb-4 rounded-xl shadow-lg"
+        />
+      )}
       <h2 className="text-3xl font-heading tracking-wide mb-4 text-persian-orange">
         <Link to={link} className="hover:underline">
           {title}
@@ -21,4 +29,5 @@ export default function Widget({ title, description, customClass, nestedWidget, 
       )}
     </div>
   );
+
 }
