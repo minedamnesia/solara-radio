@@ -18,7 +18,7 @@ export default function App() {
           <Route path="/maps" element={<Page title="Maps" />} />
           <Route path="/plant-info" element={<Page title="Plant Info" />} />
           <Route path="/photos" element={<Page title="Photos" />} />
-          <Route path="/projects" element={<Page title="Projects" />} />
+          <Route path="/creative" element={<Page title="Creative" />} />
           <Route path="/about" element={<Page title="About" />} />
         </Routes>
       </div>
