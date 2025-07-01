@@ -1,9 +1,29 @@
+import { useState } from 'react';
 import Widget from '../components/Widget';
+import OnlineRadioContactsWidget from '../components/OnlineRadioContactsWidget';
+import UploadLogbook from '../components/UploadLogbook';
+import SolarPositionsWidget from '../components/SolarPositionsWidget'; 
+import HikingMapsWidget from '../components/HikingMapsWidget';
 
 export default function Home() {
+  const [refreshKey, setRefreshKey] = useState(0);
+  const [showUploader, setShowUploader] = useState(false);
+
+  const handleUploadSuccess = () => {
+    setRefreshKey(prev => prev + 1);
+    setShowUploader(false); // Hide uploader after successful upload
+  };
+
   return (
     <div className="grid grid-cols-3 grid-rows-3 gap-6">
-      <Widget title="Online Radio Contacts" description="Track active frequencies and connect worldwide." link="/radio-contacts" />
+      <OnlineRadioContactsWidget
+        refreshKey={refreshKey}
+        onShowUploader={() => setShowUploader(true)}
+      />
+      
+      {showUploader && (
+        <UploadLogbook onUploadSuccess={handleUploadSuccess} />
+      )}
       <Widget
         title="About Me"
         description="Learn more about the operator."
@@ -13,8 +33,8 @@ export default function Home() {
         image="/qsl.png" // <-- add this line
       />
       <Widget title="Radio Guides" description="Quick reference for bands, modes, and emergency protocols." link="/guides" />
-      <Widget title="Hiking Maps" description="Explore radio-friendly trails." link="/hiking-maps" />
-      <Widget title="Solar Positions" description="Real-time sun tracking for optimal signals." link="/solar-positions" />
+      <HikingMapsWidget />
+      <SolarPositionsWidget />
       <Widget title="Local Plant Info" description="Identify flora along your radio expeditions." link="/plant-info" />
       <Widget title="Photo Archive" description="Gallery of fieldwork and antenna setups." link="/photos" />
       <Widget title="Creative" description="Creative projects and visual explorations." link="/creative" />
