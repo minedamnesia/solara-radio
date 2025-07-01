@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import Modal from '../components/Modal';
 
 export default function PSKReporterWidget() {
   const [callsign, setCallsign] = useState('');
   const [mapUrl, setMapUrl] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const handleSearch = () => {
     if (!callsign) return;
@@ -31,13 +33,25 @@ export default function PSKReporterWidget() {
       </button>
 
       {mapUrl && (
-        <iframe
-          src={mapUrl}
-          title="PSK Reporter Map"
-          className="w-full h-[500px] rounded-lg border-2 border-persian-orange"
-        ></iframe>
+        <div>
+          <img
+            src="/pskreporter-thumbnail.png"
+            alt="PSK Reporter Thumbnail"
+            className="w-full h-48 object-cover rounded-lg cursor-pointer border-2 border-persian-orange"
+            onClick={() => setShowModal(true)}
+          />
+
+          {showModal && (
+            <Modal onClose={() => setShowModal(false)}>
+              <iframe
+                src={mapUrl}
+                title="PSK Reporter Map"
+                className="w-3/4 h-[75vh] rounded-lg border-2 border-persian-orange"
+              ></iframe>
+            </Modal>
+          )}
+        </div>
       )}
     </div>
   );
 }
-
