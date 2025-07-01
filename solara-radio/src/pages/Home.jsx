@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import Widget from '../components/Widget';
+import HikingMapsWidget from '../components/HikingMapsWidget';
 import OnlineRadioContactsWidget from '../components/OnlineRadioContactsWidget';
 import UploadLogbook from '../components/UploadLogbook';
-import SolarPositionsWidget from '../components/SolarPositionsWidget'; 
-import HikingMapsWidget from '../components/HikingMapsWidget';
+import LocalPlantsWidget from '../components/LocalPlantsWidget';
+import SolarPositionsWidget from '../components/SolarPositionsWidget';
+import MUFMapWidget from '../components/MUFMapWidget';
+import PskreporterWidget from '../components/PskreporterWidget';
 
 export default function Home() {
   const [refreshKey, setRefreshKey] = useState(0);
@@ -15,12 +18,11 @@ export default function Home() {
   };
 
   return (
-    <div className="grid grid-cols-3 grid-rows-3 gap-6">
+    <div className="grid grid-cols-3 grid-rows-4 gap-6">
       <OnlineRadioContactsWidget
         refreshKey={refreshKey}
         onShowUploader={() => setShowUploader(true)}
       />
-      
       {showUploader && (
         <UploadLogbook onUploadSuccess={handleUploadSuccess} />
       )}
@@ -30,14 +32,17 @@ export default function Home() {
         customClass="row-span-2"
         nestedWidget={{ title: 'Coding Projects', description: 'Scripts and software for radio tracking.', link: '/projects' }}
         link="/about"
-        image="/qsl.png" // <-- add this line
+        image="/qsl.png"
       />
-      <Widget title="Radio Guides" description="Quick reference for bands, modes, and emergency protocols." link="/guides" />
+      <MUFMapWidget />
       <HikingMapsWidget />
+      <PskreporterWidget />
       <SolarPositionsWidget />
-      <Widget title="Local Plant Info" description="Identify flora along your radio expeditions." link="/plant-info" />
+      <LocalPlantsWidget />
       <Widget title="Photo Archive" description="Gallery of fieldwork and antenna setups." link="/photos" />
+      <Widget title="Radio Guides" description="Quick reference for bands, modes, and emergency protocols." link="/guides" />
       <Widget title="Creative" description="Creative projects and visual explorations." link="/creative" />
+
     </div>
   );
 }
