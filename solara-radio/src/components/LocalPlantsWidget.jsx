@@ -54,8 +54,10 @@ export default function LocalPlantsWidget() {
       }
     } else {
       if (!gridSquare) return;
-      const { lat, lon } = toLatLon(gridSquare.toUpperCase());
+      const [lat, lon] = toLatLon(gridSquare.toUpperCase());
+      console.log("Fetching plants near:", lat, lon);
       fetchPlants(lat, lon);
+      console.log("Fetched data:", data);
     }
   };
 
