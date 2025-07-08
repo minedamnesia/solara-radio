@@ -1,34 +1,33 @@
-import { NavLink } from 'react-router-dom';
-
-export default function Sidebar() {
-  const links = [
-    { path: '/', label: 'Home' },
-    { path: '/radio-contacts', label: 'Radio Contacts' },
-    { path: '/guides', label: 'Guides' },
-    { path: '/hiking-maps', label: 'Hiking Maps' },
-    { path: '/solar-positions', label: 'Solar Positions' },
-    { path: '/plant-info', label: 'Plant Info' },
-    { path: '/photos', label: 'Photos' },
-    { path: '/creative', label: 'Creative' },
-    { path: '/about', label: 'About' }
-  ];
-  
-
+export default function SidebarRight() {
   return (
-    <aside className="w-64 bg-feldgrau p-6 flex flex-col justify-between">
-      <nav className="space-y-4">
-        {links.map((link, index) => (
-          <NavLink
-            key={index}
-            to={link.path}
-            className={({ isActive }) =>
-              `block text-2xl font-heading tracking-wide py-2 px-4 rounded-lg transition-colors duration-300 ${isActive ? 'bg-persian-orange text-gunmetal' : 'hover:bg-tan hover:text-gunmetal'}`
-            }
-          >
-            {link.label}
-          </NavLink>
-        ))}
-      </nav>
+    <aside className="w-full md:w-64 p-4">
+      <div className="bg-sage p-4 rounded-2xl shadow-lg">
+        <h2 className="text-xl font-heading mb-4 text-persian-orange">Coding Projects</h2>
+        <ul className="list-disc list-inside text-gunmetal text-sm space-y-2">
+          <li>
+            <a
+              href="https://github.com/minedamnesia/solara-prop"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-persian-orange"
+            >
+              Propagation Project
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/minedamnesia/another-project"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-persian-orange"
+            >
+              Signal Mapper
+            </a>
+          </li>
+          {/* Add more projects as needed */}
+        </ul>
+      </div>
     </aside>
   );
 }
+
