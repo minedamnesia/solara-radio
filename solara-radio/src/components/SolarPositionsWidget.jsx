@@ -73,10 +73,10 @@ export default function SolarPositionsWidget() {
               <div
                 className={`p-2 rounded text-center font-bold ${
                   data.polar_cap_absorption === 'red'
-                    ? 'bg-red-600 text-white'
+                    ? 'bg-persian-orange text-coffee'
                     : data.polar_cap_absorption === 'yellow'
-                    ? 'bg-yellow-400 text-black'
-                    : 'bg-green-500 text-white'
+                    ? 'bg-tan text-coffee'
+                    : 'bg-sage text-gunmetal'
                 }`}
               >
                 {data.polar_cap_absorption.toUpperCase()}
