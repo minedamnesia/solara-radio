@@ -139,7 +139,7 @@ app.get('/api/parks', (req, res) => {
     .on('data', (data) => {
       // Only return parks in the specified state (if provided)
       // Filter by "US-XX" if a state is provided
-      if (!state || data.countryCode === `US-${state}`) {
+      if (!state || data.locationDesc === `US-${state}`) {
         results.push(data);
       }
     })
