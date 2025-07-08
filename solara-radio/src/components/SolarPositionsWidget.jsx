@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 
 export default function SolarPositionsWidget() {
-  const [mode, setMode] = useState('weather'); // 'weather' or 'position'
+  const [mode, setMode] = useState('weather');
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Fetch data when mode changes
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
@@ -13,12 +12,11 @@ export default function SolarPositionsWidget() {
         let response;
 
         if (mode === 'weather') {
-          // Example: NOAA X-ray flares data
-          response = await fetch('https://services.swpc.noaa.gov/json/goes/primary/xray-flares.json');
+          // Updated to use NOAA solar probabilities
+          response = await fetch('https://services.swpc.noaa.gov/json/solar_probabilities.json');
           const json = await response.json();
-          setData(json.slice(0, 5)); // Take recent 5 flares
+          setData(json[0]); // only using the first day’s data for now
         } else if (mode === 'position') {
-          // Example: Sunrise-Sunset API
           response = await fetch('https://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400&formatted=0');
           const json = await response.json();
           setData(json.results);
@@ -56,15 +54,40 @@ export default function SolarPositionsWidget() {
       {loading ? (
         <p className="font-sans text-tan">Loading...</p>
       ) : mode === 'weather' ? (
-        <ul className="font-sans text-tan">
-          {data && data.length > 0 ? data.map((flare, index) => (
-            <li key={index}>Start: {flare.begin_time} | Class: {flare.flux}</li>
-          )) : (
+        <div className="font-sans text-tan space-y-2">
+          {data ? (
+            <>
+              <h3 className="text-lg font-heading text-persian-orange">Flare Probabilities (1 Day)</h3>
+              <ul className="space-y-1">
+                <li>C-class: {data.c_class_1_day}%</li>
+                <li>M-class: {data.m_class_1_day}%</li>
+                <li>X-class: {data.x_class_1_day}%</li>
+              </ul>
+
+              <h3 className="text-lg font-heading text-persian-orange mt-4">Proton Events (1 Day)</h3>
+              <ul className="space-y-1">
+                <li>10MeV Protons: {data['10mev_protons_1_day']}%</li>
+              </ul>
+
+              <h3 className="text-lg font-heading text-persian-orange mt-4">Polar Cap Absorption</h3>
+              <div
+                className={`p-2 rounded text-center font-bold ${
+                  data.polar_cap_absorption === 'red'
+                    ? 'bg-red-600 text-white'
+                    : data.polar_cap_absorption === 'yellow'
+                    ? 'bg-yellow-400 text-black'
+                    : 'bg-green-500 text-white'
+                }`}
+              >
+                {data.polar_cap_absorption.toUpperCase()}
+              </div>
+            </>
+          ) : (
             <p>No solar weather data available.</p>
           )}
-        </ul>
+        </div>
       ) : (
-        <ul className="font-sans text-tan">
+        <ul className="font-sans text-tan space-y-1">
           {data ? (
             <>
               <li>Sunrise: {new Date(data.sunrise).toLocaleTimeString()}</li>
@@ -80,3 +103,4 @@ export default function SolarPositionsWidget() {
     </div>
   );
 }
+
