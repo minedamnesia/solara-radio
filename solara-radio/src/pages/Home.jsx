@@ -1,6 +1,6 @@
 import Widget from '../components/Widget';
 import HikingMapsWidget from '../components/HikingMapsWidget';
-import OnlineRadioContactsWidget from '../components/OnlineRadioContactsWidget';
+import CodingProjectsWidget from '../components/CodingProjectsWidget';
 import LocalPlantsWidget from '../components/LocalPlantsWidget';
 import SolarPositionsWidget from '../components/SolarPositionsWidget';
 import MUFMapWidget from '../components/MUFMapWidget';
@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     <div className="grid grid-cols-3 grid-rows-4 gap-6">
-      <OnlineRadioContactsWidget />
+      <CodingProjectsWidget />
       <Widget
         title="About KK7QEA / Kelly Simer "
         customClass="row-span-2"
