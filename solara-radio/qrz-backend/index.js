@@ -131,7 +131,7 @@ app.get('/api/recent-contacts', async (req, res) => {
 
 // Serve parks from CSV
 app.get('/api/parks', (req, res) => {
-  const stateFilter = req.query.state?.toUpperCase();
+  const { state } = req.query;
   const results = [];
 
   fs.createReadStream(path.join(__dirname, 'all_parks_ext.csv'))
