@@ -43,6 +43,44 @@ async function fetchCallsignData(callsign) {
   return data;
 }
 
+app.get('/api/recent-logbook', async (req, res) => {
+  try {
+    // Re-authenticate if session is missing or expired
+    if (!sessionKey) await getSessionKey();
+
+    // Build logbook query URL (replace with your actual QRZ callsign)
+    const logbookUrl = `https://xmldata.qrz.com/xml/current/?s=${sessionKey};search=KK7QEA`;
+
+    const response = await axios.get(logbookUrl);
+    const jsonData = await parseStringPromise(response.data);
+
+    // Check for session errors (session expired, etc.)
+    const sessionError = jsonData?.QRZDatabase?.Session?.[0]?.Error?.[0];
+    if (sessionError && sessionError.includes("Invalid session key")) {
+      console.log("Session expired. Getting new session key...");
+      await getSessionKey(); // Refresh session
+      return res.redirect('/api/recent-logbook'); // Retry once
+    }
+
+    const logbook = jsonData?.QRZDatabase?.Callsign || [];
+
+    const recentContacts = logbook.slice(0, 5).map(entry => ({
+      callsign: entry.call?.[0] || 'Unknown',
+      frequency: entry.freq?.[0] || 'Unknown',
+      mode: entry.mode?.[0] || 'Unknown',
+      datetime: `${entry.qso_date?.[0] || ''} ${entry.time_on?.[0] || ''}`,
+      country: entry.country?.[0] || 'Unknown',
+      state: entry.state?.[0] || ''
+    }));
+
+    res.json(recentContacts);
+  } catch (error) {
+    console.error('Error fetching QRZ logbook:', error.message);
+    res.status(500).json({ error: 'Failed to fetch QRZ logbook' });
+  }
+});
+
+
 
 // ===== Middleware: Upload Secret Protection =====
 function verifyUploadSecret(req, res, next) {
