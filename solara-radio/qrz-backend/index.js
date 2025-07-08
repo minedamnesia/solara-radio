@@ -131,18 +131,34 @@ app.get('/api/recent-contacts', async (req, res) => {
 
 // Serve parks from CSV
 app.get('/api/parks', (req, res) => {
+  const stateFilter = req.query.state?.toUpperCase();
   const results = [];
-  fs.createReadStream(path.join(__dirname, 'parks.csv'))
+
+  fs.createReadStream(path.join(__dirname, 'all_parks_ext.csv'))
     .pipe(csv())
-    .on('data', (data) => results.push(data))
+    .on('data', (row) => {
+      // Only return parks in the specified state (if provided)
+      if (!stateFilter || row.state === stateFilter) {
+        results.push({
+          reference: row.reference,
+          name: row.name,
+          latitude: parseFloat(row.latitude),
+          longitude: parseFloat(row.longitude),
+          grid: row.grid,
+          state: row.state,
+          country: row.country
+        });
+      }
+    })
     .on('end', () => {
       res.json(results);
     })
-    .on('error', (error) => {
-      console.error('Error reading parks.csv:', error);
+    .on('error', (err) => {
+      console.error('Error reading CSV:', err);
       res.status(500).json({ error: 'Failed to load parks data.' });
     });
 });
+
 
 
 // ===== Start Server =====
