@@ -136,7 +136,7 @@ app.get('/api/parks', (req, res) => {
 
   fs.createReadStream(path.join(__dirname, 'all_parks_ext.csv'))
     .pipe(csv())
-    .on('data', (row) => {
+    .on('data', (data) => {
       // Only return parks in the specified state (if provided)
       // Filter by "US-XX" if a state is provided
       if (!state || data.countryCode === `US-${state}`) {
