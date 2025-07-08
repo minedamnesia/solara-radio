@@ -52,6 +52,8 @@ app.get('/api/recent-logbook', async (req, res) => {
     const logbookUrl = `https://xmldata.qrz.com/xml/current/?s=${sessionKey};search=KK7QEA`;
 
     const response = await axios.get(logbookUrl);
+
+    console.log('🔍 Raw QRZ Logbook XML Response:\n', xml);
     const jsonData = await parseStringPromise(response.data);
 
     // Check for session errors (session expired, etc.)
