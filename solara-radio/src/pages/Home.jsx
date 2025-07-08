@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Widget from '../components/Widget';
 import HikingMapsWidget from '../components/HikingMapsWidget';
 import OnlineRadioContactsWidget from '../components/OnlineRadioContactsWidget';
