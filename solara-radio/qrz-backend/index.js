@@ -36,15 +36,25 @@ function verifyUploadSecret(req, res, next) {
 // ===== Callsign Lookup (QRZ XML) =====
 app.get('/api/lookup/:callsign', async (req, res) => {
   try {
+    const { callsign } = req.params;
+
+    // Always get fresh key if none exists
     if (!sessionKey) await getSessionKey();
 
-    const { callsign } = req.params;
-    const url = `https://xmldata.qrz.com/xml/current/?s=${sessionKey};callsign=${callsign}`;
-    const response = await axios.get(url);
+    let url = `https://xmldata.qrz.com/xml/current/?s=${sessionKey};callsign=${callsign}`;
+    let response = await axios.get(url);
+    let jsonData = await parseStringPromise(response.data);
 
-    const jsonData = await parseStringPromise(response.data);
+    // If QRZ returned an invalid session, re-authenticate
+    if (jsonData.QRZDatabase.Session?.[0]?.Error?.[0] === 'Invalid session key') {
+      console.warn('Session expired. Getting new session key...');
+      await getSessionKey(); // Refresh key
 
-    console.log('Raw parsed QRZ data:', JSON.stringify(jsonData, null, 2));
+      // Retry the call with new session key
+      url = `https://xmldata.qrz.com/xml/current/?s=${sessionKey};callsign=${callsign}`;
+      response = await axios.get(url);
+      jsonData = await parseStringPromise(response.data);
+    }
 
     const callsignData = jsonData.QRZDatabase.Callsign?.[0] || {};
 
@@ -52,14 +62,16 @@ app.get('/api/lookup/:callsign', async (req, res) => {
       callsign: callsignData.call?.[0] || callsign,
       country: callsignData.country?.[0] || 'Unknown',
       state: callsignData.state?.[0] || '',
-      dxcc: callsignData.dxcc?.[0] || ''
+      dxcc: callsignData.dxcc?.[0] || '',
+      grid: callsignData.grid?.[0] || '',
+      name: callsignData.fname?.[0] || '',
+      qth: callsignData.qth?.[0] || '',
     });
   } catch (error) {
     console.error('Error fetching QRZ data:', error.message);
     res.status(500).json({ error: 'Failed to fetch QRZ data' });
   }
 });
-
 
 // ===== File Upload Setup =====
 const storage = multer.diskStorage({
