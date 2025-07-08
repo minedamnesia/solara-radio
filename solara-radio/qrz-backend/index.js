@@ -53,6 +53,9 @@ app.get('/api/lookup/:callsign', async (req, res) => {
       // Retry the call with new session key
       url = `https://xmldata.qrz.com/xml/current/?s=${sessionKey};callsign=${callsign}`;
       response = await axios.get(url);
+
+      console.log('Raw QRZ response:', response.data);
+
       jsonData = await parseStringPromise(response.data);
     }
 
