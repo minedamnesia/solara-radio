@@ -13,7 +13,8 @@ export default function Home() {
     <div className="grid grid-cols-3 grid-rows-4 gap-6">
       <CodingProjectsWidget />
       <Widget
-        title="About KK7QEA / Kelly Simer "
+        title="About Me"
+        description="Hi! I'm Kelly, otherwise known as KK7QEA..."
         customClass="row-span-2"
         link="/about"
         image="/qsl.png"
