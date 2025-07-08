@@ -27,17 +27,6 @@ export default function Widget({ title, description, customClass, nestedWidget, 
         </div>
       )}
 
-      {/* Nested Widget */}
-      {nestedWidget && (
-        <div className="flex justify-center items-center h-[60%] mb-4">
-          <div className="bg-sage p-4 rounded-lg shadow-md w-3/4 text-center">
-            <h3 className="text-xl font-heading mb-2">
-              <a href={nestedWidget.link}>{nestedWidget.title}</a>
-            </h3>
-            <p className="font-sans text-gunmetal">{nestedWidget.description}</p>
-          </div>
-        </div>
-      )}
 
       {/* Modal for Biographical Text */}
       {showModal && (
