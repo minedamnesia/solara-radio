@@ -65,7 +65,7 @@ export default function HikingMapsWidget() {
 
   return (
     <div className="bg-coffee p-4 rounded-2xl shadow-lg">
-      <h2 className="text-3xl font-heading tracking-wide mb-4 text-persian-orange">Hiking Maps</h2>
+      <h2 className="text-3xl font-heading tracking-wide mb-4 text-persian-orange">Hiking Trails near POTA spots</h2>
 
       {/* State Dropdown */}
       <select
@@ -88,7 +88,7 @@ export default function HikingMapsWidget() {
           }}
           className="mb-4 p-2 rounded w-full"
         >
-          <option value="">Select a POTA Park</option>
+          <option value="">Select a POTA Site</option>
           {parks.map((park) => (
             <option key={park.reference} value={park.reference}>
               {park.name} ({park.reference})

@@ -5,6 +5,8 @@ import Modal from '../components/Modal';
 export default function Widget({ title, description, customClass, nestedWidget, link, image }) {
   const [showModal, setShowModal] = useState(false);
 
+  const isAboutMe = title === 'About Me';
+
   return (
     <div className={`bg-coffee p-4 rounded-2xl shadow-lg ${customClass || ''}`}>
       {image && <img src={image} alt={title} className="w-full h-50 object-cover rounded mb-4 mx-auto" />}
@@ -14,34 +16,38 @@ export default function Widget({ title, description, customClass, nestedWidget, 
       </h2>
 
       <div className="mb-4">
-        <p className="font-sans text-tan">{description}</p>
+        {isAboutMe ? (
+          <div className="bg-sage p-2 rounded-lg flex justify-between items-center">
+            <p className="font-sans text-gunmetal text-sm">Hi! I'm Kelly, otherwise known as KK7QEA...</p>
+            <button
+              onClick={() => setShowModal(true)}
+              className="text-gunmetal hover:text-persian-orange ml-2"
+              aria-label="View Full Bio"
+            >
+              <Info size={24} />
+            </button>
+          </div>
+        ) : (
+          <p className="font-sans text-tan">{description}</p>
+        )}
       </div>
 
-      {/* Biographical Text Block */}
-      {title === 'About Me' && (
-        <div className="bg-sage p-2 rounded-lg mb-4 flex justify-between items-center h-[30%]">
-          <p className="font-sans text-gunmetal text-sm">Start of biographical statement...</p>
-          <button onClick={() => setShowModal(true)} className="text-gunmetal hover:text-persian-orange">
-            <Info size={24} />
-          </button>
-        </div>
-      )}
-
-
-      {/* Modal for Biographical Text */}
-      {showModal && (
+      {/* Modal for Full Biographical Text */}
+      {isAboutMe && showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <div className="p-4 text-tan">
             <h2 className="text-3xl font-heading mb-4 text-persian-orange">About Me - Full Bio</h2>
-            <p className="font-sans">Hi! I'm Kelly, otherwise known as KK7QEA. I have had an amateur radio license since December 2023, when I first started as a Technician,  and I moved up to General in 2024 after building my first antenna—a simple 10M dipole that got me hooked. These days, I usually operate with a Xiegu G90 and an end-fed halfwave or random wire, depending on the setting.</p>
-            <p>I’m a member of the Henderson Amateur Radio Club, and as of July 5, 2025, I hold an Extra class license. Lately, I’ve been spending more time on digital modes like FT8, where I enjoy the efficiency and reach of low-power contacts.</p>
-            <p>I’m especially drawn to portable operations and try to activate parks whenever I can—POTA has become a favorite part of the hobby. I’ve even attempted a SOTA activation, though it ended up being more of a hike than a contact success.</p>
-            <p>By day, I work as a software developer writing Python. Off the air, I enjoy hiking, gardening, art, music, stargazing, and time outdoors with my very curious dog.</p>
-            <p>Hope to connect on the bands soon. 73!</p>
-
+            <div className="space-y-4 font-sans">
+              <p>Hi! I'm Kelly, otherwise known as KK7QEA. I have had an amateur radio license since December 2023, when I first started as a Technician, and I moved up to General in 2024 after building my first antenna—a simple 10M dipole that got me hooked. These days, I usually operate with a Xiegu G90 and an end-fed halfwave or random wire, depending on the setting.</p>
+              <p>I’m a member of the Henderson Amateur Radio Club, and as of July 5, 2025, I hold an Extra class license. Lately, I’ve been spending more time on digital modes like FT8, where I enjoy the efficiency and reach of low-power contacts.</p>
+              <p>I’m especially drawn to portable operations and try to activate parks whenever I can—POTA has become a favorite part of the hobby. I’ve even attempted a SOTA activation, though it ended up being more of a hike than a contact success.</p>
+              <p>By day, I work as a software developer writing Python. Off the air, I enjoy hiking, gardening, art, music, stargazing, and time outdoors with my very curious dog.</p>
+              <p>Hope to connect on the bands soon. 73!</p>
+            </div>
           </div>
         </Modal>
       )}
     </div>
   );
 }
+
