@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Widget from '../components/Widget';
 import HikingMapsWidget from '../components/HikingMapsWidget';
 import OnlineRadioContactsWidget from '../components/OnlineRadioContactsWidget';
-import UploadLogbook from '../components/UploadLogbook';
 import LocalPlantsWidget from '../components/LocalPlantsWidget';
 import SolarPositionsWidget from '../components/SolarPositionsWidget';
 import MUFMapWidget from '../components/MUFMapWidget';
@@ -10,13 +9,6 @@ import PskreporterWidget from '../components/PskreporterWidget';
 import SpotifyEmbedWidget from '../components/SpotifyEmbedWidget';
 
 export default function Home() {
-  const [refreshKey, setRefreshKey] = useState(0);
-  const [showUploader, setShowUploader] = useState(false);
-
-  const handleUploadSuccess = () => {
-    setRefreshKey(prev => prev + 1);
-    setShowUploader(false); // Hide uploader after successful upload
-  };
 
   return (
     <div className="grid grid-cols-3 grid-rows-4 gap-6">
