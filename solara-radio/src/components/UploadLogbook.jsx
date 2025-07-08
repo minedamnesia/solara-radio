@@ -22,7 +22,7 @@ export default function UploadLogbook({ onUploadSuccess }) {
     formData.append('logbook', file);
 
     try {
-      const response = await fetch('http://localhost:5000/api/upload-logbook', {
+      const response = await fetch('http://solara-radio.onrender.com/api/upload-logbook', {
         method: 'POST',
         headers: {
           'x-upload-secret': 'my_super_secret_key' // Must match your backend secret

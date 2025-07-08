@@ -20,7 +20,7 @@ export default function HikingMapsWidget() {
 
     async function fetchParks() {
       try {
-        const response = await fetch(`http://localhost:5000/api/parks?state=${selectedState}`);
+        const response = await fetch(`http://solara-radio.onrender.com/api/parks?state=${selectedState}`);
         const data = await response.json();
         setParks(data);
         setSelectedPark(null);

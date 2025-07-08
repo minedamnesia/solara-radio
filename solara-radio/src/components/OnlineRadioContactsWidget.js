@@ -7,7 +7,7 @@ export default function OnlineRadioContactsWidget({ refreshKey, onShowUploader }
   useEffect(() => {
     async function loadContacts() {
       try {
-        const response = await fetch('http://localhost:5000/uploads/logbook.adi');
+        const response = await fetch('http://solara-radio.onrender.com/uploads/logbook.adi');
         const adifText = await response.text();
 
         const parsedContacts = parseAdif(adifText);
