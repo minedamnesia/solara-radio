@@ -23,6 +23,26 @@ async function getSessionKey() {
   const match = response.data.match(/<Key>(.*?)<\/Key>/);
   sessionKey = match ? match[1] : null;
 }
+async function fetchCallsignData(callsign) {
+  if (!sessionKey) await getSessionKey();
+
+  let url = `https://xmldata.qrz.com/xml/current/?s=${sessionKey};callsign=${callsign}`;
+  let response = await axios.get(url);
+  let data = await parseStringPromise(response.data);
+
+  // Check for session error and retry
+  if (data.QRZDatabase?.Session?.[0]?.Error?.[0] === 'Invalid session key') {
+    console.log("Session expired. Getting new session key...");
+    await getSessionKey(); // refresh session
+    url = `https://xmldata.qrz.com/xml/current/?s=${sessionKey};callsign=${callsign}`;
+    response = await axios.get(url);
+    data = await parseStringPromise(response.data);
+    console.log("Raw QRZ response (after re-auth):", response.data);
+  }
+
+  return data;
+}
+
 
 // ===== Middleware: Upload Secret Protection =====
 function verifyUploadSecret(req, res, next) {
@@ -37,29 +57,8 @@ function verifyUploadSecret(req, res, next) {
 app.get('/api/lookup/:callsign', async (req, res) => {
   try {
     const { callsign } = req.params;
-
-    // Always get fresh key if none exists
-    if (!sessionKey) await getSessionKey();
-
-    let url = `https://xmldata.qrz.com/xml/current/?s=${sessionKey};callsign=${callsign}`;
-    let response = await axios.get(url);
-    let jsonData = await parseStringPromise(response.data);
-
-    // If QRZ returned an invalid session, re-authenticate
-    if (jsonData.QRZDatabase.Session?.[0]?.Error?.[0] === 'Invalid session key') {
-      console.warn('Session expired. Getting new session key...');
-      await getSessionKey(); // Refresh key
-
-      // Retry the call with new session key
-      url = `https://xmldata.qrz.com/xml/current/?s=${sessionKey};callsign=${callsign}`;
-      response = await axios.get(url);
-
-      console.log('Raw QRZ response:', response.data);
-
-      jsonData = await parseStringPromise(response.data);
-    }
-
-    const callsignData = jsonData.QRZDatabase.Callsign?.[0] || {};
+    const data = await fetchCallsignData(callsign);
+    const callsignData = data.QRZDatabase.Callsign?.[0] || {};
 
     res.json({
       callsign: callsignData.call?.[0] || callsign,
