@@ -138,23 +138,16 @@ app.get('/api/parks', (req, res) => {
     .pipe(csv())
     .on('data', (row) => {
       // Only return parks in the specified state (if provided)
-      if (!stateFilter || row.state === stateFilter) {
-        results.push({
-          reference: row.reference,
-          name: row.name,
-          latitude: parseFloat(row.latitude),
-          longitude: parseFloat(row.longitude),
-          grid: row.grid,
-          state: row.state,
-          country: row.country
-        });
+      // Filter by "US-XX" if a state is provided
+      if (!state || data.countryCode === `US-${state}`) {
+        results.push(data);
       }
     })
     .on('end', () => {
       res.json(results);
     })
-    .on('error', (err) => {
-      console.error('Error reading CSV:', err);
+    .on('error', (error) => {
+      console.error('Error reading all_parks_ext.csv:', error);
       res.status(500).json({ error: 'Failed to load parks data.' });
     });
 });
