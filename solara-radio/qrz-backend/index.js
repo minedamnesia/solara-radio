@@ -41,7 +41,11 @@ app.get('/api/lookup/:callsign', async (req, res) => {
     const { callsign } = req.params;
     const url = `https://xmldata.qrz.com/xml/current/?s=${sessionKey};callsign=${callsign}`;
     const response = await axios.get(url);
+
     const jsonData = await parseStringPromise(response.data);
+
+    console.log('Raw parsed QRZ data:', JSON.stringify(jsonData, null, 2));
+
     const callsignData = jsonData.QRZDatabase.Callsign?.[0] || {};
 
     res.json({
@@ -55,6 +59,7 @@ app.get('/api/lookup/:callsign', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch QRZ data' });
   }
 });
+
 
 // ===== File Upload Setup =====
 const storage = multer.diskStorage({
