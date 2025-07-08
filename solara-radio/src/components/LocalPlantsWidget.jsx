@@ -11,10 +11,14 @@ export default function LocalPlantsWidget() {
 
   const fetchPlants = async (lat, lon) => {
     setLoading(true);
+    console.log('Fetching plants near:', lat, lon);
 
     try {
-      const response = await fetch(`https://api.inaturalist.org/v1/observations?lat=${lat}&lng=${lon}&radius=10&taxon_id=47126&per_page=50`);
+      const response = await fetch(
+        `https://api.inaturalist.org/v1/observations?lat=${lat}&lng=${lon}&radius=10&taxon_id=47126&per_page=50`
+      );
       const data = await response.json();
+      console.log('Fetched data:', data);
 
       const plantMap = new Map();
 
@@ -29,7 +33,7 @@ export default function LocalPlantsWidget() {
       });
 
       setPlants(Array.from(plantMap.values()));
-      setCurrentPage(1); // Reset to first page on new search
+      setCurrentPage(1); // Reset pagination
     } catch (error) {
       console.error('Error fetching plant data:', error);
     }
@@ -40,32 +44,35 @@ export default function LocalPlantsWidget() {
   const handleFetch = async () => {
     if (useGps) {
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          const { latitude, longitude } = position.coords;
-          const grid = toMaiden(latitude, longitude);
-          setGridSquare(grid);
-          fetchPlants(latitude, longitude);
-        }, (error) => {
-          console.error('GPS Error:', error);
-          setLoading(false);
-        });
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            const grid = toMaiden(latitude, longitude);
+            setGridSquare(grid);
+            fetchPlants(latitude, longitude);
+          },
+          (error) => {
+            console.error('GPS Error:', error);
+            setLoading(false);
+          }
+        );
       } else {
-        console.error('Geolocation is not supported by this browser.');
+        console.error('Geolocation not supported.');
       }
     } else {
       if (!gridSquare) return;
-      const [lat, lon] = toLatLon(gridSquare.toUpperCase());
-      console.log("Fetching plants near:", lat, lon);
-      fetchPlants(lat, lon);
-      console.log("Fetched data:", data);
+      try {
+        const [lat, lon] = toLatLon(gridSquare.toUpperCase()); // FIXED
+        fetchPlants(lat, lon);
+      } catch (e) {
+        console.error('Invalid grid square:', e);
+      }
     }
   };
 
-  // Calculate paginated plants
   const indexOfLastPlant = currentPage * plantsPerPage;
   const indexOfFirstPlant = indexOfLastPlant - plantsPerPage;
   const currentPlants = plants.slice(indexOfFirstPlant, indexOfLastPlant);
-
   const totalPages = Math.ceil(plants.length / plantsPerPage);
 
   return (
@@ -110,7 +117,6 @@ export default function LocalPlantsWidget() {
         )) : !loading && <p className="font-sans text-tan">No plants found for this location.</p>}
       </div>
 
-      {/* Pagination Controls */}
       {plants.length > plantsPerPage && (
         <div className="flex justify-center space-x-4 mt-4">
           <button
