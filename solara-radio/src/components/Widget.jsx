@@ -44,7 +44,12 @@ export default function Widget({ title, description, customClass, nestedWidget, 
         <Modal onClose={() => setShowModal(false)}>
           <div className="p-4 text-tan">
             <h2 className="text-3xl font-heading mb-4 text-persian-orange">About Me - Full Bio</h2>
-            <p className="font-sans">Here is the full biographical statement you can expand with more detail...</p>
+            <p className="font-sans">Hi! I'm Kelly, otherwise known as KK7QEA. I have had an amateur radio license since December 2023, when I first started as a Technician,  and I moved up to General in 2024 after building my first antenna—a simple 10M dipole that got me hooked. These days, I usually operate with a Xiegu G90 and an end-fed halfwave or random wire, depending on the setting.</p>
+            <p>I’m a member of the Henderson Amateur Radio Club, and as of July 5, 2025, I hold an Extra class license. Lately, I’ve been spending more time on digital modes like FT8, where I enjoy the efficiency and reach of low-power contacts.</p>
+            <p>I’m especially drawn to portable operations and try to activate parks whenever I can—POTA has become a favorite part of the hobby. I’ve even attempted a SOTA activation, though it ended up being more of a hike than a contact success.</p>
+            <p>By day, I work as a software developer writing Python. Off the air, I enjoy hiking, gardening, art, music, stargazing, and time outdoors with my very curious dog.</p>
+            <p>Hope to connect on the bands soon. 73!</p>
+
           </div>
         </Modal>
       )}
