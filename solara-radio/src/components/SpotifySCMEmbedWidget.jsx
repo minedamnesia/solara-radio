@@ -24,9 +24,16 @@ export default function SpotifySCMEmbedPlayer() {
     ? `https://open.spotify.com/embed/playlist/${playlistId}?utm_source=solara`
     : "";
 
+  const handleRandomSelect = () => {
+    if (playlists.length) {
+      const random = playlists[Math.floor(Math.random() * playlists.length)];
+      setPlaylistId(random.id);
+    }
+  };
+
   return (
     <div className="w-full max-w-2xl mx-auto p-4 bg-coffee shadow-xl rounded-2xl shadow-lg border border-gray-200 space-y-4">
-      <h2 className="text-3xl font-heading tracking-wide mb-4 text-persian-orange">Local Plants</h2>
+      <h2 className="text-3xl font-heading tracking-wide mb-4 text-persian-orange">Space Cowgirl Radio</h2>
 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <label className="font-medium text-lg text-gray-800">
@@ -48,6 +55,14 @@ export default function SpotifySCMEmbedPlayer() {
             </option>
           ))}
         </select>
+      <button
+        type="button"
+        className="px-4 py-2 bg-emerald-500 text-white rounded-lg shadow hover:bg-emerald-600 transition"
+        onClick={handleRandomSelect}
+        disabled={!playlists.length}
+      >
+      Surprise Me, Universe
+      </button>
       </div>
 
       {embedUrl && (
