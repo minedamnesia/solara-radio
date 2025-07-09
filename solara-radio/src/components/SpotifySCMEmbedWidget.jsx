@@ -1,19 +1,13 @@
-import { useEffect, useState, ChangeEvent } from "react";
-
-interface Playlist {
-  name: string;
-  id: string;
-  uri: string;
-}
+import { useEffect, useState } from "react";
 
 export default function SpotifySCMEmbedPlayer() {
-  const [playlists, setPlaylists] = useState<Playlist[]>([]);
-  const [playlistId, setPlaylistId] = useState<string>("");
+  const [playlists, setPlaylists] = useState([]);
+  const [playlistId, setPlaylistId] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:5000/api/spotify-playlists") // Replace with deployed URL
       .then((res) => res.json())
-      .then((data: Playlist[]) => {
+      .then((data) => {
         setPlaylists(data);
         if (data.length) {
           setPlaylistId(data[0].id);
@@ -22,7 +16,7 @@ export default function SpotifySCMEmbedPlayer() {
       .catch((err) => console.error("Failed to load playlists:", err));
   }, []);
 
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (e) => {
     setPlaylistId(e.target.value);
   };
 
