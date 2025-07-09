@@ -14,6 +14,32 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
+// ===== Spotify Setup ======
+let spotifyToken = null;
+let tokenExpiresAt = 0;
+
+async function getSpotifyToken() {
+  const now = Date.now();
+  if (spotifyToken && now < tokenExpiresAt) return spotifyToken;
+
+  const authOptions = {
+    method: 'post',
+    url: 'https://accounts.spotify.com/api/token',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Authorization:
+        'Basic ' +
+        Buffer.from(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`).toString('base64'),
+    },
+    data: 'grant_type=client_credentials',
+  };
+
+  const response = await axios(authOptions);
+  spotifyToken = response.data.access_token;
+  tokenExpiresAt = now + response.data.expires_in * 1000 - 60000; // refresh 1 min early
+  return spotifyToken;
+}
+
 // ===== QRZ Session Setup =====
 let sessionKey = null;
 
@@ -82,7 +108,32 @@ app.get('/api/recent-logbook', async (req, res) => {
   }
 });
 
+app.get('/api/spotify-playlists', async (req, res) => {
+  try {
+    const token = await getSpotifyToken();
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
 
+    const response = await axios.get(
+      `https://api.spotify.com/v1/users/${process.env.SPOTIFY_USER_ID}/playlists?limit=50`,
+      { headers }
+    );
+
+    const playlists = response.data.items
+      .filter((p) => p.name.startsWith("SCM:"))
+      .map((p) => ({
+        name: p.name,
+        id: p.id,
+        uri: p.uri,
+      }));
+
+    res.json(playlists);
+  } catch (error) {
+    console.error('Error fetching Spotify playlists:', error.message);
+    res.status(500).json({ error: 'Failed to fetch Spotify playlists' });
+  }
+});
 
 // ===== Middleware: Upload Secret Protection =====
 function verifyUploadSecret(req, res, next) {

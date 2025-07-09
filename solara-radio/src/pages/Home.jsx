@@ -5,7 +5,7 @@ import LocalPlantsWidget from '../components/LocalPlantsWidget';
 import SolarPositionsWidget from '../components/SolarPositionsWidget';
 import MUFMapWidget from '../components/MUFMapWidget';
 import PskreporterWidget from '../components/PskreporterWidget';
-import SpotifyEmbedWidget from '../components/SpotifyEmbedWidget';
+import SpotifySCMEmbedPlayer from "../components/SpotifySCMEmbedPlayer";
 
 export default function Home() {
 
@@ -24,7 +24,7 @@ export default function Home() {
       <PskreporterWidget />
       <SolarPositionsWidget />
       <LocalPlantsWidget />
-      <SpotifyEmbedWidget />
+      <SpotifySCMEmbedPlayer />
       <Widget title="Radio Guides" description="Quick reference for bands, modes, and emergency protocols." link="/guides" />
       <Widget title="Photo Archive" description="Gallery of fieldwork and antenna setups." link="/photos" />
       <Widget title="Creative" description="Creative projects and visual explorations." link="/creative" />
