@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-export default function SpotifyEmbedWidget() {
+const SpotifyEmbedWidget = () => {
   const [accessToken, setAccessToken] = useState(null);
   const [showPlayer, setShowPlayer] = useState(false);
-  const iframeRef = useRef();
+  const iframeRef = useRef(null);
 
   const handleLaunch = () => {
     const width = 500;
@@ -11,7 +11,7 @@ export default function SpotifyEmbedWidget() {
     const left = window.screenX + (window.innerWidth - width) / 2;
     const top = window.screenY + (window.innerHeight - height) / 2;
 
-    const popup = window.open(
+    window.open(
       'https://solara-spotify.vercel.app/popup-login',
       'Spotify Login',
       `width=${width},height=${height},left=${left},top=${top}`
@@ -24,12 +24,13 @@ export default function SpotifyEmbedWidget() {
         event.origin === 'https://solara-spotify.vercel.app' &&
         event.data?.type === 'SPOTIFY_TOKEN'
       ) {
+        console.log('[Widget] Received Spotify token:', event.data.token);
         setAccessToken(event.data.token);
         setShowPlayer(true);
 
-        // Delay to ensure iframe has mounted
+        // Wait for iframe to be ready
         setTimeout(() => {
-          iframeRef.current?.contentWindow.postMessage(
+          iframeRef.current?.contentWindow?.postMessage(
             { type: 'SPOTIFY_TOKEN', token: event.data.token },
             'https://solara-spotify.vercel.app'
           );
@@ -68,5 +69,7 @@ export default function SpotifyEmbedWidget() {
       )}
     </div>
   );
-}
+};
+
+export default SpotifyEmbedWidget;
 
