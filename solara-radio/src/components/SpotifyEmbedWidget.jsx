@@ -62,7 +62,7 @@ export default function SpotifyEmbedWidget() {
           height="600"
           className="rounded-xl border border-sage shadow-inner mt-4"
           allow="autoplay; clipboard-write; encrypted-media; fullscreen"
-          sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-presentation"
+          sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox allow-forms allow-presentation"
           title="Solara's Space Cowgirl Radio"
         />
       )}
