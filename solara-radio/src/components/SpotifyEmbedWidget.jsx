@@ -5,15 +5,18 @@ export default function SpotifyEmbedWidget() {
   const iframeRef = useRef(null);
 
   useEffect(() => {
-    // Listen for token from popup
     const handleMessage = (event) => {
-      if (event.data?.type === 'SPOTIFY_TOKEN' && iframeRef.current) {
-        // ✅ Relay token into iframe
-        iframeRef.current.contentWindow.postMessage({
-          type: 'SPOTIFY_TOKEN',
-          token: event.data.token,
-        }, '*');
-
+      if (
+        event.origin === 'https://solara-spotify.vercel.app' && // 👈 only accept from this origin
+        event.data?.type === 'SPOTIFY_TOKEN'
+      ) {
+        iframeRef.current?.contentWindow.postMessage(
+          {
+            type: 'SPOTIFY_TOKEN',
+            token: event.data.token
+          },
+          'https://solara-spotify.vercel.app'
+        );
         setAuthorized(true);
       }
     };
