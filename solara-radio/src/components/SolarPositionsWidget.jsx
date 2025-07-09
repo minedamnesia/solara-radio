@@ -33,7 +33,7 @@ export default function SolarPositionsWidget() {
   }, [mode]);
 
   return (
-    <div className="bg-coffee p-4 rounded-2xl shadow-lg">
+    <div className="bg-coffee p-4 rounded-2xl shadow-lg solara-widget">
       <h2 className="text-3xl font-heading tracking-wide mb-4 text-persian-orange">Solar Positions</h2>
 
       <div className="flex mb-4">
