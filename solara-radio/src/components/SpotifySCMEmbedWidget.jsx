@@ -25,7 +25,9 @@ export default function SpotifySCMEmbedPlayer() {
     : "";
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-4 bg-white shadow-xl rounded-2xl border border-gray-200 space-y-4">
+    <div className="w-full max-w-2xl mx-auto p-4 bg-coffee shadow-xl rounded-2xl shadow-lg border border-gray-200 space-y-4">
+      <h2 className="text-3xl font-heading tracking-wide mb-4 text-persian-orange">Local Plants</h2>
+
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <label className="font-medium text-lg text-gray-800">
           Select a Playlist:
