@@ -25,17 +25,23 @@ export default function SpotifySCMEmbedPlayer() {
     : "";
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-4 bg-white shadow-lg rounded-2xl border border-gray-200 space-y-4">
+    <div className="w-full max-w-2xl mx-auto p-4 bg-white shadow-xl rounded-2xl border border-gray-200 space-y-4">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <label className="font-semibold text-lg">Select a Playlist:</label>
+        <label className="font-medium text-lg text-gray-800">
+          Select a Playlist:
+        </label>
         <select
-          className="p-2 px-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"
+          className="w-full md:w-2/3 p-2 px-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white text-gray-700 whitespace-normal"
           value={playlistId}
           onChange={handleChange}
           disabled={!playlists.length}
         >
           {playlists.map((playlist) => (
-            <option key={playlist.id} value={playlist.id}>
+            <option
+              key={playlist.id}
+              value={playlist.id}
+              className="whitespace-normal"
+            >
               {playlist.name.replace(/^SCM:\s*/, "")}
             </option>
           ))}
