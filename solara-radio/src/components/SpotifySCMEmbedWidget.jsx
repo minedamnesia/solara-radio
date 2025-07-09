@@ -5,7 +5,7 @@ export default function SpotifySCMEmbedPlayer() {
   const [playlistId, setPlaylistId] = useState("");
 
   useEffect(() => {
-    fetch("http://https://solara-radio.onrender.com/api/spotify-playlists")
+    fetch("https://solara-radio.onrender.com/api/spotify-playlists")
       .then((res) => res.json())
       .then((data) => {
         setPlaylists(data);
