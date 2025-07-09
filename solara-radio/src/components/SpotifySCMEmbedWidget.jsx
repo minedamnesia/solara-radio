@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, ChangeEvent } from "react";
 
 interface Playlist {
   name: string;
@@ -8,10 +8,10 @@ interface Playlist {
 
 export default function SpotifySCMEmbedPlayer() {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
-  const [playlistId, setPlaylistId] = useState<string | null>(null);
+  const [playlistId, setPlaylistId] = useState<string>("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/spotify-playlists") // Replace with deployed URL if needed
+    fetch("http://localhost:5000/api/spotify-playlists") // Replace with deployed URL
       .then((res) => res.json())
       .then((data: Playlist[]) => {
         setPlaylists(data);
@@ -21,6 +21,10 @@ export default function SpotifySCMEmbedPlayer() {
       })
       .catch((err) => console.error("Failed to load playlists:", err));
   }, []);
+
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setPlaylistId(e.target.value);
+  };
 
   const embedUrl = playlistId
     ? `https://open.spotify.com/embed/playlist/${playlistId}?utm_source=solara`
@@ -32,8 +36,8 @@ export default function SpotifySCMEmbedPlayer() {
         <label className="font-semibold text-lg">Select a Playlist:</label>
         <select
           className="p-2 px-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-400"
-          value={playlistId || ""}
-          onChange={(e) => setPlaylistId(e.target.value)}
+          value={playlistId}
+          onChange={handleChange}
           disabled={!playlists.length}
         >
           {playlists.map((playlist) => (
