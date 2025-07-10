@@ -56,7 +56,7 @@ export default function MaidenheadWidget() {
   }
 
   return (
-    <div className="bg-sage p-4 rounded-2xl shadow-md text-center">
+    <div className="sidebar-widget text-center">
       <h2 className="sidebar-heading flex justify-center items-center gap-2">
         <MapPin size={20} />
         Grid Locator
