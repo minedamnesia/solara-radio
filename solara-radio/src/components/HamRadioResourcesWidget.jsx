@@ -1,3 +1,7 @@
+import { MdApps, MdWarningAmber } from 'react-icons/md';
+import { FaSatelliteDish, FaNetworkWired } from 'react-icons/fa';
+import { HiChip } from 'react-icons/hi';
+import { GiAntenna, GiBackpack } from 'react-icons/gi';
 import { useState } from 'react';
 
 const linkData = {
@@ -114,7 +118,7 @@ export default function HamRadioResourcesWidget() {
               onClick={() => setSelectedCategory(category)}
               className="cursor-pointer bg-sage hover:bg-sage/80 text-coffee p-4 rounded-2xl shadow-lg font-semibold text-center flex flex-col items-center"
             >
-              {Icon && <Icon size={32} className="mb-2 text-persian-orange" />}
+              {Icon && <Icon size={24} className="mb-2 text-persian-orange" />}
               <span className="text-center break-words leading-tight">{category}</span>
             </div>
           );
