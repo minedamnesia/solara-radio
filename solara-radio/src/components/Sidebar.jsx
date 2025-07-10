@@ -2,31 +2,33 @@ import { useEffect, useState } from 'react';
 import MaidenheadWidget from '../components/MaidenheadWidget';
 
 export default function SidebarRight() {
-  const [heading, setHeading] = useState(0); 
+  const [heading, setHeading] = useState(0);
   const [supported, setSupported] = useState(true);
 
   useEffect(() => {
     const handleOrientation = (event) => {
-      if (event.webkitCompassHeading !== undefined) {
+      const alpha = event.alpha;
+
+      if (typeof event.webkitCompassHeading === 'number') {
         // iOS
-        setHeading(event.webkitCompassHeading || 0);
-      } else if (event.alpha !== null) {
-        // Android or generic browser 
-        setHeading(360 - event.alpha);
+        setHeading(event.webkitCompassHeading);
+      } else if (typeof alpha === 'number') {
+        // Android or generic
+        setHeading(360 - alpha);
       }
     };
-    
+
     if (window.DeviceOrientationEvent) {
       window.addEventListener('deviceorientationabsolute', handleOrientation, true);
       window.addEventListener('deviceorientation', handleOrientation, true);
     } else {
       setSupported(false);
     }
-    
+
     return () => {
       window.removeEventListener('deviceorientationabsolute', handleOrientation);
       window.removeEventListener('deviceorientation', handleOrientation);
-    };   
+    };
   }, []);
 
   return (
