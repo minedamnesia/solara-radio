@@ -25,7 +25,7 @@ export default function CodingProjectsWidget() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {projects.map((project, index) => (
           <div key={index} className="bg-sage p-4 rounded-xl shadow-md border border-persian-orange">
-            <h4 className="text-xl font-heading mb-2 text-gunmetal">{project.name}</h3>
+            <h4 className="text-xl font-heading mb-2 text-gunmetal">{project.name}</h4>
             <p className="font-sans text-coffee text-sm mb-2">{project.description}</p>
             <a
               href={project.link}
