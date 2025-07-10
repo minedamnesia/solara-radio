@@ -1,4 +1,5 @@
-import { FaGithub, FaLinkedin,RiContactsFill } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { RiContactsFill } from 'react-icons/ri';
 import { Radio } from 'lucide-react';
 
 export default function Header() {
