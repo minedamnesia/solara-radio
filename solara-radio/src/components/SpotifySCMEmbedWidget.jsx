@@ -33,7 +33,7 @@ export default function SpotifySCMEmbedPlayer() {
 
   return (
     <div className="solara-widget">
-      <h2 className="text-3xl font-heading tracking-wide mb-4 text-persian-orange">Space Cowgirl Radio</h2>
+      <h3 className="widget-heading">Space Cowgirl Radio</h3>
 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <label className="font-medium text-lg text-gray-800">
@@ -57,7 +57,7 @@ export default function SpotifySCMEmbedPlayer() {
         </select>
       <button
         type="button"
-        className="px-4 py-2 bg-emerald-500 text-white rounded-lg shadow hover:bg-emerald-600 transition"
+        className="px-4 py-2 bg-sage text-white rounded-lg shadow hover:bg-emerald-600 transition"
         onClick={handleRandomSelect}
         disabled={!playlists.length}
       >
