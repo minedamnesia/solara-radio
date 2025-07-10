@@ -29,8 +29,6 @@ export default function Home() {
       <LocalPlantsWidget />
       <SpotifySCMEmbedWidget />
       <Widget title="Radio Guides" description="Quick reference for bands, modes, and emergency protocols." link="/guides" />
-      <Widget title="Photo Archive" description="Gallery of fieldwork and antenna setups." link="/photos" />
-      <Widget title="Creative" description="Creative projects and visual explorations." link="/creative" />
     </main>
       {/* Sidebar */}
       <aside className="w-[10%] p-2">
