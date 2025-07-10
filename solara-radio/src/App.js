@@ -10,18 +10,6 @@ export default function App() {
       <div className="flex-1 p-6">
         <Header />
         <Home />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/radio-contacts" element={<Page title="Radio Contacts" />} />
-          <Route path="/guides" element={<Page title="Guides" />} />
-          <Route path="/solar-positions" element={<Page title="Solar Positions" />} />
-          <Route path="/maps" element={<Page title="Maps" />} />
-          <Route path="/plant-info" element={<Page title="Plant Info" />} />
-          <Route path="/photos" element={<Page title="Photos" />} />
-          <Route path="/creative" element={<Page title="Creative" />} />
-          <Route path="/about" element={<Page title="About" />} />
-          <Route path="/projects" element={<Page title="Coding Projects" />} />
-        </Routes>
       </div>
     </div>
   );
