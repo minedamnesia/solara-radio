@@ -1,7 +1,6 @@
 import { MdApps, MdWarningAmber } from 'react-icons/md';
 import { FaSatelliteDish, FaNetworkWired,FaBroadcastTower } from 'react-icons/fa';
 import { HiChip } from 'react-icons/hi';
-import { PiBroadcastTower } from 'react-icons/pi';
 import { GiBackpack } from 'react-icons/gi';
 import { useState } from 'react';
 
