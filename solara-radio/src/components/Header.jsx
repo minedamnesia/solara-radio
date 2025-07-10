@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaGithub, FaLinkedin,RiContactsFill } from 'react-icons/fa';
 import { Radio } from 'lucide-react';
 
 export default function Header() {
@@ -15,13 +15,12 @@ export default function Header() {
       {/* Rust-colored link bar */}
       <div className="bg-persian-orange text-gunmetal text-sm px-6 py-2 flex space-x-4 justify-end font-sans">
         <a href="https://www.linkedin.com/in/kelly-simer" target="_blank" rel="noopener noreferrer" className="hover:underline">
-          LinkedIn <FaLinkedin size={24} />
+        <FaLinkedin size={12} />  LinkedIn
         </a>
-        <a href="https://github.com/minedamnesia" target="_blank" rel="noopener noreferrer" className="hover:underline">
-          GitHub <FaGithub size={24} />
+        <a href="https://github.com/minedamnesia" target="_blank" rel="noopener noreferrer" className="hover:underline"><FaGithub size={12} /> Github
         </a>
         <a href="https://www.qrz.com/db/KK7QEA" target="_blank" rel="noopener noreferrer" className="hover:underline">
-          QRZ Profile
+         <RiContactsFill size={12} /> QRZ Profile
         </a>
       </div>
     </header>
