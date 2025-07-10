@@ -2,7 +2,7 @@ import CompassWidget from '../components/CompassWidget';
 import MaidenheadWidget from '../components/MaidenheadWidget';
 import BuyMeCoffeeWidget from '../components/BuyMeCoffeeWidget';
 
-export default function SidebarRight() {
+export default function Sidebar() {
   return (
     <aside className="w-full md:w-64 p-4 text-coffee">
       <div className="sidebar-widget">
