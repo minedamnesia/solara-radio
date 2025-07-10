@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import MaidenheadWidget from '../components/MaidenheadWidget';
+import BuyMeCoffeeWidget from '../component/BuyMeCoffeeWidget';
 
 export default function SidebarRight() {
   const [heading, setHeading] = useState(0);
@@ -54,6 +55,7 @@ export default function SidebarRight() {
         )}
       </div>
       <MaidenheadWidget />
+      <BuyMeCoffeeWidget />
     </aside>
   );
 }

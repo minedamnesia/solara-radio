@@ -5,7 +5,6 @@ export default function LocalPlantsWidget() {
   const [gridSquare, setGridSquare] = useState('');
   const [plants, setPlants] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [useGps, setUseGps] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const plantsPerPage = 5;
 
@@ -21,19 +20,18 @@ export default function LocalPlantsWidget() {
       console.log('Fetched data:', data);
 
       const plantMap = new Map();
-
       data.results.forEach(item => {
-        if (item.taxon && item.taxon.preferred_common_name && item.taxon.default_photo) {
+        if (item.taxon?.preferred_common_name && item.taxon?.default_photo) {
           plantMap.set(item.taxon.id, {
             id: item.taxon.id,
             name: item.taxon.preferred_common_name,
-            photoUrl: item.taxon.default_photo.medium_url || item.taxon.default_photo.url
+            photoUrl: item.taxon.default_photo.medium_url || item.taxon.default_photo.url,
           });
         }
       });
 
       setPlants(Array.from(plantMap.values()));
-      setCurrentPage(1); // Reset pagination
+      setCurrentPage(1);
     } catch (error) {
       console.error('Error fetching plant data:', error);
     }
@@ -41,33 +39,36 @@ export default function LocalPlantsWidget() {
     setLoading(false);
   };
 
-  const handleFetch = async () => {
-    if (useGps) {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            const grid = toMaiden(latitude, longitude);
-            setGridSquare(grid);
-            fetchPlants(latitude, longitude);
-          },
-          (error) => {
-            console.error('GPS Error:', error);
-            setLoading(false);
-          }
-        );
-      } else {
-        console.error('Geolocation not supported.');
-      }
-    } else {
-      if (!gridSquare) return;
-      try {
-        const [lat, lon] = toLatLon(gridSquare.toUpperCase()); // FIXED
-        fetchPlants(lat, lon);
-      } catch (e) {
-        console.error('Invalid grid square:', e);
-      }
+  const handleFetchFromGrid = () => {
+    if (!gridSquare) return;
+    try {
+      const [lat, lon] = toLatLon(gridSquare.toUpperCase());
+      fetchPlants(lat, lon);
+    } catch (e) {
+      console.error('Invalid grid square:', e);
     }
+  };
+
+  const handleFetchFromGps = () => {
+    setLoading(true);
+    if (!navigator.geolocation) {
+      console.error('Geolocation not supported.');
+      setLoading(false);
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        const grid = toMaiden(latitude, longitude);
+        setGridSquare(grid);
+        fetchPlants(latitude, longitude);
+      },
+      (error) => {
+        console.error('GPS Error:', error);
+        setLoading(false);
+      }
+    );
   };
 
   const indexOfLastPlant = currentPage * plantsPerPage;
@@ -79,32 +80,29 @@ export default function LocalPlantsWidget() {
     <div className="solara-widget">
       <h3 className="widget-heading">Local Plants</h3>
 
-      <div className="mb-4">
-        <label className="flex items-center space-x-2 text-tan">
-          <input
-            type="checkbox"
-            checked={useGps}
-            onChange={(e) => setUseGps(e.target.checked)}
-          />
-          <span>Use GPS Auto-Detect</span>
-        </label>
-      </div>
-
       <input
         type="text"
         placeholder="Enter Grid Square (e.g. DM13)"
         value={gridSquare}
         onChange={(e) => setGridSquare(e.target.value)}
-        className="mb-4 p-2 rounded w-full"
-        disabled={useGps}
+        className="mb-2 p-2 rounded w-full"
       />
 
-      <button
-        onClick={handleFetch}
-        className="mb-4 px-4 py-2 bg-persian-orange text-gunmetal rounded-lg hover:bg-amber-400"
-      >
-        Find Local Plants
-      </button>
+      <div className="flex gap-4 mb-4">
+        <button
+          onClick={handleFetchFromGrid}
+          className="px-4 py-2 bg-persian-orange text-gunmetal rounded-lg hover:bg-amber-400"
+        >
+          Use Grid Square
+        </button>
+
+        <button
+          onClick={handleFetchFromGps}
+          className="px-4 py-2 bg-persian-orange text-gunmetal rounded-lg hover:bg-amber-400"
+        >
+          Use Current Location
+        </button>
+      </div>
 
       {loading && <p className="font-sans text-tan">Loading plants...</p>}
 
