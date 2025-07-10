@@ -16,9 +16,9 @@ export default function Widget({ title, description, customClass, nestedWidget, 
         />
       )}
 
-      <h3 className="widget-heading">
+      <h2 className="widget-heading">
         {link ? <a href={link}>{title}</a> : title}
-      </h3>
+      </h2>
 
       <div className="mb-4">
         {isAboutMe ? (
