@@ -61,15 +61,15 @@ export default function CompassWidget() {
 
       {supported ? (
         <div className="flex flex-col items-center">
-          <div className="relative w-40 h-40 border-4 border-sage rounded-full flex items-center justify-center">
+          <div className="relative w-40 h-40 border-4 border-coffee rounded-full flex items-center justify-center">
             <div
               className="absolute w-1 h-16 bg-persian-orange origin-bottom transition-transform duration-300 ease-out"
               style={{ transform: `rotate(${heading}deg)` }}
             />
-            <span className="absolute top-2 text-xs text-coffee">N</span>
-            <span className="absolute right-2 text-xs text-coffee">E</span>
-            <span className="absolute bottom-2 text-xs text-coffee">S</span>
-            <span className="absolute left-2 text-xs text-coffee">W</span>
+            <span className="absolute top-2 text-xs text-gunmetal">N</span>
+            <span className="absolute right-2 text-xs text-gunmetal">E</span>
+            <span className="absolute bottom-2 text-xs text-gunmetal">S</span>
+            <span className="absolute left-2 text-xs text-gunmetal">W</span>
           </div>
 
           <p className="mt-4 font-sans text-coffee">
@@ -77,7 +77,7 @@ export default function CompassWidget() {
           </p>
 
           {geoHeading !== null && (
-            <p className="text-xs text-coffee mt-1">Geo Heading: {geoHeading}°</p>
+            <p className="text-xs text-gunmetal mt-1">Geo Heading: {geoHeading}°</p>
           )}
         </div>
       ) : (

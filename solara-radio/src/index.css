@@ -18,10 +18,10 @@ code {
 
 @layer components {
   .sidebar-widget {
-    @apply mb-6 bg-sage text-coffee;
+    @apply mb-6 bg-sage text-gunmetal;
   }
   .sidebar-heading {
-    @apply text-2xl font-heading mb-3 text-coffee;
+    @apply text-2xl font-heading mb-3 text-gunmetal;
   }
   .solara-widget {
     @apply bg-coffee p-4 rounded-2xl shadow-lg min-h-[350px] sm:min-h-[380px] md:min-h-[420px] max-h-[60vh] overflow-auto;
