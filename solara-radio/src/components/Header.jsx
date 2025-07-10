@@ -15,7 +15,7 @@ export default function Header() {
       {/* Rust-colored link bar */}
       <div className="bg-persian-orange text-gunmetal text-sm px-6 py-2 flex space-x-4 justify-end font-sans">
         <a href="https://www.linkedin.com/in/kelly-simer" target="_blank" rel="noopener noreferrer" className="hover:underline">
-          LinkedIn <FaLinkedIn size={24} />
+          LinkedIn <FaLinkedin size={24} />
         </a>
         <a href="https://github.com/minedamnesia" target="_blank" rel="noopener noreferrer" className="hover:underline">
           GitHub <FaGithub size={24} />
