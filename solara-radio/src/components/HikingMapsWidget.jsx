@@ -65,7 +65,7 @@ export default function HikingMapsWidget() {
 
   return (
     <div className="solara-widget">
-      <h3 className="widget-heading">Hiking Trails near POTA spots</h3>
+      <h2 className="widget-heading">Hiking Trails near POTA spots</h2>
 
       {/* State Dropdown */}
       <select

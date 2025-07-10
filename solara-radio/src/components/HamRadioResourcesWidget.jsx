@@ -92,7 +92,7 @@ export default function HamRadioResourcesWidget() {
 
   return (
     <div className="solara-widget">
-      <h3 className="widget-heading">Ham Links</h3>
+      <h2 className="widget-heading">Ham Links</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {Object.keys(linkData).map((category) => (
