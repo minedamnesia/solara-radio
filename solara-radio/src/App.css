@@ -43,7 +43,7 @@
 
 @layer components {
   .solara-widget {
-    @apply min-h-[350px] sm:min-h-[380px] md:min-h-[420px];
+    @apply min-h-[350px] sm:min-h-[380px] md:min-h-[420px] max-h-[60vh] overflow-auto;
   }
 }
 
