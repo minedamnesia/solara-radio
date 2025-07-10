@@ -6,11 +6,14 @@ import SolarPositionsWidget from '../components/SolarPositionsWidget';
 import MUFMapWidget from '../components/MUFMapWidget';
 import PskreporterWidget from '../components/PskreporterWidget';
 import SpotifySCMEmbedWidget from '../components/SpotifySCMEmbedWidget';
+import Sidebar from '../components/Sidebar';
 
 export default function Home() {
 
   return (
-    <div className="grid grid-cols-3 grid-rows-4 gap-6">
+    <div className="flex w-full min-h-screen">
+      {/* Main Grid */}
+    <main className="w-[90%] p-6 grid grid-cols-3 grid-rows-4 gap-6">
       <CodingProjectsWidget />
       <Widget
         title="About Me"
@@ -28,7 +31,11 @@ export default function Home() {
       <Widget title="Radio Guides" description="Quick reference for bands, modes, and emergency protocols." link="/guides" />
       <Widget title="Photo Archive" description="Gallery of fieldwork and antenna setups." link="/photos" />
       <Widget title="Creative" description="Creative projects and visual explorations." link="/creative" />
-
+    </main>
+      {/* Sidebar */}
+      <aside className="w-[10%] p-2">
+        <Sidebar />
+      </aside>
     </div>
   );
 }
