@@ -26,12 +26,12 @@ export default function CodingProjectsWidget() {
         {projects.map((project, index) => (
           <div key={index} className="bg-sage p-4 rounded-xl shadow-md border border-persian-orange">
             <h3 className="text-xl font-heading mb-2 text-gunmetal">{project.name}</h3>
-            <p className="font-sans text-tan text-sm mb-2">{project.description}</p>
+            <p className="font-sans text-coffee text-sm mb-2">{project.description}</p>
             <a
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-persian-orange hover:underline text-sm font-bold"
+              className="text-coffee hover:underline text-sm font-bold"
             >
               View on GitHub →
             </a>
