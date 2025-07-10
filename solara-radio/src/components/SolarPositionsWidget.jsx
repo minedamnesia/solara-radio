@@ -100,7 +100,19 @@ export default function SolarPositionsWidget() {
           )}
         </ul>
       )}
-    </div>
+    {/* Resource Link */}
+  <div className="mt-4 text-tan font-sans">
+    <p className="mb-1">🔗 Resource for more complete solar conditions:</p>
+    <a
+      href="https://www.solarham.net/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-persian-orange underline hover:text-persian-orange/80 transition"
+    >
+      solarham.net
+    </a>
+  </div>
+  </div>
   );
 }
 
