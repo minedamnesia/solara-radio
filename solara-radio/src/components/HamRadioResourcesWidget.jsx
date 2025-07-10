@@ -118,7 +118,7 @@ export default function HamRadioResourcesWidget() {
               onClick={() => setSelectedCategory(category)}
               className="cursor-pointer bg-sage hover:bg-sage/80 text-coffee p-4 rounded-2xl shadow-lg font-semibold text-center flex flex-col items-center"
             >
-              {Icon && <Icon size={24} className="mb-2 text-persian-orange" />}
+              {Icon && <Icon size={24} className="mb-2 text-gunmetal" />}
               <span className="text-center break-words leading-tight">{category}</span>
             </div>
           );
