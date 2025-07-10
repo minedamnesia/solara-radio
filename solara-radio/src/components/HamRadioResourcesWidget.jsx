@@ -87,6 +87,17 @@ const linkData = {
   ],
 };
 
+const categoryIcons = {
+  General: MdApps,
+  Satellites: FaSatelliteDish,
+  'Emergency Comms': MdWarningAmber,
+  'Digital Modes': HiChip,
+  Antennas: GiAntenna,
+  'Packet Radio': FaNetworkWired,
+  Supplies: GiBackpack,
+};
+
+
 export default function HamRadioResourcesWidget() {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
@@ -95,15 +106,19 @@ export default function HamRadioResourcesWidget() {
       <h2 className="widget-heading">Ham Links</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {Object.keys(linkData).map((category) => (
-          <div
-            key={category}
-            onClick={() => setSelectedCategory(category)}
-            className="cursor-pointer bg-sage hover:bg-sage/80 text-coffee p-4 rounded-2xl shadow-lg font-semibold text-center"
-          >
-            📁 {category}
-          </div>
-        ))}
+        {Object.keys(linkData).map((category) => {
+          const Icon = categoryIcons[category]; // grab the icon
+          return (
+            <div
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className="cursor-pointer bg-sage hover:bg-sage/80 text-coffee p-4 rounded-2xl shadow-lg font-semibold text-center flex flex-col items-center"
+            >
+              {Icon && <Icon size={32} className="mb-2 text-persian-orange" />}
+              {category}
+            </div>
+          );
+        })}
       </div>
 
       {selectedCategory && (
