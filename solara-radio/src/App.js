@@ -23,7 +23,6 @@ export default function App() {
           <Route path="/projects" element={<Page title="Coding Projects" />} />
         </Routes>
       </div>
-      <Sidebar />
     </div>
   );
 }
