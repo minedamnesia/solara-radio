@@ -7,12 +7,12 @@ export default function MUFMapWidget() {
 
   const sources = {
     propquest: {
-      label: "Propquest (3000 km MUF)",
+      label: "Propquest",
       url: 'https://propquest.co.uk/map.php',
       type: 'modal'
     },
     hamdxmap: {
-      label: "HamDXMap (global MUF & foF2)",
+      label: "HamDXMap",
       url: 'https://dxmap.f5uii.net',
       type: 'external'
     }
