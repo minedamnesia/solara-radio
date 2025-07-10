@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <div className="flex w-full min-h-screen">
       {/* Main Grid */}
-    <main className="w-[90%] p-6 grid grid-cols-3 grid-rows-4 gap-6">
+    <main className="w-[80%] p-6 grid grid-cols-3 grid-rows-4 gap-6">
       <CodingProjectsWidget />
       <Widget
         title="About Me"
