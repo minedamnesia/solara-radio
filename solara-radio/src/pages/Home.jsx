@@ -7,6 +7,7 @@ import MUFMapWidget from '../components/MUFMapWidget';
 import PskreporterWidget from '../components/PskreporterWidget';
 import SpotifySCMEmbedWidget from '../components/SpotifySCMEmbedWidget';
 import Sidebar from '../components/Sidebar';
+import HamRadioResourcesWidget from '../components/HamRadioResourcesWidget';
 
 export default function Home() {
 
@@ -28,8 +29,7 @@ export default function Home() {
       <SolarPositionsWidget />
       <LocalPlantsWidget />
       <SpotifySCMEmbedWidget />
-      <Widget title="Radio Guides" description="Quick reference for bands, modes, and emergency protocols." link="/guides" />
-    </main>
+      <HamRadioResourcesWidget />
       {/* Sidebar */}
       <aside className="w-[10%] p-2">
         <Sidebar />
