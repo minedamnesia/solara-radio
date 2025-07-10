@@ -115,7 +115,7 @@ export default function HamRadioResourcesWidget() {
               className="cursor-pointer bg-sage hover:bg-sage/80 text-coffee p-4 rounded-2xl shadow-lg font-semibold text-center flex flex-col items-center"
             >
               {Icon && <Icon size={32} className="mb-2 text-persian-orange" />}
-              {category}
+              <span className="text-center break-words leading-tight">{category}</span>
             </div>
           );
         })}
