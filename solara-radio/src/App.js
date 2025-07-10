@@ -10,6 +10,7 @@ export default function App() {
     <div className="bg-gunmetal text-persian-orange min-h-screen flex">
       <div className="flex-1 p-6">
         <Header />
+        <Home />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/radio-contacts" element={<Page title="Radio Contacts" />} />
