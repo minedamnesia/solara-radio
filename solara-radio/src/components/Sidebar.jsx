@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import MaidenheadWidget from '../components/MaidenheadWidget';
 
 export default function SidebarRight() {
   const [heading, setHeading] = useState(0); 
@@ -30,7 +31,7 @@ export default function SidebarRight() {
 
   return (
     <aside className="w-full md:w-64 p-4">
-      <div className="bg-sage p-4 rounded-2xl shadow-lg text-center">
+      <div className="bg-sage p-4 rounded-2xl shadow-lg text-coffee text-center">
         <h2 className="text-3xl font-heading tracking-wide mb-4 text-persian-orange">Live Compass</h2>
         {supported ? (
           <div className="flex flex-col items-center">
@@ -39,17 +40,18 @@ export default function SidebarRight() {
                 className="absolute w-1 h-16 bg-persian-orange origin-bottom"
                 style={{ transform: `rotate(${heading}deg)` }}
               />
-              <span className="absolute top-2 text-xs text-tan">N</span>
-              <span className="absolute right-2 text-xs text-tan">E</span>
-              <span className="absolute bottom-2 text-xs text-tan">S</span>
-              <span className="absolute left-2 text-xs text-tan">W</span>
+              <span className="absolute top-2 text-xs text-coffee">N</span>
+              <span className="absolute right-2 text-xs text-coffee">E</span>
+              <span className="absolute bottom-2 text-xs text-coffee">S</span>
+              <span className="absolute left-2 text-xs text-coffee">W</span>
             </div>
-            <p className="mt-4 font-sans text-tan">Heading: {Math.round(heading)}°</p>
+            <p className="mt-4 font-sans text-coffee">Heading: {Math.round(heading)}°</p>
           </div>
         ) : (
-          <p className="text-tan font-sans">Compass not supported on this device.</p>
+          <p className="text-coffee font-sans">Compass not supported on this device.</p>
         )}
       </div>
+      <MaidenheadWidget />
     </aside>
   );
 }
