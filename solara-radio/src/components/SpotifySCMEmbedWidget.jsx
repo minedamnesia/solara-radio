@@ -35,12 +35,13 @@ export default function SpotifySCMEmbedPlayer() {
     <div className="solara-widget">
       <h2 className="widget-heading">Space Cowgirl Radio</h2>
 
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col gap-4 mb-4">
         <label className="font-medium text-lg text-gray-800">
           Select a Playlist:
         </label>
+
         <select
-          className="w-full md:w-2/3 p-2 px-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white text-gray-700 whitespace-normal"
+          className="w-full p-2 px-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white text-gray-700 whitespace-normal"
           value={playlistId}
           onChange={handleChange}
           disabled={!playlists.length}
@@ -55,27 +56,29 @@ export default function SpotifySCMEmbedPlayer() {
             </option>
           ))}
         </select>
-      <button
-        type="button"
-        className="px-4 py-2 bg-sage text-white rounded-lg shadow hover:bg-emerald-600 transition"
-        onClick={handleRandomSelect}
-        disabled={!playlists.length}
-      >
-      Surprise Me, Universe
-      </button>
+
+        <button
+          type="button"
+          className="px-4 py-2 bg-sage text-white rounded-lg shadow hover:bg-emerald-600 transition"
+          onClick={handleRandomSelect}
+          disabled={!playlists.length}
+        >
+          Surprise Me, Universe
+        </button>
       </div>
 
       {embedUrl && (
-        <iframe
-          title="Spotify Playlist Embed"
-          src={embedUrl}
-          width="100%"
-          height="380"
-          frameBorder="0"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"
-          className="rounded-xl shadow-md"
-        ></iframe>
+        <div className="rounded-xl shadow-md overflow-hidden">
+          <iframe
+            title="Spotify Playlist Embed"
+            src={embedUrl}
+            width="100%"
+            height="380"
+            frameBorder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
+        </div>
       )}
     </div>
   );
