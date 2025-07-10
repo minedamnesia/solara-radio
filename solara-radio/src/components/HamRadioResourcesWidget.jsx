@@ -1,5 +1,5 @@
 import { MdApps, MdWarningAmber } from 'react-icons/md';
-import { FaSatelliteDish, FaNetworkWired } from 'react-icons/fa';
+import { FaSatelliteDish, FaNetworkWired,FaBroadcastTower } from 'react-icons/fa';
 import { HiChip } from 'react-icons/hi';
 import { PiBroadcastTower } from 'react-icons/pi';
 import { GiBackpack } from 'react-icons/gi';
@@ -97,7 +97,7 @@ const categoryIcons = {
   Satellites: FaSatelliteDish,
   'Emergency Comms': MdWarningAmber,
   'Digital Modes': HiChip,
-  Antennas: PiBroadcastTower,
+  Antennas: FaBroadcastTower,
   'Packet Radio': FaNetworkWired,
   Supplies: GiBackpack,
 };
