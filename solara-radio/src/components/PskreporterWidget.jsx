@@ -14,7 +14,7 @@ export default function PSKReporterWidget() {
   };
 
   return (
-    <div className="bg-coffee p-4 rounded-2xl shadow-lg solara-widget">
+    <div className="solara-widget">
       <h2 className="text-3xl font-heading tracking-wide mb-4 text-persian-orange">PSK Reporter - Where You Are Heard</h2>
 
       <input

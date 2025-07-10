@@ -91,8 +91,8 @@ export default function HamRadioResourcesWidget() {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   return (
-    <div className="p-6 text-tan">
-      <h2 className="text-3xl font-heading mb-6 text-persian-orange">📡 Ham Radio Resource Categories</h2>
+    <div className="solara-widget">
+      <h2 className="text-3xl font-heading mb-6 text-persian-orange">Ham Links</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {Object.keys(linkData).map((category) => (
