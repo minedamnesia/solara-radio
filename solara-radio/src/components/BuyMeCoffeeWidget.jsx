@@ -2,7 +2,7 @@
 export default function BuyMeCoffeeWidget() {
   return (
     <div className="solara-widget text-center">
-      <h2 className="widget-heading">Buy Me a Coffee</h2>
+      <h2 className="sidebar-heading">Buy Me a Coffee</h2>
       <p className="text-lg mb-4">If you enjoy the site, feel free to support it ☕</p>
 
       {/* QR Code */}

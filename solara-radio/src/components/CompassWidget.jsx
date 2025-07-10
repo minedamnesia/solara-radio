@@ -57,7 +57,7 @@ export default function CompassWidget() {
 
   return (
     <div className="solara-widget text-center">
-      <h2 className="widget-heading">Live Compass</h2>
+      <h2 className="sidebar-heading">Live Compass</h2>
 
       {supported ? (
         <div className="flex flex-col items-center">
