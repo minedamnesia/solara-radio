@@ -30,6 +30,7 @@ export default function Home() {
       <LocalPlantsWidget />
       <SpotifySCMEmbedWidget />
       <HamRadioResourcesWidget />
+      </main>
       {/* Sidebar */}
       <aside className="w-[10%] p-2">
         <Sidebar />
