@@ -1,6 +1,5 @@
 // solara-radio-app/src/App.jsx
 import { Routes, Route } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Page from './pages/Page';
