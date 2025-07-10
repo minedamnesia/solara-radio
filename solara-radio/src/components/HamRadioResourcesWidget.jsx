@@ -109,14 +109,14 @@ export default function HamRadioResourcesWidget() {
     <div className="solara-widget">
       <h2 className="widget-heading">Ham Links</h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
         {Object.keys(linkData).map((category) => {
           const Icon = categoryIcons[category]; // grab the icon
           return (
             <div
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className="cursor-pointer bg-sage hover:bg-sage/80 text-coffee p-4 rounded-2xl shadow-lg font-semibold text-center flex flex-col items-center"
+              className="cursor-pointer bg-sage hover:bg-sage/80 text-coffee p-5 rounded-2xl shadow-lg font-semibold text-center flex flex-col items-center"
             >
               {Icon && <Icon size={24} className="mb-2 text-gunmetal" />}
               <span className="text-center break-words leading-tight">{category}</span>
