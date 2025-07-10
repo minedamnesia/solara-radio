@@ -24,9 +24,9 @@ export default function MUFMapWidget() {
 
   return (
     <div className="solara-widget">
-      <h2 className="text-3xl font-heading tracking-wide mb-4 text-persian-orange">
+      <h3 className="widget-heading">
         MUF Map
-      </h2>
+      </h3>
 
       <p className="font-sans text-tan mb-4">
         Choose a MUF propagation source. Some maps open fullscreen, others open in a new tab.

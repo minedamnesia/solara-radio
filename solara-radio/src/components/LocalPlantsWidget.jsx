@@ -77,7 +77,7 @@ export default function LocalPlantsWidget() {
 
   return (
     <div className="solara-widget">
-      <h2 className="text-3xl font-heading tracking-wide mb-4 text-persian-orange">Local Plants</h2>
+      <h3 className="widget-heading">Local Plants</h3>
 
       <div className="mb-4">
         <label className="flex items-center space-x-2 text-tan">
