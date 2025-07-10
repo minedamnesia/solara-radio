@@ -43,7 +43,7 @@
 
 @layer components {
   .solara-widget {
-    @apply bg-coffee p-4 rounded-2xl shadow-lg min-h-[350px] sm:min-h-[380px] md:min-h-[420px] max-h-[60vh] overflow-auto;
+    @apply bg-tan p-4 rounded-2xl shadow-lg min-h-[350px] sm:min-h-[380px] md:min-h-[420px] max-h-[60vh] overflow-auto;
   }
   .widget-heading {
     @apply text-3xl font-heading tracking-wide mb-4 text-persian-orange;
