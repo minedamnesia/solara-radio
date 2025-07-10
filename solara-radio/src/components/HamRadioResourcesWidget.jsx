@@ -1,7 +1,7 @@
 import { MdApps, MdWarningAmber } from 'react-icons/md';
 import { FaSatelliteDish, FaNetworkWired } from 'react-icons/fa';
 import { HiChip } from 'react-icons/hi';
-import { PiBroadcastTowerBold } from 'react-icons/pi';
+import { PiBroadcastTower } from 'react-icons/pi';
 import { GiBackpack } from 'react-icons/gi';
 import { useState } from 'react';
 
@@ -97,7 +97,7 @@ const categoryIcons = {
   Satellites: FaSatelliteDish,
   'Emergency Comms': MdWarningAmber,
   'Digital Modes': HiChip,
-  Antennas: PiBroadcastTowerBold,
+  Antennas: PiBroadcastTower,
   'Packet Radio': FaNetworkWired,
   Supplies: GiBackpack,
 };
