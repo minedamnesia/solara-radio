@@ -4,7 +4,7 @@ export default function BuyMeCoffeeWidget() {
   return (
     <div className="sidebar-widget text-center">
       <h3 className="sidebar-heading">Buy Me a Coffee</h3>
-      <p className="text-sm mb-4">If you enjoy the site, feel free to support it <FaCoffee size={18} text-gunmeta" />
+      <p className="text-sm mb-4">If you enjoy the site, feel free to support it <FaCoffee size={18} text-gunmetal" />
 </p>
 
       {/* QR Code */}
