@@ -52,11 +52,11 @@ export default function SatellitePassWidget() {
       </h2>
 
       {!enabled ? (
-        <p className="text-tan">Enable geolocation to view satellite passes for your location.</p>
+        <p className="text-coffee">Enable geolocation to view satellite passes for your location.</p>
       ) : geoError ? (
-        <p className="text-red-400">Geolocation error: {geoError}</p>
+        <p className="text-persian-orange">Geolocation error: {geoError}</p>
       ) : !latitude || !longitude ? (
-        <p className="text-tan">Waiting for location data…</p>
+        <p className="text-coffee">Waiting for location data…</p>
       ) : (
         <>
           <select
