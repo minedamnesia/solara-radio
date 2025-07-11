@@ -148,12 +148,12 @@ export default function LivePropagationWidget() {
         </>
       ) : (
         <div className="text-white text-sm italic">
-          <p className="mb-2">Showing default HF conditions map:</p>
-          <img
-            src="https://www.solarham.net/region2.png"
-            alt="HF Propagation Fallback"
-            className="w-full rounded border border-white"
-          />
+         <p className="mb-2">Showing default HF conditions map:</p>
+         <img
+           src="https://prop.kc2g.com/coverage/coverage.png"
+           alt="Real-Time MUF Map"
+           className="w-full rounded border border-white"
+        />
         </div>
       )}
     </div>
