@@ -32,7 +32,7 @@ export default function SpotifySCMEmbedPlayer() {
   };
 
   return (
-    <div className="solara-widget">
+    <div className="solara-widget pb-2">
       <h2 className="widget-heading">Space Cowgirl Radio</h2>
 
       <div className="flex flex-col gap-4 mb-4">
