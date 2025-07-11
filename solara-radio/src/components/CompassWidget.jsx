@@ -3,11 +3,14 @@ import { GeolocationContext } from '../context/GeolocationProvider';
 
 export default function CompassWidget() {
   const [heading, setHeading] = useState(0);
-  const [supported, setSupported] = useState(true);
   const [geoHeading, setGeoHeading] = useState(null);
+  const [supported, setSupported] = useState(true);
+  const [permissionGranted, setPermissionGranted] = useState(false);
   const { enabled: geolocationEnabled } = useContext(GeolocationContext);
 
   useEffect(() => {
+    if (!permissionGranted) return;
+
     let geoWatchId;
 
     const handleOrientation = (event) => {
@@ -17,13 +20,14 @@ export default function CompassWidget() {
         deviceHeading = event.webkitCompassHeading;
       } else if (typeof event.alpha === 'number') {
         deviceHeading = 360 - event.alpha;
+      } else {
+        return;
       }
 
       setHeading(deviceHeading);
     };
 
     if (window.DeviceOrientationEvent) {
-      window.addEventListener('deviceorientationabsolute', handleOrientation, true);
       window.addEventListener('deviceorientation', handleOrientation, true);
     } else {
       setSupported(false);
@@ -45,19 +49,46 @@ export default function CompassWidget() {
     }
 
     return () => {
-      window.removeEventListener('deviceorientationabsolute', handleOrientation);
       window.removeEventListener('deviceorientation', handleOrientation);
-      if (geoWatchId) {
-        navigator.geolocation.clearWatch(geoWatchId);
-      }
+      if (geoWatchId) navigator.geolocation.clearWatch(geoWatchId);
     };
-  }, [geolocationEnabled]); // ⬅️ React to toggle change
+  }, [permissionGranted, geolocationEnabled]);
+
+  function requestOrientationPermission() {
+    if (
+      typeof DeviceOrientationEvent !== 'undefined' &&
+      typeof DeviceOrientationEvent.requestPermission === 'function'
+    ) {
+      DeviceOrientationEvent.requestPermission()
+        .then((response) => {
+          if (response === 'granted') {
+            setPermissionGranted(true);
+          } else {
+            setSupported(false);
+          }
+        })
+        .catch((err) => {
+          console.error('Orientation permission error:', err);
+          setSupported(false);
+        });
+    } else {
+      // Not iOS – just proceed
+      setPermissionGranted(true);
+    }
+  }
 
   return (
     <div className="sidebar-widget text-center">
       <h2 className="sidebar-heading">Live Compass</h2>
 
-      {supported ? (
+      {!permissionGranted ? (
+        <button
+          onClick={requestOrientationPermission}
+          className="bg-persian-orange text-gunmetal font-bold px-4 py-2 rounded hover:underline"
+        >
+          Enable Compass
+        </button>
+      ) : supported ? (
         <div className="flex flex-col items-center">
           <div className="relative w-40 h-40 border-4 border-coffee rounded-full flex items-center justify-center">
             <div
