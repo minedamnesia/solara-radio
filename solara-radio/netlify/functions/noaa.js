@@ -1,4 +1,4 @@
-kconst fetch = require('node-fetch');
+const fetch = require('node-fetch'); // ✅ Correct in Node/Netlify
 
 exports.handler = async function (event, context) {
   try {
