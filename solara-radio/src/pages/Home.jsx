@@ -9,35 +9,39 @@ import Sidebar from '../components/Sidebar';
 import HamRadioResourcesWidget from '../components/HamRadioResourcesWidget';
 
 export default function Home() {
-
   return (
     <div className="flex w-full min-h-screen">
       {/* Main Grid */}
-    <main className="w-[80%] p-6 grid grid-cols-3 gap-6">
-      <div className="grid grid-cols-3 gap-6 border border-persian-orange rounded-xl p-4">    
-        <HamRadioResourcesWidget />
-        <div className="col-span-1">
-          <Widget
-            title="About Me"
-            description="Hi! I'm Kelly, otherwise known as KK7QEA..."
-            customClass="row-span-2"
-            link="/about"
-            image="/qsl.png"
-          />
-          <SpotifySCMEmbedWidget />
+      <main className="w-[80%] p-6 space-y-6">
+        <div className="grid grid-cols-3 gap-6 border border-persian-orange rounded-xl p-4">
+          <HamRadioResourcesWidget />
+          <div className="col-span-1 flex flex-col gap-4">
+            <Widget
+              title="About Me"
+              description="Hi! I'm Kelly, otherwise known as KK7QEA..."
+              customClass="row-span-2"
+              link="/about"
+              image="/qsl.png"
+            />
+            <SpotifySCMEmbedWidget />
+          </div>
         </div>
-      </div>
-      <div className="grid grid-cols-3 gap-6 border border-persian-orange rounded-xl p-4">
-        <LocalPlantsWidget />
-      </div>
-      <div className="grid grid-cols-3 gap-6 border border-persian-orange rounded-xl p-4">
-        <HikingMapsWidget />
-        <SolarPositionsWidget />
-        <SatellitePassWidget />
-      <div className="grid grid-cols-3 gap-6 border border-persian-orange rounded-xl p-4">
-        <CodingProjectsWidget />
-      </div>
+
+        <div className="grid grid-cols-3 gap-6 border border-persian-orange rounded-xl p-4">
+          <LocalPlantsWidget />
+        </div>
+
+        <div className="grid grid-cols-3 gap-6 border border-persian-orange rounded-xl p-4">
+          <HikingMapsWidget />
+          <SolarPositionsWidget />
+          <SatellitePassWidget />
+        </div>
+
+        <div className="grid grid-cols-3 gap-6 border border-persian-orange rounded-xl p-4">
+          <CodingProjectsWidget />
+        </div>
       </main>
+
       {/* Sidebar */}
       <aside className="w-[10%] p-2">
         <Sidebar />
@@ -45,3 +49,4 @@ export default function Home() {
     </div>
   );
 }
+
