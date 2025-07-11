@@ -46,8 +46,8 @@ export default function SatellitePassWidget() {
   }, [noradId, latitude, longitude, enabled]);
 
   return (
-    <div className="bg-coffee p-4 rounded-2xl shadow-lg max-h-[420px] overflow-auto text-sm">
-      <h2 className="text-base font-heading text-persian-orange mb-2">
+    <div className="sidebar-widget">
+      <h2 className="sidebar-heading">
         Satellite Pass Predictor
       </h2>
 

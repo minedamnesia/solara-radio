@@ -69,8 +69,8 @@ export default function LivePropagationWidget() {
   ];
 
   return (
-    <div className="bg-coffee p-4 rounded-2xl shadow-lg min-h-[400px]">
-      <h2 className="text-xl font-heading mb-2 text-persian-orange">
+    <div className="solara-widget">
+      <h2 className="widget-heading">
         Live Propagation Conditions
       </h2>
 
