@@ -1,21 +1,19 @@
 import { useState } from 'react';
-import Modal from '../components/Modal';
 
 export default function PSKReporterWidget() {
   const [callsign, setCallsign] = useState('');
-  const [mapUrl, setMapUrl] = useState('');
-  const [showModal, setShowModal] = useState(false);
 
   const handleSearch = () => {
     if (!callsign) return;
     const encodedCallsign = encodeURIComponent(callsign);
     const url = `https://pskreporter.info/pskmap.html?preset&callsign=${encodedCallsign}`;
-    setMapUrl(url);
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <div className="solara-widget">
-      <h2 className="widget-heading">PSK Reporter - Where You Are Heard</h2>
+    <div className="solara-widget short-widget">
+      <h2 className="widget-heading">PSK Reporter</h2>
+      <p>  Where You Are Heard</p>
 
       <input
         type="text"
@@ -27,31 +25,11 @@ export default function PSKReporterWidget() {
 
       <button
         onClick={handleSearch}
-        className="mb-4 px-4 py-2 bg-persian-orange text-gunmetal rounded-lg hover:bg-amber-400"
+        className="px-4 py-2 bg-persian-orange text-gunmetal rounded-lg hover:bg-amber-400 transition"
       >
         Show Reception Map
       </button>
-
-      {mapUrl && (
-        <div>
-          <img
-            src="/pskreporter-thumbnail.png"
-            alt="PSK Reporter Thumbnail"
-            className="w-full h-48 object-cover rounded-lg cursor-pointer border-2 border-persian-orange"
-            onClick={() => setShowModal(true)}
-          />
-
-          {showModal && (
-            <Modal onClose={() => setShowModal(false)}>
-              <iframe
-                src={mapUrl}
-                title="PSK Reporter Map"
-                className="w-3/4 h-[75vh] rounded-lg border-2 border-persian-orange"
-              ></iframe>
-            </Modal>
-          )}
-        </div>
-      )}
     </div>
   );
 }
+
