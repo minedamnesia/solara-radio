@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useGeolocation } from '../context/GeolocationProvider';
 
-const API_KEY = import.meta.env.YOUR_N2YO_API_KEY || 'REPLACE_ME';
+const API_KEY = 'YOUR_N2YO_API_KEY';
 
 // Example NORAD satellites
 const SATELLITES = [
