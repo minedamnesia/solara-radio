@@ -3,14 +3,41 @@ import { useGeolocation } from '../context/GeolocationProvider';
 
 const API_KEY = 'YOUR_N2YO_API_KEY';
 
-// Example NORAD satellites
 const SATELLITES = [
   { name: 'ISS (ZARYA)', noradId: 25544 },
+  { name: 'Hubble Space Telescope', noradId: 20580 },
   { name: 'NOAA 15', noradId: 25338 },
   { name: 'NOAA 18', noradId: 28654 },
   { name: 'NOAA 19', noradId: 33591 },
+  { name: 'GOES 16 (GOES-R)', noradId: 41866 },
+  { name: 'GOES 17 (GOES-S)', noradId: 43226 },
+  { name: 'GOES 18 (GOES-T)', noradId: 52025 },
+  { name: 'AO-07 (AMSAT-OSCAR 7)', noradId: 7530 },
   { name: 'AO-91 (RadFxSat)', noradId: 43017 },
+  { name: 'AO-92 (Fox-1D)', noradId: 43137 },
   { name: 'SO-50', noradId: 27607 },
+  { name: 'FO-29 (JAS-2)', noradId: 24278 },
+  { name: 'XW-2A (CAS-3A)', noradId: 40903 },
+  { name: 'XW-2B (CAS-3B)', noradId: 40911 },
+  { name: 'XW-2C (CAS-3C)', noradId: 40906 },
+  { name: 'XW-2D (CAS-3D)', noradId: 40907 },
+  { name: 'XW-2F (CAS-3F)', noradId: 40910 },
+  { name: 'LilacSat-2', noradId: 40908 },
+  { name: 'UKube-1', noradId: 40074 },
+  { name: 'FUNCube-1 (AO-73)', noradId: 39444 },
+  { name: 'FalconSat-3', noradId: 30776 },
+  { name: 'Meteor-M2', noradId: 40069 },
+  { name: 'Tiangong Space Station (CSS)', noradId: 48274 },
+  { name: 'Landsat 8', noradId: 39084 },
+  { name: 'Landsat 9', noradId: 49260 },
+  { name: 'Terra (EOS AM-1)', noradId: 25994 },
+  { name: 'Aqua (EOS PM-1)', noradId: 27424 },
+  { name: 'Suomi NPP', noradId: 37849 },
+  { name: 'Fengyun 3C', noradId: 39260 },
+  { name: 'Resurs-P1', noradId: 39186 },
+  { name: 'SPOT 6', noradId: 38755 },
+  { name: 'SPOT 7', noradId: 40053 },
+  { name: 'TERRA SAR-X', noradId: 31698 },
 ];
 
 export default function SatellitePassWidget() {
