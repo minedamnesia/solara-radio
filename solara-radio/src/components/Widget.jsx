@@ -9,10 +9,10 @@ export default function Widget({ title, description, customClass, nestedWidget, 
   return (
     <div className={`solara-widget pb-1`}>
       {image && (
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-48 object-cover rounded mb-4 mx-auto border border-persian-orange"
+      <img
+         src={image}
+         alt={title}
+         className="w-full max-h-[400px] object-contain rounded mb-4 mx-auto border border-persian-orange"
         />
       )}
 
