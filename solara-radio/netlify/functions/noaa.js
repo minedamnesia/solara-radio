@@ -1,8 +1,12 @@
-const fetch = require('node-fetch'); // ✅ Correct in Node/Netlify
-
-exports.handler = async function (event, context) {
+exports.handler = async function () {
   try {
-    const response = await fetch('https://services.swpc.noaa.gov/json/solar-terrestrial.json');
+    const response = await fetch('https://services.swpc.noaa.gov/products/noaa-scales.json');
+
+    if (!response.ok) {
+      const text = await response.text();
+      throw new Error(`Upstream NOAA error: ${response.status} ${response.statusText} - ${text.slice(0, 100)}...`);
+    }
+
     const data = await response.json();
 
     return {
