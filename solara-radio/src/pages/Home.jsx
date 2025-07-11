@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="flex w-full min-h-screen">
       {/* Main Grid */}
-    <main className="w-[80%] p-6 grid grid-cols-3 grid-rows-4 gap-6">
+    <main className="w-[80%] p-6 grid grid-cols-3 gap-6">
       <HamRadioResourcesWidget />
       <div className="col-span-1">
         <Widget
