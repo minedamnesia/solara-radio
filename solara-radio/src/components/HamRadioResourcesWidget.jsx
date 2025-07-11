@@ -106,7 +106,7 @@ export default function HamRadioResourcesWidget() {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   return (
-    <div className="solara-widget">
+    <div className="solara-widget col-span-2 tall-widget">
       <h2 className="widget-heading">Ham Links</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">

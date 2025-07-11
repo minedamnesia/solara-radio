@@ -77,7 +77,7 @@ export default function LocalPlantsWidget() {
   const totalPages = Math.ceil(plants.length / plantsPerPage);
 
   return (
-    <div className="solara-widget">
+    <div className="solara-widget col-span-3 short-widget">
       <h3 className="widget-heading">Local Plants</h3>
 
       <input
