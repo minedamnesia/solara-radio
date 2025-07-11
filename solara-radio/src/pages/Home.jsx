@@ -3,8 +3,6 @@ import HikingMapsWidget from '../components/HikingMapsWidget';
 import CodingProjectsWidget from '../components/CodingProjectsWidget';
 import LocalPlantsWidget from '../components/LocalPlantsWidget';
 import SolarPositionsWidget from '../components/SolarPositionsWidget';
-import MUFMapWidget from '../components/MUFMapWidget';
-import PskreporterWidget from '../components/PskreporterWidget';
 import SpotifySCMEmbedWidget from '../components/SpotifySCMEmbedWidget';
 import Sidebar from '../components/Sidebar';
 import HamRadioResourcesWidget from '../components/HamRadioResourcesWidget';
