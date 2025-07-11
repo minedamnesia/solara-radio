@@ -7,15 +7,16 @@ module.exports = {
         sans: ['"IBM Plex Sans"', 'sans-serif'],
       },
        colors: {
-        'persian-orange': '#EC9860',
+        'persian-orange': '#EC935E',
         'gunmetal': '#0C2F34',
         'beaver': '#A37966',
-        'tan': '#D0AF87',
+        'tan': '#EAE3D2',
         'feldgrau': '#586D5A',
-        'sage': '#A0AA7F',
-        'coffee': '#755847',
+        'sage': '#D6E3D4',
+        'coffee': '#4B3621',
       },
     },
   },
   plugins: [],
 };
+
