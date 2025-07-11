@@ -13,10 +13,10 @@ export default function Sidebar() {
       <div className="sidebar-widget">
         <MaidenheadWidget />
       </div>
-      <div className-"sidebar-widget" >
+      <div className="sidebar-widget" >
         <MUFMapWidget />
       </div>
-      <div className-"sidebar-widget" >
+      <div className="sidebar-widget" >
         <PskreporterWidget />
       </div>
       <div className="sidebar-widget">
