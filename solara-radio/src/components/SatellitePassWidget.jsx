@@ -30,7 +30,7 @@ export default function SatellitePassWidget() {
     async function fetchPasses() {
       setLoading(true);
       try {
-        const url = `https://api.n2yo.com/rest/v1/satellite/radiopasses/${noradId}/${latitude}/${longitude}/0/2/60/&apiKey=${API_KEY}`;
+        const url = `https://api.n2yo.com/rest/v1/satellite/radiopasses/${noradId}/${latitude}/${longitude}/0/2/60&apiKey=${API_KEY}`;
         const res = await fetch(url);
         const json = await res.json();
         setPasses(json.passes || []);
