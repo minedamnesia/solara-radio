@@ -15,14 +15,9 @@ export default function Header() {
 
       {/* Rust-colored link bar */}
       <div className="bg-persian-orange text-gunmetal text-sm px-6 py-2 flex space-x-4 justify-end font-sans">
-        <a href="https://www.linkedin.com/in/kelly-simer" target="_blank" rel="noopener noreferrer" className="hover:underline">
-        <FaLinkedin size={12} />  LinkedIn
-        </a>
-        <a href="https://github.com/minedamnesia" target="_blank" rel="noopener noreferrer" className="hover:underline"><FaGithub size={12} /> Github
-        </a>
-        <a href="https://www.qrz.com/db/KK7QEA" target="_blank" rel="noopener noreferrer" className="hover:underline">
-         <RiContactsFill size={12} /> QRZ Profile
-        </a>
+        <FaLinkedin size={12} /> <a href="https://www.linkedin.com/in/kelly-simer" target="_blank" rel="noopener noreferrer" className="hover:underline"> LinkedIn</a>
+        <FaGithub size={12} /><a href="https://github.com/minedamnesia" target="_blank" rel="noopener noreferrer" className="hover:underline"> Github </a>
+        <RiContactsFill size={12} /><a href="https://www.qrz.com/db/KK7QEA" target="_blank" rel="noopener noreferrer" className="hover:underline"> QRZ Profile</a>
       </div>
     </header>
   );
