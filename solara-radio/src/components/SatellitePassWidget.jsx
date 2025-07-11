@@ -1,17 +1,26 @@
 import { useState, useEffect } from 'react';
 import { useGeolocation } from '../context/GeolocationProvider';
 
-const API_KEY = import.meta.env.VITE_N2YO_API_KEY || 'REPLACE_ME';
-const DEFAULT_NORAD = 25544; // ISS
+const API_KEY = import.meta.env.YOUR_N2YO_API_KEY || 'REPLACE_ME';
+
+// Example NORAD satellites
+const SATELLITES = [
+  { name: 'ISS (ZARYA)', noradId: 25544 },
+  { name: 'NOAA 15', noradId: 25338 },
+  { name: 'NOAA 18', noradId: 28654 },
+  { name: 'NOAA 19', noradId: 33591 },
+  { name: 'AO-91 (RadFxSat)', noradId: 43017 },
+  { name: 'SO-50', noradId: 27607 },
+];
 
 export default function SatellitePassWidget() {
   const { location, enabled, error: geoError } = useGeolocation();
-  const [noradId, setNoradId] = useState(DEFAULT_NORAD);
+  const [noradId, setNoradId] = useState(SATELLITES[0].noradId);
   const [passes, setPasses] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const latitude = location?.latitude ?? null;
-  const longitude = location?.longitude ?? null;
+  const latitude = location?.latitude;
+  const longitude = location?.longitude;
 
   useEffect(() => {
     if (!enabled || !latitude || !longitude || API_KEY === 'REPLACE_ME') return;
@@ -21,18 +30,8 @@ export default function SatellitePassWidget() {
       try {
         const url = `https://api.n2yo.com/rest/v1/satellite/radiopasses/${noradId}/${latitude}/${longitude}/0/2/60/&apiKey=${API_KEY}`;
         const res = await fetch(url);
-
-        if (!res.ok) {
-          throw new Error(`HTTP ${res.status} - ${res.statusText}`);
-        }
-
         const json = await res.json();
-
-        if (!json.passes || !Array.isArray(json.passes)) {
-          throw new Error('Unexpected API response format');
-        }
-
-        setPasses(json.passes);
+        setPasses(json.passes || []);
       } catch (err) {
         console.error('Error fetching satellite passes:', err);
         setPasses([]);
@@ -56,19 +55,18 @@ export default function SatellitePassWidget() {
         <p className="text-sm text-tan">Waiting for location data…</p>
       ) : (
         <>
-          <div className="flex gap-2 mb-4">
-            <input
-              type="text"
+          <div className="flex flex-col sm:flex-row gap-2 mb-4">
+            <select
               value={noradId}
               onChange={(e) => setNoradId(Number(e.target.value))}
-              className="w-24 p-1 text-sm rounded bg-gunmetal text-tan border border-tan"
-            />
-            <button
-              onClick={() => {}} // Trigger is automatic via useEffect
-              className="px-2 py-1 text-xs bg-persian-orange text-gunmetal rounded hover:bg-amber-400"
+              className="p-2 text-sm rounded bg-gunmetal text-tan border border-tan"
             >
-              Track
-            </button>
+              {SATELLITES.map((sat) => (
+                <option key={sat.noradId} value={sat.noradId}>
+                  {sat.name}
+                </option>
+              ))}
+            </select>
           </div>
 
           {loading && <p className="text-sm text-tan">Loading pass data…</p>}
