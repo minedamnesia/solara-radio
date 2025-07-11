@@ -20,7 +20,7 @@ export default function CodingProjectsWidget() {
 
   return (
     <div className="solara-widget col-span-3">
-      <h2 className="text-3xl font-heading tracking-wide mb-4 text-persian-orange">Coding Projects</h2><h3 className=text-coffee italic>  Coming Soon...</h3>
+      <h2 className="text-3xl font-heading tracking-wide mb-4 text-persian-orange">Coding Projects</h2><h3 className="text-coffee italic">  Coming Soon...</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {projects.map((project, index) => (
