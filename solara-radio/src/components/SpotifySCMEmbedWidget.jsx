@@ -36,7 +36,7 @@ export default function SpotifySCMEmbedPlayer() {
       <h2 className="widget-heading">Space Cowgirl Radio</h2>
 
       <div className="flex flex-col gap-4 mb-4">
-        <label className="font-medium text-lg text-gray-800">
+        <label className="font-medium text-lg text-tan">
           Select a Playlist:
         </label>
 
@@ -59,7 +59,7 @@ export default function SpotifySCMEmbedPlayer() {
 
         <button
           type="button"
-          className="px-4 py-2 bg-sage text-white rounded-lg shadow hover:bg-emerald-600 transition"
+          className="px-4 py-2 bg-sage text-gunmetal rounded-lg shadow hover:bg-emerald-600 transition"
           onClick={handleRandomSelect}
           disabled={!playlists.length}
         >

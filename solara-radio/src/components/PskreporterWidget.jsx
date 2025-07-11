@@ -13,14 +13,14 @@ export default function PSKReporterWidget() {
   return (
     <div className="sidebar-widget short-widget">
       <h2 className="sidebar-heading">PSK Reporter</h2>
-      <p className="text-sm text-tan mb-3">Where you are heard (digital modes).</p>
+      <p className="text-sm text-gunmetal mb-3">Where you are heard (digital modes).</p>
 
       <input
         type="text"
         placeholder="Enter Your Callsign"
         value={callsign}
         onChange={(e) => setCallsign(e.target.value)}
-        className="mb-3 p-2 text-sm rounded w-full border border-tan bg-gunmetal text-tan placeholder-tan"
+        className="mb-3 p-2 text-sm rounded w-full border border-tan bg-gunmetal text-gunmetal placeholder-gunmetal"
       />
 
       <button

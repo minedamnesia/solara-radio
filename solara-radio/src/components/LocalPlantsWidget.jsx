@@ -1,23 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toLatLon, toMaiden } from 'maidenhead';
+import { useGeolocation } from '../context/GeolocationProvider'; // 👈 use the shared context
 
 export default function LocalPlantsWidget() {
+  const { location, enabled, error: geoError } = useGeolocation(); // 📡 from global provider
   const [gridSquare, setGridSquare] = useState('');
   const [plants, setPlants] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const plantsPerPage = 5;
 
+  useEffect(() => {
+    if (enabled && location) {
+      const grid = toMaiden(location.latitude, location.longitude);
+      setGridSquare(grid);
+      fetchPlants(location.latitude, location.longitude);
+    }
+  }, [enabled, location]);
+
   const fetchPlants = async (lat, lon) => {
     setLoading(true);
-    console.log('Fetching plants near:', lat, lon);
-
     try {
       const response = await fetch(
         `https://api.inaturalist.org/v1/observations?lat=${lat}&lng=${lon}&radius=10&taxon_id=47126&per_page=50`
       );
       const data = await response.json();
-      console.log('Fetched data:', data);
 
       const plantMap = new Map();
       data.results.forEach(item => {
@@ -35,7 +42,6 @@ export default function LocalPlantsWidget() {
     } catch (error) {
       console.error('Error fetching plant data:', error);
     }
-
     setLoading(false);
   };
 
@@ -49,35 +55,13 @@ export default function LocalPlantsWidget() {
     }
   };
 
-  const handleFetchFromGps = () => {
-    setLoading(true);
-    if (!navigator.geolocation) {
-      console.error('Geolocation not supported.');
-      setLoading(false);
-      return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        const grid = toMaiden(latitude, longitude);
-        setGridSquare(grid);
-        fetchPlants(latitude, longitude);
-      },
-      (error) => {
-        console.error('GPS Error:', error);
-        setLoading(false);
-      }
-    );
-  };
-
   const indexOfLastPlant = currentPage * plantsPerPage;
   const indexOfFirstPlant = indexOfLastPlant - plantsPerPage;
   const currentPlants = plants.slice(indexOfFirstPlant, indexOfLastPlant);
   const totalPages = Math.ceil(plants.length / plantsPerPage);
 
   return (
-    <div className="solara-widget col-span-3 short-widget">
+    <div className="solara-widget col-span-3">
       <h3 className="widget-heading">Local Plants</h3>
 
       <input
@@ -95,16 +79,17 @@ export default function LocalPlantsWidget() {
         >
           Use Grid Square
         </button>
-
-        <button
-          onClick={handleFetchFromGps}
-          className="px-4 py-2 bg-persian-orange text-gunmetal rounded-lg hover:bg-amber-400"
-        >
-          Use Current Location
-        </button>
       </div>
 
-      {loading && <p className="font-sans text-tan">Loading plants...</p>}
+      {enabled && !location && (
+        <p className="text-tan text-sm">Locating…</p>
+      )}
+
+      {geoError && (
+        <p className="text-red-500 text-sm">Location error: {geoError}</p>
+      )}
+
+      {loading && <p className="font-sans text-tan">Loading plants…</p>}
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {currentPlants.length > 0 ? currentPlants.map((plant) => (

@@ -1,32 +1,25 @@
 import { useState, useEffect } from 'react';
 import { MapPin } from 'lucide-react';
+import { useGeolocation } from '../context/GeolocationProvider';
 
 export default function MaidenheadWidget() {
+  const { location, enabled, error: geoError } = useGeolocation();
   const [grid, setGrid] = useState('');
   const [latlon, setLatlon] = useState({ lat: '', lon: '' });
-  const [error, setError] = useState('');
-  const [manual, setManual] = useState(false);
+  const [manualMode, setManualMode] = useState(false);
+  const [manualError, setManualError] = useState('');
 
   useEffect(() => {
-    if (!navigator.geolocation) {
-      setError('Geolocation not supported.');
-      setManual(true);
-      return;
+    if (enabled && location) {
+      const lat = location.latitude;
+      const lon = location.longitude;
+      setLatlon({ lat: lat.toFixed(5), lon: lon.toFixed(5) });
+      setGrid(latLonToMaiden(lat, lon));
+      setManualMode(false);
+    } else if (!enabled) {
+      setManualMode(true);
     }
-
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const lat = pos.coords.latitude;
-        const lon = pos.coords.longitude;
-        setLatlon({ lat: lat.toFixed(5), lon: lon.toFixed(5) });
-        setGrid(latLonToMaiden(lat, lon));
-      },
-      () => {
-        setError('Unable to access your location.');
-        setManual(true);
-      }
-    );
-  }, []);
+  }, [enabled, location]);
 
   function latLonToMaiden(lat, lon) {
     lat += 90;
@@ -48,10 +41,10 @@ export default function MaidenheadWidget() {
     const lat = parseFloat(latlon.lat);
     const lon = parseFloat(latlon.lon);
     if (isNaN(lat) || isNaN(lon)) {
-      setError('Please enter valid numbers.');
+      setManualError('Please enter valid numbers.');
       return;
     }
-    setError('');
+    setManualError('');
     setGrid(latLonToMaiden(lat, lon));
   }
 
@@ -74,7 +67,7 @@ export default function MaidenheadWidget() {
             </p>
           )}
         </>
-      ) : manual ? (
+      ) : manualMode ? (
         <>
           <form onSubmit={handleManualSubmit} className="space-y-2">
             <div className="flex flex-col gap-1">
@@ -99,11 +92,13 @@ export default function MaidenheadWidget() {
             >
               Calculate Grid Square
             </button>
-            {error && <p className="text-red-400 text-sm mt-1">{error}</p>}
+            {manualError && <p className="text-red-400 text-sm mt-1">{manualError}</p>}
           </form>
         </>
+      ) : geoError ? (
+        <p className="text-red-400 text-sm mt-1">{geoError}</p>
       ) : (
-        <p className="text-tan font-sans text-sm">Detecting location...</p>
+        <p className="text-tan font-sans text-sm">Detecting location…</p>
       )}
     </div>
   );

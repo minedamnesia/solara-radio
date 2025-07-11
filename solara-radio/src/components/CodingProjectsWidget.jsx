@@ -26,7 +26,7 @@ export default function CodingProjectsWidget() {
         {projects.map((project, index) => (
           <div key={index} className="bg-sage p-4 rounded-xl shadow-md border border-persian-orange">
             <h5 className="text-l font-heading mb-2 text-gunmetal">{project.name}</h5>
-            <p className="font-sans text-coffee text-sm mb-2">{project.description}</p>
+            <p className="font-sans text-gunmetal text-sm mb-2">{project.description}</p>
             <a
               href={project.link}
               target="_blank"
