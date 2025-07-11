@@ -71,7 +71,7 @@ export default function HikingMapsWidget() {
       <select
         onChange={(e) => setSelectedState(e.target.value)}
         value={selectedState}
-        className="mb-4 p-2 rounded w-full"
+        className="mb-4 p-2 rounded w-full bg-tan text-gunmetal"
       >
         <option value="">Select a State</option>
         {states.map((state) => (
@@ -86,7 +86,7 @@ export default function HikingMapsWidget() {
             const park = parks.find(p => p.reference === e.target.value);
             setSelectedPark(park);
           }}
-          className="mb-4 p-2 rounded w-full"
+          className="mb-4 p-2 rounded w-full bg-tan text-gunmetal"
         >
           <option value="">Select a POTA Site</option>
           {parks.map((park) => (
@@ -109,7 +109,7 @@ export default function HikingMapsWidget() {
       {trails.length > 0 && (
         <div className="mt-4 font-sans text-tan">
           <h3 className="text-xl font-heading mb-2 text-persian-orange">Nearby Hiking Trails</h3>
-          <ul className="list-disc list-inside text-sm space-y-1">
+          <ul className="list-disc list-inside text-sm space-y-1 bg-tan text-gunmetal">
             {trails.slice(0, 5).map((trail, index) => (
               <li key={index}>
                 <button

@@ -10,6 +10,7 @@ export function GeolocationToggle() {
         <input
           type="checkbox"
           checked={enabled}
+          className="bg-tan accent-persian-orange"
           onChange={(e) => setEnabled(e.target.checked)}
         />
         <span>Enable Geolocation</span>

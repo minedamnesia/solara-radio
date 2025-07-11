@@ -90,7 +90,7 @@ export default function LocalPlantsWidget() {
         placeholder="Enter Grid Square (e.g. DM13)"
         value={gridSquare}
         onChange={(e) => setGridSquare(e.target.value)}
-        className="mb-2 p-2 rounded w-full"
+        className="mb-2 p-2 rounded w-full bg-tan text-gunmetal"
       />
 
       <div className="flex gap-4 mb-4">
@@ -107,7 +107,7 @@ export default function LocalPlantsWidget() {
       )}
 
       {geoError && (
-        <p className="text-red-500 text-sm">Location error: {geoError}</p>
+        <p className="text-persian-orange text-sm">Location error: {geoError}</p>
       )}
 
       {loading && <p className="font-sans text-tan">Loading plants…</p>}

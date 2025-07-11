@@ -20,7 +20,7 @@ export default function PSKReporterWidget() {
         placeholder="Enter Your Callsign"
         value={callsign}
         onChange={(e) => setCallsign(e.target.value)}
-        className="mb-3 p-2 text-sm rounded w-full border border-tan bg-gunmetal text-tan placeholder-tan"
+        className="mb-3 p-2 text-sm rounded w-full border border-tan bg-tan text-gunmetal placeholder-gunmetal"
       />
 
       <button
