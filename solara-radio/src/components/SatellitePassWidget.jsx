@@ -34,7 +34,7 @@ export default function SatellitePassWidget() {
   }, [noradId, latitude, longitude, enabled]);
 
   return (
-    <div className="solara-widget short-widget">
+    <div className="solara-widget">
       <h2 className="widget-heading">Satellite Pass Predictor</h2>
 
       {!enabled ? (
