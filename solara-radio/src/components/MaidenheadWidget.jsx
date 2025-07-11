@@ -88,7 +88,7 @@ export default function MaidenheadWidget() {
             </div>
             <button
               type="submit"
-              className="bg-persian-orange text-gunmetal font-bold px-4 py-2 rounded hover:underline"
+              className="sidebar-button"
             >
               Calculate Grid Square
             </button>

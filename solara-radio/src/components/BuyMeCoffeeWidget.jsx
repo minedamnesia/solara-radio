@@ -19,7 +19,7 @@ export default function BuyMeCoffeeWidget() {
         href="https://venmo.com/Kelly-Simer" 
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-block bg-persian-orange text-gunmetal font-semibold px-6 py-3 rounded-full shadow hover:bg-opacity-90 transition"
+        className="inline-block sidebar-button"
       >
         Venmo Me
       </a>

@@ -48,7 +48,7 @@ export default function MUFMapWidget() {
 
       <button
         onClick={handleOpenMap}
-        className="w-full text-sm px-3 py-2 bg-persian-orange text-gunmetal rounded-lg hover:bg-amber-400 transition"
+        className="w-full sidebar-button"
       >
         Open {current.label} →
       </button>
