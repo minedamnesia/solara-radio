@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useGeolocation } from '../context/GeolocationProvider';
 
-const API_KEY = 'YOUR_N2YO_API_KEY'; // Replace with your actual API key
+const API_KEY = import.meta.env.VITE_N2YO_API_KEY || 'REPLACE_ME';
 const DEFAULT_NORAD = 25544; // ISS
 
 export default function SatellitePassWidget() {
@@ -10,21 +10,32 @@ export default function SatellitePassWidget() {
   const [passes, setPasses] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const latitude = location?.latitude;
-  const longitude = location?.longitude;
+  const latitude = location?.latitude ?? null;
+  const longitude = location?.longitude ?? null;
 
   useEffect(() => {
-    if (!enabled || !latitude || !longitude) return;
+    if (!enabled || !latitude || !longitude || API_KEY === 'REPLACE_ME') return;
 
     async function fetchPasses() {
       setLoading(true);
       try {
         const url = `https://api.n2yo.com/rest/v1/satellite/radiopasses/${noradId}/${latitude}/${longitude}/0/2/60/&apiKey=${API_KEY}`;
         const res = await fetch(url);
+
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status} - ${res.statusText}`);
+        }
+
         const json = await res.json();
-        setPasses(json.passes || []);
+
+        if (!json.passes || !Array.isArray(json.passes)) {
+          throw new Error('Unexpected API response format');
+        }
+
+        setPasses(json.passes);
       } catch (err) {
         console.error('Error fetching satellite passes:', err);
+        setPasses([]);
       } finally {
         setLoading(false);
       }
