@@ -3,11 +3,10 @@ import { GeolocationContext } from '../context/GeolocationProvider';
 
 export default function CompassWidget() {
   const [heading, setHeading] = useState(0);
+  const [supported, setSupported] = useState(true);
   const [geoHeading, setGeoHeading] = useState(null);
-  const [sensorSupported, setSensorSupported] = useState(true);
-  const { enabled: geolocationEnabled } = useContext(GeolocationContext);
-
   const fallbackRef = useRef(null);
+  const { enabled: geolocationEnabled } = useContext(GeolocationContext);
 
   useEffect(() => {
     let geoWatchId;
@@ -22,36 +21,28 @@ export default function CompassWidget() {
         deviceHeading = 360 - event.alpha;
       }
 
-      if (event.alpha !== null || event.webkitCompassHeading !== undefined) {
-        setSensorSupported(true);
-        setHeading(deviceHeading);
-        clearInterval(fallbackInterval);
-      } else {
-        setSensorSupported(false);
-      }
+      setHeading(deviceHeading);
     };
 
     if (window.DeviceOrientationEvent) {
       window.addEventListener('deviceorientationabsolute', handleOrientation, true);
       window.addEventListener('deviceorientation', handleOrientation, true);
     } else {
-      setSensorSupported(false);
-    }
+      setSupported(false);
 
-    if (!sensorSupported) {
-      // Start fallback simulated rotation
-      let angle = 0;
+      // 🔁 Animate fallback needle rotation
       fallbackInterval = setInterval(() => {
-        angle = (angle + 1) % 360;
-        setHeading(angle);
-      }, 100);
+        setHeading((prev) => (prev + 1) % 360);
+      }, 50); // ~7.2 seconds per full rotation
     }
 
     if (geolocationEnabled && navigator.geolocation) {
       geoWatchId = navigator.geolocation.watchPosition(
         (pos) => {
           const { heading } = pos.coords;
-          if (heading != null) setGeoHeading(Math.round(heading));
+          if (heading !== null && heading !== undefined) {
+            setGeoHeading(Math.round(heading));
+          }
         },
         (err) => {
           console.warn('Geolocation heading not available:', err.message);
@@ -63,10 +54,14 @@ export default function CompassWidget() {
     return () => {
       window.removeEventListener('deviceorientationabsolute', handleOrientation);
       window.removeEventListener('deviceorientation', handleOrientation);
-      if (geoWatchId) navigator.geolocation.clearWatch(geoWatchId);
-      if (fallbackInterval) clearInterval(fallbackInterval);
+      if (geoWatchId) {
+        navigator.geolocation.clearWatch(geoWatchId);
+      }
+      if (fallbackInterval) {
+        clearInterval(fallbackInterval);
+      }
     };
-  }, [geolocationEnabled, sensorSupported]);
+  }, [geolocationEnabled]);
 
   return (
     <div className="sidebar-widget text-center">
@@ -75,6 +70,7 @@ export default function CompassWidget() {
       <div className="flex flex-col items-center">
         <div className="relative w-40 h-40 border-4 border-coffee rounded-full flex items-center justify-center">
           <div
+            ref={fallbackRef}
             className="absolute w-1 h-16 bg-persian-orange origin-bottom transition-transform duration-300 ease-out"
             style={{ transform: `rotate(${heading}deg)` }}
           />
@@ -85,15 +81,19 @@ export default function CompassWidget() {
         </div>
 
         <p className="mt-4 font-sans text-coffee">
-          {sensorSupported
-            ? `Device Heading: ${Math.round(heading)}°`
-            : `Simulated Heading: ${Math.round(heading)}°`}
+          Device Heading: {Math.round(heading)}°
         </p>
 
         {geoHeading !== null && geolocationEnabled && (
           <p className="text-xs text-gunmetal mt-1">Geo Heading: {geoHeading}°</p>
         )}
       </div>
+
+      {!supported && (
+        <p className="text-xs text-coffee mt-2 italic">
+          Compass fallback animation enabled (no sensor data)
+        </p>
+      )}
     </div>
   );
 }
