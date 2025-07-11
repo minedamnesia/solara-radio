@@ -5,7 +5,7 @@ export default function CompassWidget() {
   const [heading, setHeading] = useState(0);
   const [supported, setSupported] = useState(true);
   const [geoHeading, setGeoHeading] = useState(null);
-  const { geolocationEnabled } = useContext(GeolocationContext); // ⬅️ Toggle context
+  const { enabled: geolocationEnabled } = useContext(GeolocationContext);
 
   useEffect(() => {
     let geoWatchId;
