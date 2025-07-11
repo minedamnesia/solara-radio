@@ -262,7 +262,77 @@ app.get('/api/parks', (req, res) => {
     });
 });
 
+// ===== Nearest Park from all_parks_ext.csv =====
+function haversineDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Earth's radius in km
+  const toRad = (deg) => deg * Math.PI / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+    Math.sin(dLon / 2) ** 2;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
 
+let parkDataCache = null;
+
+function loadParksFromCSV() {
+  return new Promise((resolve, reject) => {
+    const results = [];
+    fs.createReadStream(path.join(__dirname, 'all_parks_ext.csv'))
+      .pipe(csv())
+      .on('data', (data) => {
+        if (data.latitude && data.longitude) {
+          results.push({
+            reference: data.reference,
+            name: data.name,
+            state: data.locationDesc?.replace('US-', '') || '',
+            latitude: parseFloat(data.latitude),
+            longitude: parseFloat(data.longitude)
+          });
+        }
+      })
+      .on('end', () => resolve(results))
+      .on('error', (err) => reject(err));
+  });
+}
+
+app.get('/api/nearest-park', async (req, res) => {
+  const { lat, lon } = req.query;
+  if (!lat || !lon) return res.status(400).json({ error: 'Missing lat/lon' });
+
+  try {
+    const userLat = parseFloat(lat);
+    const userLon = parseFloat(lon);
+
+    // Lazy-load the CSV data once
+    if (!parkDataCache) {
+      parkDataCache = await loadParksFromCSV();
+    }
+
+    let nearest = null;
+    let minDistance = Infinity;
+
+    for (const park of parkDataCache) {
+      const dist = haversineDistance(userLat, userLon, park.latitude, park.longitude);
+      if (dist < minDistance) {
+        minDistance = dist;
+        nearest = park;
+      }
+    }
+
+    if (nearest) {
+      res.json(nearest);
+    } else {
+      res.status(404).json({ error: 'No parks found nearby' });
+    }
+  } catch (err) {
+    console.error('Error finding nearest park:', err.message);
+    res.status(500).json({ error: 'Failed to locate nearest park' });
+  }
+});
 
 // ===== Start Server =====
 app.listen(PORT, () => {
