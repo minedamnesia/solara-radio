@@ -3,13 +3,11 @@ import VOACAPPrediction from "./VOACAPPrediction"; // adjust the path as needed
 
 export default function LivePropagationWidget() {
   const [position, setPosition] = useState(null);
-  const [error, setError] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [propData, setPropData] = useState(null);
 
   useEffect(() => {
     if (!navigator.geolocation) {
-      setError(true);
       setShowMessage(true);
       return;
     }
@@ -23,7 +21,6 @@ export default function LivePropagationWidget() {
       },
       (err) => {
         console.warn("Geolocation error:", err.message);
-        setError(true);
         setShowMessage(true);
       }
     );

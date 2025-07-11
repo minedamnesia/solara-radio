@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const DX_TARGETS = {
   "Europe": { lat: 50, lon: 10 },
