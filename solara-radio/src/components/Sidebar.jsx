@@ -3,6 +3,7 @@ import MaidenheadWidget from '../components/MaidenheadWidget';
 import BuyMeCoffeeWidget from '../components/BuyMeCoffeeWidget';
 import PskreporterWidget from '../components/PskreporterWidget';
 import MUFMapWidget from '../components/MUFMapWidget';
+import SatellitePassWidget from '../components/SatellitePassWidget';
 import { GeolocationToggle } from '../components/GeolocationToggle';
 
 export default function Sidebar() {
@@ -22,6 +23,9 @@ export default function Sidebar() {
       </div>
       <div className="sidebar-widget">
         <PskreporterWidget />
+      </div>
+      <div className="sidebar-widget">
+          <SatellitePassWidget />
       </div>
       <div className="sidebar-widget">
         <BuyMeCoffeeWidget />

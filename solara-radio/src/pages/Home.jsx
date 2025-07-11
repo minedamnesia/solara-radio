@@ -4,8 +4,8 @@ import CodingProjectsWidget from '../components/CodingProjectsWidget';
 import LocalPlantsWidget from '../components/LocalPlantsWidget';
 import SolarPositionsWidget from '../components/SolarPositionsWidget';
 import SpotifySCMEmbedWidget from '../components/SpotifySCMEmbedWidget';
-import SatellitePassWidget from '../components/SatellitePassWidget';
 import Sidebar from '../components/Sidebar';
+import LivePropagationWidget from '../components/LivePropagationWidget';
 import HamRadioResourcesWidget from '../components/HamRadioResourcesWidget';
 
 export default function Home() {
@@ -34,7 +34,7 @@ export default function Home() {
         <div className="grid grid-cols-3 gap-6 border border-persian-orange rounded-xl p-4">
           <HikingMapsWidget />
           <SolarPositionsWidget />
-          <SatellitePassWidget />
+          <LivePropagationWidget />
         </div>
 
         <div className="grid grid-cols-3 gap-6 border border-persian-orange rounded-xl p-4">
