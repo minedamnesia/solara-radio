@@ -12,7 +12,7 @@ module.exports = {
         'beaver': '#A37966',
         'tan': '#f2c79d',
         'feldgrau': '#586D5A',
-        'sage': '#6c8d6a',
+        'sage': '#9cb99a',
         'coffee': '#4B3621',
       },
     },
