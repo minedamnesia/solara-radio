@@ -24,7 +24,7 @@ code {
     @apply text-2xl font-heading mb-3 text-gunmetal text-center;
   }
   .solara-widget {
-    @apply bg-coffee p-4 rounded-2xl shadow-lg min-h-[350px] sm:min-h-[380px] md:min-h-[420px] max-h-[60vh] row-span-1 overflow-auto;
+    @apply bg-tan p-4 rounded-2xl shadow-lg min-h-[350px] sm:min-h-[380px] md:min-h-[420px] max-h-[60vh] row-span-1 overflow-auto;
   }
   .tall-widget {
     @apply min-h-[700px] sm:min-h-[760px] md:min-h-[840px] max-h-[90vh] row-span-2;
@@ -33,6 +33,6 @@ code {
     @apply min-h-[120px] sm:min-h-[140px] md:min-h-[160px] max-h-[20vh];
   }
   .widget-heading {
-    @apply text-3xl font-heading tracking-wide mb-4 text-persian-orange;
+    @apply text-3xl font-heading tracking-wide mb-4 text-gunmetal;
   }
 }  
