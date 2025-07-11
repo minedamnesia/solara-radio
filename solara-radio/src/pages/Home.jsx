@@ -21,10 +21,10 @@ export default function Home() {
         link="/about"
         image="/qsl.png"
       />
+      <SpotifySCMEmbedWidget />
+      <LocalPlantsWidget />
       <HikingMapsWidget />
       <SolarPositionsWidget />
-      <LocalPlantsWidget />
-      <SpotifySCMEmbedWidget />
       <CodingProjectsWidget />
       </main>
       {/* Sidebar */}

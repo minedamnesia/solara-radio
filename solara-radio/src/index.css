@@ -18,7 +18,7 @@ code {
 
 @layer components {
   .sidebar-widget {
-    @apply mb-6 bg-sage text-gunmetal;
+    @apply mb-6 pb-6 p-4 bg-sage text-gunmetal;
   }
   .sidebar-heading {
     @apply text-2xl font-heading mb-3 text-gunmetal text-center;
