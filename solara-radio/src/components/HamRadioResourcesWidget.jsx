@@ -45,7 +45,7 @@ const linkData = {
     ["WSJT-X", "https://physics.princeton.edu/pulsar/k1jt/wsjtx.html"],
     ["JS8Call", "https://js8call.com/"],
     ["FLDigi", "http://www.w1hkj.com/"],
-    ["JTDX (JT Digital Modes for HF)", "https://jtdx.tech/en/"]
+    ["JTDX (JT Digital Modes for HF)", "https://jtdx.tech/en/"],
     ["VARA Modem", "https://rosmodem.wordpress.com/"],
     ["NBEMS Guide", "https://www.arrl.org/files/file/Get%20on%20the%20Air/NBEMS.pdf"],
     ["ARRL Digital Overview", "https://www.arrl.org/digital-modes"],
