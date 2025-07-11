@@ -36,7 +36,8 @@ export default function LivePropagationWidget() {
   useEffect(() => {
     async function fetchPropagationData() {
       try {
-        const res = await fetch("https://services.swpc.noaa.gov/json/solar-terrestrial.json");
+        const res = await fetch("/.netlify/functions/noaa");
+
         const data = await res.json();
         if (data && data.length > 0) {
           setPropData(data[0]);
