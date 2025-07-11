@@ -28,7 +28,7 @@ code {
     @apply mb-6 pb-2 p-2 bg-sage text-gunmetal;
   }
   .sidebar-heading {
-    @apply text-2xl font-heading mb-3 text-gunmetal text-center;
+    @apply text-xl font-heading mb-3 text-gunmetal text-center;
   }
   .sidebar-button {
    @apply px-2.5 py-1.5 rounded-lg hover:bg-amber-400 transition shadow-sm text-sm bg-persian-orange text-gunmetal text-center font-semibold
