@@ -38,3 +38,4 @@ export function useGeolocation() {
   return useContext(GeolocationContext);
 }
 
+export { GeolocationContext };
