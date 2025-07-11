@@ -3,7 +3,7 @@ import MaidenheadWidget from '../components/MaidenheadWidget';
 import BuyMeCoffeeWidget from '../components/BuyMeCoffeeWidget';
 import PskreporterWidget from '../components/PskreporterWidget';
 import MUFMapWidget from '../components/MUFMapWidget';
-import GeolocationToggle from '../components/GeolocationToggle';
+import { GeolocationToggle } from '../components/GeolocationToggle';
 
 export default function Sidebar() {
   return (
