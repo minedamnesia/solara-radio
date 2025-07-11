@@ -1,3 +1,5 @@
+import fetch from 'node-fetch';
+
 export async function handler(event, context) {
   try {
     const response = await fetch('https://services.swpc.noaa.gov/json/solar-terrestrial.json');
@@ -6,7 +8,7 @@ export async function handler(event, context) {
     return {
       statusCode: 200,
       headers: {
-        'Access-Control-Allow-Origin': '*', // Allow CORS
+        'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
@@ -14,7 +16,10 @@ export async function handler(event, context) {
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Failed to fetch NOAA data', detail: error.message }),
+      body: JSON.stringify({
+        error: 'Failed to fetch NOAA data',
+        detail: error.message,
+      }),
     };
   }
 }
