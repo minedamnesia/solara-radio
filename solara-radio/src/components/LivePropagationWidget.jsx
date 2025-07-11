@@ -40,7 +40,7 @@ export default function LivePropagationWidget() {
         const data = await res.json();
 
         if (data && Array.isArray(data) && data.length > 1) {
-          const [_, values] = data; // skip headers, use row 1
+          const [values] = data; // skip headers, use row 1
           setPropData({
             description: values[1],
             gScale: values[2],
