@@ -31,7 +31,7 @@ code {
     @apply text-2xl font-heading mb-3 text-gunmetal text-center;
   }
   .sidebar-button {
-   @apply px-2.5 py-1.5 rounded-ls hover:bg-amber-400 transition shadow-sm text-sm bg-persian-orange text-gunmetal text-center font-semibold
+   @apply px-2.5 py-1.5 rounded-lg hover:bg-amber-400 transition shadow-sm text-sm bg-persian-orange text-gunmetal text-center font-semibold
   }
   .solara-widget {
     @apply bg-gunmetal p-4 rounded-2xl shadow-lg min-h-[350px] sm:min-h-[380px] md:min-h-[420px] max-h-[60vh] row-span-1 overflow-auto;
