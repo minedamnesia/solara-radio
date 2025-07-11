@@ -1,7 +1,7 @@
 import { MdApps, MdWarningAmber } from 'react-icons/md';
-import { FaSatelliteDish, FaNetworkWired, FaBroadcastTower } from 'react-icons/fa';
+import { FaSatelliteDish, FaNetworkWired, FaBroadcastTower,FaBookOpen } from 'react-icons/fa';
 import { HiChip } from 'react-icons/hi';
-import { GiBackpack } from 'react-icons/gi';
+import { GiBackpack,GiWalkieTalkie } from 'react-icons/gi';
 import { useState } from 'react';
 
 const linkData = {
@@ -89,6 +89,28 @@ const linkData = {
     ["W8JI Antenna Theory", "https://www.w8ji.com/"],
     ["VK1NAM Portable", "https://vk1nam.wordpress.com/"],
   ],
+ "Portable Ops": [
+   ["Parks on the Air (POTA)", "https://parksontheair.com/"],
+   ["Summits on the Air (SOTA)", "https://www.sota.org.uk/"],
+   ["SOTA Mapping Project", "https://sotl.as/"],
+   ["QRP Labs", "https://www.qrp-labs.com/"],
+   ["Elecraft (QRP Radios)", "https://elecraft.com/"],
+   ["ARRL Portable Ops Guide", "https://www.arrl.org/portable-operations"],
+   ["Ham Radio Prepper", "https://offgridsurvival.com/hamradio/"],
+   ["Go-Kit Ideas (ARRL)", "https://www.arrl.org/emergency-radio-go-kits"],
+   ["Wilderness Protocol", "https://wildernessprotocol.org/"],
+   ["Portable Ops Tips", "https://www.hamradio.me/portable-operation"]
+ ],
+  Licensing: [
+    ["HamStudy.org", "https://hamstudy.org/"],
+    ["ARRL License Manual", "https://www.arrl.org/shop/Licensing-Education-and-Training/"],
+    ["FCC Exam Schedule", "https://www.arrl.org/find-an-amateur-radio-license-exam-session"],
+    ["HamTestOnline", "https://www.hamtestonline.com/"],
+    ["eHam Practice Exams", "https://www.eham.net/exams/"],
+    ["QRZ Practice Tests", "https://www.qrz.com/hamtest/"],
+    ["NCVEC Question Pools", "https://www.ncvec.org/page.php?id=356"],
+  ],
+
 };
 
 const categoryIcons = {
@@ -99,6 +121,8 @@ const categoryIcons = {
   Antennas: FaBroadcastTower,
   'Packet Radio': FaNetworkWired,
   Supplies: GiBackpack,
+  Licensing: FaBookOpen,
+  Portable Ops: GiWalkieTalkie,
 };
 
 export default function HamRadioResourcesWidget() {
