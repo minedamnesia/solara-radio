@@ -1,6 +1,6 @@
-import fetch from 'node-fetch';
+kconst fetch = require('node-fetch');
 
-export async function handler(event, context) {
+exports.handler = async function (event, context) {
   try {
     const response = await fetch('https://services.swpc.noaa.gov/json/solar-terrestrial.json');
     const data = await response.json();
@@ -22,5 +22,5 @@ export async function handler(event, context) {
       }),
     };
   }
-}
+};
 
