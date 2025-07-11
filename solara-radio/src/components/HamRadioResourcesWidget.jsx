@@ -122,7 +122,7 @@ const categoryIcons = {
   'Packet Radio': FaNetworkWired,
   Supplies: GiBackpack,
   Licensing: FaBookOpen,
-  Portable Ops: GiWalkieTalkie,
+  'Portable Ops': GiWalkieTalkie,
 };
 
 export default function HamRadioResourcesWidget() {
