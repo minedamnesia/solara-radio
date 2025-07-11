@@ -34,7 +34,6 @@ export default function SolarPositionsWidget() {
 
   return (
     <div className="solara-widget">
-      <h2 className="widget-heading">Solar Positions</h2>
 
       <div className="flex mb-4">
         <button
