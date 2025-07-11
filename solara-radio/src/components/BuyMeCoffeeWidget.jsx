@@ -3,7 +3,7 @@ export default function BuyMeCoffeeWidget() {
   return (
     <div className="sidebar-widget text-center">
       <h2 className="sidebar-heading">Buy Me a Coffee</h2>
-      <p className="text-lg mb-4">If you enjoy the site, feel free to support it ☕</p>
+      <p className="text-sm mb-4">If you enjoy the site, feel free to support it ☕</p>
 
       {/* QR Code */}
       <div className="flex justify-center mb-4">

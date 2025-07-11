@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { GeolocationContext } from '../context/GeolocationProvider';
 
 export default function CompassWidget() {
   const [heading, setHeading] = useState(0);
   const [supported, setSupported] = useState(true);
   const [geoHeading, setGeoHeading] = useState(null);
+  const { geolocationEnabled } = useContext(GeolocationContext); // ⬅️ Toggle context
 
   useEffect(() => {
     let geoWatchId;
@@ -12,17 +14,14 @@ export default function CompassWidget() {
       let deviceHeading = 0;
 
       if (typeof event.webkitCompassHeading === 'number') {
-        // iOS
         deviceHeading = event.webkitCompassHeading;
       } else if (typeof event.alpha === 'number') {
-        // Android and others
         deviceHeading = 360 - event.alpha;
       }
 
       setHeading(deviceHeading);
     };
 
-    // Listen to compass orientation
     if (window.DeviceOrientationEvent) {
       window.addEventListener('deviceorientationabsolute', handleOrientation, true);
       window.addEventListener('deviceorientation', handleOrientation, true);
@@ -30,8 +29,7 @@ export default function CompassWidget() {
       setSupported(false);
     }
 
-    // Use geolocation to record device orientation relative to true north
-    if (navigator.geolocation) {
+    if (geolocationEnabled && navigator.geolocation) {
       geoWatchId = navigator.geolocation.watchPosition(
         (pos) => {
           const { heading } = pos.coords;
@@ -53,7 +51,7 @@ export default function CompassWidget() {
         navigator.geolocation.clearWatch(geoWatchId);
       }
     };
-  }, []);
+  }, [geolocationEnabled]); // ⬅️ React to toggle change
 
   return (
     <div className="sidebar-widget text-center">
@@ -76,7 +74,7 @@ export default function CompassWidget() {
             Device Heading: {Math.round(heading)}°
           </p>
 
-          {geoHeading !== null && (
+          {geoHeading !== null && geolocationEnabled && (
             <p className="text-xs text-gunmetal mt-1">Geo Heading: {geoHeading}°</p>
           )}
         </div>
