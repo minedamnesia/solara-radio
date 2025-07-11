@@ -90,7 +90,7 @@ export default function LocalPlantsWidget() {
         placeholder="Enter Grid Square (e.g. DM13)"
         value={gridSquare}
         onChange={(e) => setGridSquare(e.target.value)}
-        className="mb-2 p-2 rounded w-full bg-tan text-gunmetal"
+        className="mb-2 p-2 rounded w-full bg-tan text-gunmetal placeholder-gunmetal"
       />
 
       <div className="flex gap-4 mb-4">
