@@ -63,7 +63,6 @@ const linkData = {
     ["Winlink Book", "https://winlink.org/book"],
     ["Byonics", "http://www.byonics.com/"],
     ["TAPR", "https://www.tapr.org/"],
-    ["YAAC (Yet Another APRS Client", "https://www.ka2ddo.org/ka2ddo/YAAC.html"],
   ],
   Supplies: [
     ["DX Engineering", "https://www.dxengineering.com/"],
