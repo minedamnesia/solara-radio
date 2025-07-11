@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { toLatLon, toMaiden } from 'maidenhead';
-import { useGeolocation } from '../context/GeolocationProvider'; // 👈 use the shared context
+import { useGeolocation } from '../context/GeolocationProvider';
 
 export default function LocalPlantsWidget() {
-  const { location, enabled, error: geoError } = useGeolocation(); // 📡 from global provider
+  const { location, enabled, error: geoError } = useGeolocation();
   const [gridSquare, setGridSquare] = useState('');
   const [plants, setPlants] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -11,14 +11,34 @@ export default function LocalPlantsWidget() {
   const plantsPerPage = 5;
 
   useEffect(() => {
-    if (enabled && location) {
-      const grid = toMaiden(location.latitude, location.longitude);
-      setGridSquare(grid);
-      fetchPlants(location.latitude, location.longitude);
+    if (
+      enabled &&
+      location &&
+      typeof location.latitude === 'number' &&
+      typeof location.longitude === 'number'
+    ) {
+      const { latitude, longitude } = location;
+      try {
+        const grid = toMaiden(latitude, longitude);
+        setGridSquare(grid);
+        fetchPlants(latitude, longitude);
+      } catch (e) {
+        console.error('Error generating Maidenhead grid:', e);
+      }
     }
   }, [enabled, location]);
 
   const fetchPlants = async (lat, lon) => {
+    if (
+      typeof lat !== 'number' ||
+      typeof lon !== 'number' ||
+      isNaN(lat) ||
+      isNaN(lon)
+    ) {
+      console.error('Invalid lat/lon values:', lat, lon);
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await fetch(
@@ -41,8 +61,9 @@ export default function LocalPlantsWidget() {
       setCurrentPage(1);
     } catch (error) {
       console.error('Error fetching plant data:', error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleFetchFromGrid = () => {
@@ -94,10 +115,20 @@ export default function LocalPlantsWidget() {
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {currentPlants.length > 0 ? currentPlants.map((plant) => (
           <div key={plant.id} className="bg-sage p-2 rounded-lg shadow-md flex flex-col items-center">
-            <img src={plant.photoUrl} alt={plant.name} className="w-full h-40 object-cover rounded mb-2" />
+            <img
+              src={plant.photoUrl}
+              alt={plant.name}
+              className="w-full h-40 object-cover rounded mb-2"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = '/fallback-plant.jpg'; // Optional: fallback image
+              }}
+            />
             <p className="font-sans text-gunmetal text-center">{plant.name}</p>
           </div>
-        )) : !loading && <p className="font-sans text-tan">No plants found for this location.</p>}
+        )) : !loading && (
+          <p className="font-sans text-tan">No plants found for this location.</p>
+        )}
       </div>
 
       {plants.length > plantsPerPage && (
