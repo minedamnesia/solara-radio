@@ -38,7 +38,7 @@ export default function HamRadioResourcesWidget() {
             <div
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className="cursor-pointer bg-sage hover:bg-sage/90 text-coffee p-6 rounded-2xl shadow-lg font-semibold text-center flex flex-col items-center justify-center min-h-[120px] transition-transform hover:scale-[1.02]"
+              className="cursor-pointer bg-tan hover:bg-sage/90 text-coffee p-6 rounded-2xl shadow-lg font-semibold text-center flex flex-col items-center justify-center min-h-[120px] transition-transform hover:scale-[1.02]"
             >
               {Icon && <Icon size={32} className="mb-3 text-gunmetal" />}
               <span className="text-lg leading-tight">{category}</span>
