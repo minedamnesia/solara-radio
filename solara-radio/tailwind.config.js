@@ -10,7 +10,7 @@ module.exports = {
         'persian-orange': '#EC935E',
         'gunmetal': '#0C2F34',
         'beaver': '#A37966',
-        'tan': '#EAE3D2',
+        'tan': '#ead6b8',
         'feldgrau': '#586D5A',
         'sage': '##c0bb9b',
         'coffee': '#4B3621',
