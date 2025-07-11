@@ -23,8 +23,8 @@ export default function MUFMapWidget() {
   };
 
   return (
-    <div className="solara-widget short-widget">
-      <h2 className="widget-heading">MUF Map</h2>
+    <div className="sidebar-widget short-widget">
+      <h2 className="sidebar-heading">MUF Map</h2>
 
       <p className="font-sans text-tan mb-4">
         Choose a MUF propagation source. Map will open in a new tab.

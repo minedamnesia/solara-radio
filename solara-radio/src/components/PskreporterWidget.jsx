@@ -11,8 +11,8 @@ export default function PSKReporterWidget() {
   };
 
   return (
-    <div className="solara-widget short-widget">
-      <h2 className="widget-heading">PSK Reporter</h2>
+    <div className="sidebar-widget short-widget">
+      <h2 className="sidebar-heading">PSK Reporter</h2>
       <p>  Where You Are Heard</p>
 
       <input

@@ -15,7 +15,7 @@ export default function Home() {
     <div className="flex w-full min-h-screen">
       {/* Main Grid */}
     <main className="w-[80%] p-6 grid grid-cols-3 grid-rows-4 gap-6">
-      <CodingProjectsWidget />
+      <HamRadioResourcesWidget />
       <Widget
         title="About Me"
         description="Hi! I'm Kelly, otherwise known as KK7QEA..."
@@ -23,13 +23,11 @@ export default function Home() {
         link="/about"
         image="/qsl.png"
       />
-      <MUFMapWidget />
       <HikingMapsWidget />
-      <PskreporterWidget />
       <SolarPositionsWidget />
       <LocalPlantsWidget />
       <SpotifySCMEmbedWidget />
-      <HamRadioResourcesWidget />
+      <CodingProjectsWidget />
       </main>
       {/* Sidebar */}
       <aside className="w-[10%] p-2">
