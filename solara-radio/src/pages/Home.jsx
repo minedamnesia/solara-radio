@@ -14,7 +14,7 @@ export default function Home() {
       {/* Main Grid */}
     <main className="w-[80%] p-6 grid grid-cols-3 grid-rows-4 gap-6">
       <HamRadioResourcesWidget />
-      <div className="col-span-1 row-span-1">
+      <div className="col-span-1">
         <Widget
           title="About Me"
           description="Hi! I'm Kelly, otherwise known as KK7QEA..."
@@ -22,8 +22,6 @@ export default function Home() {
           link="/about"
           image="/qsl.png"
         />
-      </div>
-      <div className="col-span-1 row-span-1">
         <SpotifySCMEmbedWidget />
       </div>
       <LocalPlantsWidget />
