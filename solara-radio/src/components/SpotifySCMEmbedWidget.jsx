@@ -41,7 +41,7 @@ export default function SpotifySCMEmbedPlayer() {
         </label>
 
         <select
-          className="w-full p-2 px-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white text-gray-700 whitespace-normal"
+          className="w-full p-2 px-3 rounded-lg border border-persian-orange shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-tan text-gunmetal whitespace-normal"
           value={playlistId}
           onChange={handleChange}
           disabled={!playlists.length}
