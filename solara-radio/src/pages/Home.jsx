@@ -4,6 +4,7 @@ import CodingProjectsWidget from '../components/CodingProjectsWidget';
 import LocalPlantsWidget from '../components/LocalPlantsWidget';
 import SolarPositionsWidget from '../components/SolarPositionsWidget';
 import SpotifySCMEmbedWidget from '../components/SpotifySCMEmbedWidget';
+import SatellitePassWidget from '../components/SatellitePassWidget';
 import Sidebar from '../components/Sidebar';
 import HamRadioResourcesWidget from '../components/HamRadioResourcesWidget';
 
@@ -27,6 +28,7 @@ export default function Home() {
       <LocalPlantsWidget />
       <HikingMapsWidget />
       <SolarPositionsWidget />
+      <SatellitePassWidget />
       <CodingProjectsWidget />
       </main>
       {/* Sidebar */}
