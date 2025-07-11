@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import useGeolocation from './useGeolocation'; // custom hook for user's lat/lon
+import useGeolocation from '../hooks/useGeolocation';
 
 const API_KEY = 'YOUR_N2YO_API_KEY';
 const DEFAULT_NORAD = 25544; // ISS
