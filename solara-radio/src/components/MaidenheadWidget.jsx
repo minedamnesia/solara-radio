@@ -57,12 +57,12 @@ export default function MaidenheadWidget() {
 
       {grid ? (
         <>
-          <p className="font-sans text-tan text-sm mb-2">Your grid square is:</p>
+          <p className="font-sans text-gunmetal text-sm mb-2">Your grid square is:</p>
           <div className="text-3xl font-bold text-gunmetal bg-tan py-2 px-4 rounded-lg inline-block border border-persian-orange">
             {grid}
           </div>
           {latlon.lat && latlon.lon && (
-            <p className="mt-2 text-xs text-tan">
+            <p className="mt-2 text-xs text-gunmetal">
               ({latlon.lat}, {latlon.lon})
             </p>
           )}
