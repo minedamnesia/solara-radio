@@ -26,7 +26,7 @@ const linkData = {
     ["ARISS", "https://www.ariss.org/"],
     ["SatPC32", "http://www.dk1tb.de/indexeng.htm"],
     ["AMSAT Status", "https://www.amsat.org/status/"],
-    ["FUNCube Dashboard", "https://funcube.org.uk/working-documents/funcube-telemetry-dashboard/"],
+    ["FUNCube Dashboard", "https://funcube.org.uk/telemetry-dashboard/"],
     ["Oscar List", "https://www.n2yo.com/satellites/?c=18"],
   ],
   "Emergency Comms": [
@@ -45,7 +45,7 @@ const linkData = {
     ["WSJT-X", "https://physics.princeton.edu/pulsar/k1jt/wsjtx.html"],
     ["JS8Call", "https://js8call.com/"],
     ["FLDigi", "http://www.w1hkj.com/"],
-    ["Ham Radio Deluxe", "https://www.hamradiodeluxe.com/"],
+    ["JTDX (JT Digital Modes for HF)", "https://jtdx.tech/en/"]
     ["VARA Modem", "https://rosmodem.wordpress.com/"],
     ["NBEMS Guide", "https://www.arrl.org/files/file/Get%20on%20the%20Air/NBEMS.pdf"],
     ["ARRL Digital Overview", "https://www.arrl.org/digital-modes"],
@@ -59,11 +59,11 @@ const linkData = {
     ["PinPoint APRS", "http://www.pinpointaprs.com/"],
     ["AGWPE", "http://www.sv2agw.com/ham/agwpe.htm"],
     ["YAAC", "https://www.ka2ddo.org/ka2ddo/YAAC.html"],
-    ["UI-View", "http://www.ui-view.net/"],
     ["AX.25 Protocol", "https://tldp.org/HOWTO/AX25-HOWTO/index.html"],
     ["Winlink Book", "https://winlink.org/book"],
     ["Byonics", "http://www.byonics.com/"],
     ["TAPR", "https://www.tapr.org/"],
+    ["YAAC (Yet Another APRS Client", "https://www.ka2ddo.org/ka2ddo/YAAC.html"],
   ],
   Supplies: [
     ["DX Engineering", "https://www.dxengineering.com/"],
@@ -80,7 +80,7 @@ const linkData = {
   Antennas: [
     ["Antenna Theory", "https://www.antenna-theory.com/"],
     ["M0UKD Projects", "https://www.m0ukd.com/"],
-    ["K7MEM Calculators", "http://www.k7mem.com/"],
+    ["66 Pacific Calculators", " https://www.66pacific.com/calculators/"],
     ["ARRL Antenna Book", "https://www.arrl.org/shop/ARRL-Antenna-Book-for-Radio-Communications-24th-Softcover-Edition/"],
     ["NEC2/4nec2", "https://www.qsl.net/4nec2/"],
     ["DX Engineering Articles", "https://www.dxengineering.com/techarticles"],
