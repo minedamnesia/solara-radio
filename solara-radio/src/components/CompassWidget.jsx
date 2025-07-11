@@ -65,7 +65,7 @@ export default function CompassWidget() {
 
   return (
     <div className="sidebar-widget text-center">
-      <h2 className="sidebar-heading">Live Compass</h2>
+      <h3 className="sidebar-heading">Live Compass</h3>
 
       <div className="flex flex-col items-center">
         <div className="relative w-40 h-40 border-4 border-coffee rounded-full flex items-center justify-center">

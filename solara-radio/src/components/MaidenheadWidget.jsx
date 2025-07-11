@@ -50,10 +50,10 @@ export default function MaidenheadWidget() {
 
   return (
     <div className="sidebar-widget text-center">
-      <h2 className="sidebar-heading flex justify-center items-center gap-2">
+      <h3 className="sidebar-heading flex justify-center items-center gap-2">
         <MapPin size={20} />
         Grid Locator
-      </h2>
+      </h3>
 
       {grid ? (
         <>

@@ -12,7 +12,7 @@ export default function PSKReporterWidget() {
 
   return (
     <div className="sidebar-widget short-widget">
-      <h2 className="sidebar-heading">PSK Reporter</h2>
+      <h3 className="sidebar-heading">PSK Reporter</h3>
       <p className="text-sm text-coffee mb-3">Where you are heard (digital modes).</p>
 
       <input

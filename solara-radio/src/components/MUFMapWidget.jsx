@@ -24,7 +24,7 @@ export default function MUFMapWidget() {
 
   return (
     <div className="sidebar-widget short-widget">
-      <h2 className="sidebar-heading">MUF Map</h2>
+      <h3 className="sidebar-heading">MUF Map</h3>
 
       <p className="font-sans text-coffee text-sm mb-3">
         Choose a source. Map opens in a new tab.

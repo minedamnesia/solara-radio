@@ -5,7 +5,7 @@ export function GeolocationToggle() {
 
   return (
     <div className="sidebar-widget">
-      <h2 className="sidebar-heading">Location Settings</h2>
+      <h3 className="sidebar-heading">Location Settings</h3>
       <label className="flex items-center space-x-2 text-coffee">
         <input
           type="checkbox"
