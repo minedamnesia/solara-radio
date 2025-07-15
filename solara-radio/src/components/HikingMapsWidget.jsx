@@ -70,7 +70,7 @@ export default function HikingMapsWidget() {
     }
 
     fetchParks();
-  }, [selectedState, useCurrentLocation]);
+  }, [selectedState, useCurrentLocation, nearbyPark]]);
 
   // <GiHiking size={18} className="text-coffee" /> Fetch hiking trails
   useEffect(() => {
@@ -105,10 +105,12 @@ export default function HikingMapsWidget() {
 
   return (
     <div className="solara-widget">
-      <h2 className="widget-heading">Hiking Trails near POTA spots</h2>
-
-      {/* <FiCompass size={18} className="text-coffee" /> Location Checkbox */}
-      <label className="block mb-4 text-tan text-sm">
+      <h2 className="widget-heading flex items-center gap-2">
+        <FiCompass size={18} className="text-coffee" />
+        Hiking Trails near POTA spots
+      </h2>
+      <label className="block mb-4 text-tan text-sm flex items-center gap-2">
+        <HiOutlineLocationMarker size={18} className="text-coffee" />
         <input
           type="checkbox"
           checked={useCurrentLocation}
@@ -131,13 +133,20 @@ export default function HikingMapsWidget() {
       {/* <GiParkBench size={18} className="text-coffee" /> Nearby Park Display */}
       {useCurrentLocation && nearbyPark && (
         <div className="p-2 mb-4 rounded bg-tan text-gunmetal shadow-md">
-          <p className="font-semibold text-sm">Your current POTA location is:</p>
+          <p className="font-semibold text-sm flex items-center gap-1">
+            <AiOutlineInfoCircle size={18} className="text-coffee" />
+            Your current POTA location is:
+          </p>
           <p className="text-md font-heading text-persian-orange">
             {nearbyPark.name} ({nearbyPark.reference})
+            {userCoords && (
+              <span className="ml-2 text-xs text-tan">
+                ({userCoords.lat}, {userCoords.lon})
+             </span>
+            )}
           </p>
-          <p className="text-xs">Lat: {nearbyPark.latitude}, Lon: {nearbyPark.longitude}</p>
         </div>
-      )}
+     )}
 
       {/* <HiOutlineLocationMarker size={18} className="text-coffee" /> State Dropdown (hidden in auto-mode) */}
       {!useCurrentLocation && (
@@ -183,7 +192,10 @@ export default function HikingMapsWidget() {
       {/* <GiHiking size={18} className="text-coffee" /> Trail List */}
       {trails.length > 0 && (
         <div className="mt-4 font-sans text-coffee">
-          <h3 className="text-xl font-heading mb-2 text-persian-orange">Nearby Hiking Trails</h3>
+          <h3 className="text-xl font-heading mb-2 text-persian-orange flex items-center gap-2">
+            <GiHiking size={18} className="text-coffee" />
+            Nearby Hiking Trails
+          </h3>
           <ul className="list-disc list-inside text-sm space-y-1 bg-tan text-gunmetal">
             {trails.slice(0, 5).map((trail, index) => (
               <li key={index}>
@@ -203,7 +215,8 @@ export default function HikingMapsWidget() {
       {selectedTrail && (
         <Modal onClose={() => setSelectedTrail(null)}>
           <div className="p-4 text-tan">
-            <h2 className="text-2xl font-heading mb-2 text-persian-orange">
+            <h2 className="text-2xl font-heading mb-2 text-persian-orange flex items-center gap-2">
+              <FaMapMarkedAlt size={18} className="text-coffee" />
               {selectedTrail.tags?.name || 'Trail Visualization'}
             </h2>
             <iframe
