@@ -151,7 +151,7 @@ export default function HikingMapsWidget() {
 
       {/* 🥾 Trail List */}
       {trails.length > 0 && (
-        <div className="mt-4 font-sans text-tan">
+        <div className="mt-4 font-sans text-coffee">
           <h3 className="text-xl font-heading mb-2 text-persian-orange">Nearby Hiking Trails</h3>
           <ul className="list-disc list-inside text-sm space-y-1 bg-tan text-gunmetal">
             {trails.slice(0, 5).map((trail, index) => (
