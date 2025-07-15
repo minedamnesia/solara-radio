@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FiCompass } from 'react-icons/fi';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
-import { GiParkBench,GiHiking } from 'react-icons/gi';
+import { GiHiking } from 'react-icons/gi';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { FaMapMarkedAlt } from 'react-icons/fa';
 
@@ -22,25 +22,53 @@ export default function HikingMapsWidget() {
   const [selectedTrail, setSelectedTrail] = useState(null);
   const [nearbyPark, setNearbyPark] = useState(null);
   const [userCoords, setUserCoords] = useState(null);
-  const [useCurrentLocation, setUseCurrentLocation] = useState(false); // ✅ New state
+  const [useCurrentLocation, setUseCurrentLocation] = useState(false);
 
-  // <FiCompass size={18} className="text-coffee" /> Auto-detect location if checkbox is checked
+  // 🔁 Fetch trails
+  const fetchNearbyTrails = async (lat, lon) => {
+    const query = `
+      [out:json];
+      (
+        way["highway"="path"](around:5000,${lat},${lon});
+        relation["highway"="path"](around:5000,${lat},${lon});
+      );
+      out body;
+      >;
+      out skel qt;
+    `;
+
+    try {
+      const response = await fetch("https://overpass-api.de/api/interpreter", {
+        method: 'POST',
+        body: query,
+      });
+      const data = await response.json();
+      setTrails(data.elements || []);
+    } catch (error) {
+      console.error('Error fetching trails:', error);
+    }
+  };
+
+  // 📍 Geolocation logic
   useEffect(() => {
     if (!useCurrentLocation || !navigator.geolocation) return;
 
     navigator.geolocation.getCurrentPosition(
       async (position) => {
-        const lat = position.coords.latitude.toFixed(4);
-        const lon = position.coords.longitude.toFixed(4);
+        const lat = position.coords.latitude.toFixed(5);
+        const lon = position.coords.longitude.toFixed(5);
         setUserCoords({ lat, lon });
 
         try {
           const res = await fetch(`https://solara-radio.onrender.com/api/nearest-park?lat=${lat}&lon=${lon}`);
           const data = await res.json();
-          if (data && data.reference && data.state) {
+          console.log('Nearby park from geolocation:', data);
+
+          if (data && data.reference && data.state && data.latitude && data.longitude) {
             setNearbyPark(data);
             setSelectedState(data.state);
             setSelectedPark(data);
+            fetchNearbyTrails(data.latitude, data.longitude); // ✅ trigger trails
           }
         } catch (err) {
           console.error('Error fetching nearby POTA site:', err);
@@ -51,7 +79,7 @@ export default function HikingMapsWidget() {
     );
   }, [useCurrentLocation]);
 
-  // <GiParkBench size={18} className="text-coffee" /> Fetch parks for selected state
+  // 🌎 Manual state-based park list
   useEffect(() => {
     if (!selectedState || useCurrentLocation) return;
 
@@ -60,6 +88,7 @@ export default function HikingMapsWidget() {
         const response = await fetch(`https://solara-radio.onrender.com/api/parks?state=${selectedState}`);
         const data = await response.json();
         setParks(data);
+
         if (!nearbyPark || nearbyPark.state !== selectedState) {
           setSelectedPark(null);
           setTrails([]);
@@ -72,34 +101,9 @@ export default function HikingMapsWidget() {
     fetchParks();
   }, [selectedState, useCurrentLocation, nearbyPark]);
 
-  // <GiHiking size={18} className="text-coffee" /> Fetch hiking trails
+  // 🥾 Trail fetch fallback for manually selected park
   useEffect(() => {
     if (!selectedPark || !selectedPark.latitude || !selectedPark.longitude) return;
-
-    async function fetchNearbyTrails(lat, lon) {
-      const query = `
-        [out:json];
-        (
-          way["highway"="path"](around:5000,${lat},${lon});
-          relation["highway"="path"](around:5000,${lat},${lon});
-        );
-        out body;
-        >;
-        out skel qt;
-      `;
-
-      try {
-        const response = await fetch("https://overpass-api.de/api/interpreter", {
-          method: 'POST',
-          body: query,
-        });
-        const data = await response.json();
-        setTrails(data.elements || []);
-      } catch (error) {
-        console.error('Error fetching trails:', error);
-      }
-    }
-
     fetchNearbyTrails(selectedPark.latitude, selectedPark.longitude);
   }, [selectedPark]);
 
@@ -109,6 +113,8 @@ export default function HikingMapsWidget() {
         <FiCompass size={18} className="text-coffee" />
         Hiking Trails near POTA spots
       </h2>
+
+      {/* 🔘 Checkbox */}
       <label className="block mb-4 text-tan text-sm flex items-center gap-2">
         <HiOutlineLocationMarker size={18} className="text-coffee" />
         <input
@@ -130,7 +136,7 @@ export default function HikingMapsWidget() {
         Use my current location
       </label>
 
-      {/* <GiParkBench size={18} className="text-coffee" /> Nearby Park Display */}
+      {/* 📍 Geolocated Park Display */}
       {useCurrentLocation && nearbyPark && (
         <div className="p-2 mb-4 rounded bg-tan text-gunmetal shadow-md">
           <p className="font-semibold text-sm flex items-center gap-1">
@@ -142,13 +148,13 @@ export default function HikingMapsWidget() {
             {userCoords && (
               <span className="ml-2 text-xs text-tan">
                 ({userCoords.lat}, {userCoords.lon})
-             </span>
+              </span>
             )}
           </p>
         </div>
-     )}
+      )}
 
-      {/* <HiOutlineLocationMarker size={18} className="text-coffee" /> State Dropdown (hidden in auto-mode) */}
+      {/* 🗂️ State Dropdown */}
       {!useCurrentLocation && (
         <select
           onChange={(e) => setSelectedState(e.target.value)}
@@ -162,7 +168,7 @@ export default function HikingMapsWidget() {
         </select>
       )}
 
-      {/* <GiParkBench size={18} className="text-coffee" /> Park Dropdown (hidden in auto-mode) */}
+      {/* 🏞️ Park Dropdown */}
       {!useCurrentLocation && parks.length > 0 && (
         <select
           onChange={(e) => {
@@ -172,8 +178,7 @@ export default function HikingMapsWidget() {
           value={selectedPark?.reference || ''}
           className="mb-4 p-2 rounded w-full bg-tan text-gunmetal"
         >
-          <option value=""><GiParkBench size={18} className="text-coffee" />
-            Select a POTA Park</option>
+          <option value="">Select a POTA Site</option>
           {parks.map((park) => (
             <option key={park.reference} value={park.reference}>
               {park.name} ({park.reference})
@@ -182,7 +187,7 @@ export default function HikingMapsWidget() {
         </select>
       )}
 
-      {/* <AiOutlineInfoCircle size={18} className="text-coffee" /> Park Info */}
+      {/* 🧭 Park Info */}
       {selectedPark && (
         <div className="font-sans text-tan mb-4">
           <p>Selected Park: {selectedPark.name}</p>
@@ -190,7 +195,7 @@ export default function HikingMapsWidget() {
         </div>
       )}
 
-      {/* <GiHiking size={18} className="text-coffee" /> Trail List */}
+      {/* 🥾 Trail List */}
       {trails.length > 0 && (
         <div className="mt-4 font-sans text-coffee">
           <h3 className="text-xl font-heading mb-2 text-persian-orange flex items-center gap-2">
@@ -212,7 +217,7 @@ export default function HikingMapsWidget() {
         </div>
       )}
 
-      {/* <FaMapMarkedAlt size={18} className="text-coffee" /> Modal with Trail Map */}
+      {/* 🗺️ Trail Map Modal */}
       {selectedTrail && (
         <Modal onClose={() => setSelectedTrail(null)}>
           <div className="p-4 text-tan">
