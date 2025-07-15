@@ -70,7 +70,7 @@ export default function HikingMapsWidget() {
     }
 
     fetchParks();
-  }, [selectedState, useCurrentLocation, nearbyPark]]);
+  }, [selectedState, useCurrentLocation, nearbyPark]);
 
   // <GiHiking size={18} className="text-coffee" /> Fetch hiking trails
   useEffect(() => {
