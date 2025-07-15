@@ -1,4 +1,10 @@
 import { useState, useEffect } from 'react';
+import { FiCompass } from 'react-icons/fi';
+import { HiOutlineLocationMarker } from 'react-icons/hi';
+import { GiParkBench,GiHiking } from 'react-icons/gi';
+import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { FaMapMarkedAlt } from 'react-icons/fa';
+
 import Modal from './Modal';
 
 export default function HikingMapsWidget() {
@@ -16,10 +22,11 @@ export default function HikingMapsWidget() {
   const [selectedTrail, setSelectedTrail] = useState(null);
   const [nearbyPark, setNearbyPark] = useState(null);
   const [userCoords, setUserCoords] = useState(null);
+  const [useCurrentLocation, setUseCurrentLocation] = useState(false); // ✅ New state
 
-  // 🌍 Detect user location and find nearest POTA park
+  // <FiCompass size={18} className="text-coffee" /> Auto-detect location if checkbox is checked
   useEffect(() => {
-    if (!navigator.geolocation) return;
+    if (!useCurrentLocation || !navigator.geolocation) return;
 
     navigator.geolocation.getCurrentPosition(
       async (position) => {
@@ -42,11 +49,11 @@ export default function HikingMapsWidget() {
       (err) => console.warn('Geolocation denied or failed:', err),
       { enableHighAccuracy: true }
     );
-  }, []);
+  }, [useCurrentLocation]);
 
-  // 🏞 Fetch parks for selected state
+  // <GiParkBench size={18} className="text-coffee" /> Fetch parks for selected state
   useEffect(() => {
-    if (!selectedState) return;
+    if (!selectedState || useCurrentLocation) return;
 
     async function fetchParks() {
       try {
@@ -63,9 +70,9 @@ export default function HikingMapsWidget() {
     }
 
     fetchParks();
-  }, [selectedState]);
+  }, [selectedState, useCurrentLocation]);
 
-  // 🥾 Fetch hiking trails near selected park
+  // <GiHiking size={18} className="text-coffee" /> Fetch hiking trails
   useEffect(() => {
     if (!selectedPark || !selectedPark.latitude || !selectedPark.longitude) return;
 
@@ -100,30 +107,54 @@ export default function HikingMapsWidget() {
     <div className="solara-widget">
       <h2 className="widget-heading">Hiking Trails near POTA spots</h2>
 
-      {/* 🧭 Auto-detected park display */}
-      {nearbyPark && (
-        <div className="p-2 mb-4 rounded bg-coffee text-tan shadow-md">
-          <p className="font-heading text-lg text-persian-orange">
-            You are near: {nearbyPark.name} ({nearbyPark.reference})
+      {/* <FiCompass size={18} className="text-coffee" /> Location Checkbox */}
+      <label className="block mb-4 text-tan text-sm">
+        <input
+          type="checkbox"
+          checked={useCurrentLocation}
+          onChange={(e) => {
+            setUseCurrentLocation(e.target.checked);
+            if (!e.target.checked) {
+              setNearbyPark(null);
+              setSelectedPark(null);
+              setSelectedState('');
+              setUserCoords(null);
+              setParks([]);
+              setTrails([]);
+            }
+          }}
+          className="mr-2"
+        />
+        Use my current location
+      </label>
+
+      {/* <GiParkBench size={18} className="text-coffee" /> Nearby Park Display */}
+      {useCurrentLocation && nearbyPark && (
+        <div className="p-2 mb-4 rounded bg-tan text-gunmetal shadow-md">
+          <p className="font-semibold text-sm">Your current POTA location is:</p>
+          <p className="text-md font-heading text-persian-orange">
+            {nearbyPark.name} ({nearbyPark.reference})
           </p>
-          <p className="text-sm">Lat: {nearbyPark.latitude}, Lon: {nearbyPark.longitude}</p>
+          <p className="text-xs">Lat: {nearbyPark.latitude}, Lon: {nearbyPark.longitude}</p>
         </div>
       )}
 
-      {/* 📍 State Dropdown */}
-      <select
-        onChange={(e) => setSelectedState(e.target.value)}
-        value={selectedState}
-        className="mb-4 p-2 rounded w-full bg-tan text-gunmetal"
-      >
-        <option value="">Select a State</option>
-        {states.map((state) => (
-          <option key={state} value={state}>{state}</option>
-        ))}
-      </select>
+      {/* <HiOutlineLocationMarker size={18} className="text-coffee" /> State Dropdown (hidden in auto-mode) */}
+      {!useCurrentLocation && (
+        <select
+          onChange={(e) => setSelectedState(e.target.value)}
+          value={selectedState}
+          className="mb-4 p-2 rounded w-full bg-tan text-gunmetal"
+        >
+          <option value="">Select a State</option>
+          {states.map((state) => (
+            <option key={state} value={state}>{state}</option>
+          ))}
+        </select>
+      )}
 
-      {/* 🏞 Park Dropdown */}
-      {parks.length > 0 && (
+      {/* <GiParkBench size={18} className="text-coffee" /> Park Dropdown (hidden in auto-mode) */}
+      {!useCurrentLocation && parks.length > 0 && (
         <select
           onChange={(e) => {
             const park = parks.find(p => p.reference === e.target.value);
@@ -141,7 +172,7 @@ export default function HikingMapsWidget() {
         </select>
       )}
 
-      {/* ℹ️ Park Info */}
+      {/* <AiOutlineInfoCircle size={18} className="text-coffee" /> Park Info */}
       {selectedPark && (
         <div className="font-sans text-tan mb-4">
           <p>Selected Park: {selectedPark.name}</p>
@@ -149,7 +180,7 @@ export default function HikingMapsWidget() {
         </div>
       )}
 
-      {/* 🥾 Trail List */}
+      {/* <GiHiking size={18} className="text-coffee" /> Trail List */}
       {trails.length > 0 && (
         <div className="mt-4 font-sans text-coffee">
           <h3 className="text-xl font-heading mb-2 text-persian-orange">Nearby Hiking Trails</h3>
@@ -168,7 +199,7 @@ export default function HikingMapsWidget() {
         </div>
       )}
 
-      {/* 🗺️ Modal with Trail Map */}
+      {/* <FaMapMarkedAlt size={18} className="text-coffee" /> Modal with Trail Map */}
       {selectedTrail && (
         <Modal onClose={() => setSelectedTrail(null)}>
           <div className="p-4 text-tan">
