@@ -62,7 +62,7 @@ export default function SatellitePassWidget() {
           <select
             value={noradId}
             onChange={(e) => setNoradId(Number(e.target.value))}
-            className="w-full p-1 mb-3 rounded bg-gunmetal text-tan border border-tan text-xs"
+            className="w-full p-1 mb-3 rounded bg-tan text-gunmetal border border-tan text-xs"
           >
             {SATELLITES.map((sat) => (
               <option key={sat.noradId} value={sat.noradId}>
@@ -74,7 +74,7 @@ export default function SatellitePassWidget() {
           {loading && <p className="text-tan">Loading passes…</p>}
 
           {!loading && passes.length === 0 && (
-            <p className="text-tan">No upcoming passes in next 2 days.</p>
+            <p className="text-coffee">No upcoming passes in next 2 days.</p>
           )}
 
           {!loading && passes.length > 0 && (
