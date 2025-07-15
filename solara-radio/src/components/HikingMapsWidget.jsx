@@ -172,7 +172,8 @@ export default function HikingMapsWidget() {
           value={selectedPark?.reference || ''}
           className="mb-4 p-2 rounded w-full bg-tan text-gunmetal"
         >
-          <option value="">Select a POTA Site</option>
+          <option value=""><GiParkBench size={18} className="text-coffee" />
+            Select a POTA Park</option>
           {parks.map((park) => (
             <option key={park.reference} value={park.reference}>
               {park.name} ({park.reference})
