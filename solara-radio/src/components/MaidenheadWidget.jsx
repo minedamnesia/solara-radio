@@ -74,14 +74,14 @@ export default function MaidenheadWidget() {
               <input
                 type="text"
                 placeholder="Latitude (e.g., 36.123)"
-                className="rounded p-2 bg-tan text-gunmetal"
+                className="rounded p-2 bg-tan text-gunmetal placeholder-gunmetal"
                 value={latlon.lat}
                 onChange={(e) => setLatlon((prev) => ({ ...prev, lat: e.target.value }))}
               />
               <input
                 type="text"
                 placeholder="Longitude (e.g., -115.456)"
-                className="rounded p-2 bg-tan text-gunmetal"
+                className="rounded p-2 bg-tan text-gunmetal placeholder-gunmetal"
                 value={latlon.lon}
                 onChange={(e) => setLatlon((prev) => ({ ...prev, lon: e.target.value }))}
               />
