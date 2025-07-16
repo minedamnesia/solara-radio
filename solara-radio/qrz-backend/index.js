@@ -307,9 +307,9 @@ app.get('/api/nearest-park', async (req, res) => {
     const userLat = parseFloat(lat);
     const userLon = parseFloat(lon);
 
-    // Lazy-load the CSV data once
+    // Lazy-load park data
     if (!parkDataCache) {
-      parkDataCache = await loadParksFromCSV();
+      parkDataCache = await loadParksFromCSV(); // Should return array of parks with lat/lon
     }
 
     let nearest = null;
@@ -324,7 +324,14 @@ app.get('/api/nearest-park', async (req, res) => {
     }
 
     if (nearest) {
-      res.json(nearest);
+      // ✅ Ensure response includes lat/lon
+      res.json({
+        reference: nearest.reference,
+        name: nearest.name,
+        state: nearest.state,
+        latitude: nearest.latitude,
+        longitude: nearest.longitude,
+      });
     } else {
       res.status(404).json({ error: 'No parks found nearby' });
     }
