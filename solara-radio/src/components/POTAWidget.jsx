@@ -122,7 +122,7 @@ export default function POTAWidget({ resetSignal }) {
             rel="noopener noreferrer"
             className="p-3 bg-persian-orange text-gunmetal rounded shadow text-sm text-center font-semibold hover:underline"
           >
-            Activator Guide
+            Activator Guide <span className="pl-4 text-xs text-tan italic">Requires LogIn</span>
           </a>
           <a
             href="https://pota.app/#/hunter"
@@ -130,7 +130,7 @@ export default function POTAWidget({ resetSignal }) {
             rel="noopener noreferrer"
             className="p-3 bg-persian-orange text-gunmetal rounded shadow text-sm text-center font-semibold hover:underline"
           >
-             Hunter Info
+             Hunter Info <span className="pl-4 text-xs text-tan italic">Requires LogIn</span>
           </a>
           <a
             href="https://pota.app/#/spots"
@@ -138,7 +138,7 @@ export default function POTAWidget({ resetSignal }) {
             rel="noopener noreferrer"
             className="p-3 bg-persian-orange text-gunmetal rounded shadow text-sm text-center font-semibold hover:underline"
           >
-             Spotting Page
+             Spotting Page <span className="pl-4 text-xs text-tan italic">Requires LogIn</span>
           </a>
         </div>
 

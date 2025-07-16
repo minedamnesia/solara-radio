@@ -1,5 +1,4 @@
 import Widget from '../components/Widget';
-import HikingMapsWidget from '../components/HikingMapsWidget';
 import CodingProjectsWidget from '../components/CodingProjectsWidget';
 import SolarPositionsWidget from '../components/SolarPositionsWidget';
 import SpotifySCMEmbedWidget from '../components/SpotifySCMEmbedWidget';
