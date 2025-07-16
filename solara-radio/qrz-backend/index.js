@@ -349,7 +349,7 @@ app.get('/api/satellite-passes', async (req, res) => {
     return res.status(400).json({ error: 'Missing parameters or API key' });
   }
 
-  const url = `https://api.n2yo.com/rest/v1/satellite/radiopasses/25544/${lat}/${lon}/0/2/60?apiKey=${apiKey}`;
+  const url = `https://api.n2yo.com/rest/v1/satellite/radiopasses/25544/${noradId}/${lat}/${lon}/0/2/60?apiKey=${apiKey}`;
 
   try {
     const response = await fetch(url);
