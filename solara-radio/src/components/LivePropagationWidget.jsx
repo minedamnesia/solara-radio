@@ -37,7 +37,7 @@ export default function LivePropagationWidget() {
       try {
         const res = await fetch('/.netlify/functions/noaa');
         const propData = await res.json();
-        setPropData(propData); // it's already structured
+        setPropData(propData);
       } catch (err) {
         console.error("Error fetching propagation data:", err);
       } finally {
@@ -59,10 +59,18 @@ export default function LivePropagationWidget() {
     { name: "10m", freq: "28 MHz" },
   ];
 
-  const bandCondition = (gScale) => {
-    if (["G1", "G2"].includes(gScale)) return "Good";
-    if (gScale === "G3") return "Fair";
-    return "Poor";
+  const bandCondition = (band, gScale, rScale) => {
+    if (["G4", "G5"].includes(gScale) || ["R3", "R4", "R5"].includes(rScale)) return "Poor";
+    if (["G1", "G2"].includes(gScale) && ["R1", "R2"].includes(rScale)) return "Good";
+    if (gScale === "G3") return band === "80m" || band === "40m" ? "Fair" : "Poor";
+    return "Fair";
+  };
+
+  const conditionBadge = (condition) => {
+    const base = "px-2 py-1 rounded text-xs font-bold text-white";
+    if (condition === "Good") return <span className={`text-sage`}>Good</span>;
+    if (condition === "Fair") return <span className={`text-amber`}>Fair</span>;
+    return <span className={`text-persian-orange`}>Poor</span>;
   };
 
   return (
@@ -111,7 +119,7 @@ export default function LivePropagationWidget() {
                     <tr key={band.name} className="border-b border-white">
                       <td className="py-1">{band.name}</td>
                       <td>{band.freq}</td>
-                      <td>{bandCondition(propData.gScale)}</td>
+                      <td>{conditionBadge(bandCondition(band.name, propData.gScale, propData.rScale))}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -146,4 +154,3 @@ export default function LivePropagationWidget() {
     </div>
   );
 }
-
