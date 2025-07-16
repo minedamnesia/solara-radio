@@ -8,14 +8,21 @@ exports.handler = async function () {
     }
 
     const data = await response.json();
-    const [, row] = data; // skip header
+
+    // ✅ Get the first entry object (assuming keys like "0", "1", etc.)
+    const firstKey = Object.keys(data)[0];
+    const row = data[firstKey];
+
+    if (!row || !row.G || !row.S || !row.R) {
+      throw new Error(`Unexpected NOAA response format: ${JSON.stringify(data).slice(0, 100)}...`);
+    }
 
     const parsed = {
-      gScale: row[2],
-      sScale: row[3],
-      rScale: row[4],
-      description: row[1],
-      time: row[5]
+      gScale: row.G.Scale,
+      sScale: row.S.Scale,
+      rScale: row.R.Scale,
+      description: row.Description || "",
+      time: row.TimeStamp || ""
     };
 
     return {
