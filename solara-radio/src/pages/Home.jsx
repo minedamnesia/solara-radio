@@ -1,12 +1,12 @@
 import Widget from '../components/Widget';
 import HikingMapsWidget from '../components/HikingMapsWidget';
 import CodingProjectsWidget from '../components/CodingProjectsWidget';
-import LocalPlantsWidget from '../components/LocalPlantsWidget';
 import SolarPositionsWidget from '../components/SolarPositionsWidget';
 import SpotifySCMEmbedWidget from '../components/SpotifySCMEmbedWidget';
 import Sidebar from '../components/Sidebar';
 import LivePropagationWidget from '../components/LivePropagationWidget';
 import HamRadioResourcesWidget from '../components/HamRadioResourcesWidget';
+import PotaHikingPlantsTabs from '../components/PotaHikingPlantsTabs';
 
 export default function Home() {
   return (
@@ -27,14 +27,17 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-6 border border-persian-orange rounded-xl p-4">
-          <LocalPlantsWidget />
+        <div className="grid grid-cols-3 gap-6">
+          <div className="col-span-3">
+            <PotaHikingPlantsTabs />
+          </div>
         </div>
 
         <div className="grid grid-cols-3 gap-6 border border-persian-orange rounded-xl p-4">
-          <HikingMapsWidget />
           <SolarPositionsWidget />
-          <LivePropagationWidget />
+          <div className="col-span-2">
+            <LivePropagationWidget />
+          </div>
         </div>
 
         <div className="grid grid-cols-3 gap-6 border border-persian-orange rounded-xl p-4">

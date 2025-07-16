@@ -10,6 +10,7 @@ const DX_TARGETS = {
 
 export default function VOACAPPrediction({ txLat, txLon }) {
   const [target, setTarget] = useState("Europe");
+  const [showIframe, setShowIframe] = useState(false);
 
   const rx = DX_TARGETS[target];
   const url = `https://www.voacap.com/prediction.html?txlat=${txLat}&txlon=${txLon}&rxlat=${rx.lat}&rxlon=${rx.lon}`;
@@ -24,7 +25,10 @@ export default function VOACAPPrediction({ txLat, txLon }) {
         Select target region:
         <select
           value={target}
-          onChange={(e) => setTarget(e.target.value)}
+          onChange={(e) => {
+            setTarget(e.target.value);
+            setShowIframe(false); // reset iframe when target changes
+          }}
           className="ml-2 px-2 py-1 rounded bg-white text-black"
         >
           {Object.keys(DX_TARGETS).map((key) => (
@@ -33,13 +37,22 @@ export default function VOACAPPrediction({ txLat, txLon }) {
         </select>
       </label>
 
-      <div className="mt-3">
-        <iframe
-          src={url}
-          className="w-full h-[500px] rounded border border-white"
-          title="VOACAP Prediction"
-        />
-      </div>
+      {!showIframe ? (
+        <button
+          onClick={() => setShowIframe(true)}
+          className="mt-2 px-4 py-2 bg-persian-orange text-tan rounded font-semibold hover:bg-tan hover:text-gunmetal transition"
+        >
+          Load Prediction
+        </button>
+      ) : (
+        <div className="mt-3">
+          <iframe
+            src={url}
+            className="w-full h-[500px] rounded border border-white"
+            title="VOACAP Prediction"
+          />
+        </div>
+      )}
     </div>
   );
 }

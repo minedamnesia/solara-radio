@@ -53,8 +53,7 @@ export default function HikingMapsWidget() {
   // 📍 Geolocation logic
   useEffect(() => {
     if (!useCurrentLocation || !navigator.geolocation) return;
-
-    navigator.geolocation.getCurrentPosition(
+      navigator.geolocation.getCurrentPosition(
       async (position) => {
         const lat = position.coords.latitude.toFixed(5);
         const lon = position.coords.longitude.toFixed(5);
@@ -63,13 +62,12 @@ export default function HikingMapsWidget() {
         try {
           const res = await fetch(`https://solara-radio.onrender.com/api/nearest-park?lat=${lat}&lon=${lon}`);
           const data = await res.json();
-          console.log('Nearby park from geolocation:', data);
 
           if (data && data.reference && data.state && data.latitude && data.longitude) {
-            setNearbyPark(data);
-            setSelectedState(data.state);
-            setSelectedPark(data);
-            fetchNearbyTrails(data.latitude, data.longitude); // ✅ trigger trails
+            setNearbyPark(data);                     // ✅ for display
+            setSelectedState(data.state);            // ✅ optional, for future use
+            setSelectedPark(data);                   // ✅ required to display info
+            fetchNearbyTrails(data.latitude, data.longitude);  // ✅ display trails
           }
         } catch (err) {
           console.error('Error fetching nearby POTA site:', err);
@@ -79,6 +77,7 @@ export default function HikingMapsWidget() {
       { enableHighAccuracy: true }
     );
   }, [useCurrentLocation]);
+
 
   // 🌎 Manual state-based park list
   useEffect(() => {
