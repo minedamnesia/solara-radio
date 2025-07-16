@@ -3,54 +3,45 @@ import VOACAPPrediction from "./VOACAPPrediction";
 
 export default function LivePropagationWidget() {
   const [position, setPosition] = useState(null);
-  const [showMessage, setShowMessage] = useState(false);
+  const [geoError, setGeoError] = useState(false);
+  const [loadingGeo, setLoadingGeo] = useState(true);
+
   const [propData, setPropData] = useState(null);
+  const [loadingProp, setLoadingProp] = useState(true);
 
   useEffect(() => {
     if (!navigator.geolocation) {
-      setShowMessage(true);
+      setGeoError(true);
+      setLoadingGeo(false);
       return;
     }
 
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         setPosition({
-          lat: pos.coords.latitude.toFixed(4),
-          lon: pos.coords.longitude.toFixed(4),
+          lat: parseFloat(pos.coords.latitude.toFixed(4)),
+          lon: parseFloat(pos.coords.longitude.toFixed(4)),
         });
+        setLoadingGeo(false);
       },
       (err) => {
         console.warn("Geolocation error:", err.message);
-        setShowMessage(true);
+        setGeoError(true);
+        setLoadingGeo(false);
       }
     );
   }, []);
 
   useEffect(() => {
-    if (showMessage) {
-      const timer = setTimeout(() => setShowMessage(false), 4000);
-      return () => clearTimeout(timer);
-    }
-  }, [showMessage]);
-
-  useEffect(() => {
     async function fetchPropagationData() {
       try {
-        const res = await fetch("/.netlify/functions/noaa");
-        const data = await res.json();
-
-        if (data && Array.isArray(data) && data.length > 1) {
-          const [values] = data; // skip headers, use row 1
-          setPropData({
-            description: values[1],
-            gScale: values[2],
-            sScale: values[3],
-            rScale: values[4],
-            time: values[5],
-          });
-        }
+        const res = await fetch('/.netlify/functions/noaa');
+        const propData = await res.json();
+        setPropData(propData); // it's already structured
       } catch (err) {
         console.error("Error fetching propagation data:", err);
+      } finally {
+        setLoadingProp(false);
       }
     }
 
@@ -68,17 +59,29 @@ export default function LivePropagationWidget() {
     { name: "10m", freq: "28 MHz" },
   ];
 
+  const bandCondition = (gScale) => {
+    if (["G1", "G2"].includes(gScale)) return "Good";
+    if (gScale === "G3") return "Fair";
+    return "Poor";
+  };
+
   return (
     <div className="solara-widget">
       <h2 className="widget-heading">Live Propagation Conditions</h2>
 
-      {showMessage && (
+      {geoError && (
         <div className="bg-yellow-100 text-yellow-800 border border-yellow-400 rounded p-2 mb-3">
-          Geolocation is required to show conditions for your location.
+          Geolocation is required to show personalized propagation predictions.
         </div>
       )}
 
-      {position && propData ? (
+      {(loadingGeo || loadingProp) && (
+        <div className="text-white text-sm italic mb-4">
+          Loading propagation data...
+        </div>
+      )}
+
+      {position && propData && !loadingGeo && !loadingProp ? (
         <>
           <div className="text-white space-y-4">
             <div>
@@ -90,9 +93,7 @@ export default function LivePropagationWidget() {
                 <strong>Solar Radiation:</strong> {propData.sScale} &nbsp;|&nbsp;
                 <strong>Radio Blackouts:</strong> {propData.rScale}
               </p>
-              <p className="text-sm italic">
-                Updated: {propData.time}
-              </p>
+              <p className="text-sm italic">Updated: {propData.time}</p>
             </div>
 
             <div>
@@ -110,13 +111,7 @@ export default function LivePropagationWidget() {
                     <tr key={band.name} className="border-b border-white">
                       <td className="py-1">{band.name}</td>
                       <td>{band.freq}</td>
-                      <td>
-                        {propData.gScale === "G1" || propData.gScale === "G2"
-                          ? "Good"
-                          : propData.gScale === "G3"
-                          ? "Fair"
-                          : "Poor"}
-                      </td>
+                      <td>{bandCondition(propData.gScale)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -137,14 +132,16 @@ export default function LivePropagationWidget() {
           <VOACAPPrediction txLat={position.lat} txLon={position.lon} />
         </>
       ) : (
-        <div className="text-white text-sm italic">
-          <p className="mb-2">Showing default HF conditions map:</p>
-          <img
-            src="https://prop.kc2g.com/coverage/coverage.png"
-            alt="Real-Time MUF Map"
-            className="w-full rounded border border-white"
-          />
-        </div>
+        !loadingProp && (
+          <div className="text-white text-sm italic">
+            <p className="mb-2">Showing default HF conditions map:</p>
+            <img
+              src="https://prop.kc2g.com/coverage/coverage.png"
+              alt="Real-Time MUF Map"
+              className="w-full rounded border border-white"
+            />
+          </div>
+        )
       )}
     </div>
   );
