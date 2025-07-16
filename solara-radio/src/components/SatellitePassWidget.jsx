@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useGeolocation } from '../context/GeolocationProvider';
 
-const API_KEY = 'YOUR_N2YO_API_KEY'; 
-
 const SATELLITES = [
   { name: 'ISS (ZARYA)', noradId: 25544 },
   { name: 'Hubble Space Telescope', noradId: 20580 },
@@ -25,11 +23,11 @@ export default function SatellitePassWidget() {
   const longitude = location?.longitude;
 
   useEffect(() => {
-    if (!enabled || !latitude || !longitude || API_KEY === 'REPLACE_ME') return;
-
+    if (!enabled || !latitude || !longitude) return;
     async function fetchPasses() {
       setLoading(true);
       try {
+        const url = `https://solara-radio.onrender.com/api/satellite-passes?lat=${latitude}&lon=${longitude}`;
         const url = `const url = `https://your-backend-url.com/api/satellite-passes?lat=${lat}&lon=${lon}`;
         const res = await fetch(url);
         const json = await res.json();
