@@ -2,6 +2,7 @@ import { MdApps, MdWarningAmber } from 'react-icons/md';
 import { FaSatelliteDish, FaNetworkWired, FaBroadcastTower,FaBookOpen } from 'react-icons/fa';
 import { HiChip } from 'react-icons/hi';
 import { GiBackpack,GiWalkieTalkie } from 'react-icons/gi';
+import { Megaphone } from 'lucide-react';
 import { useState } from 'react';
 
 const linkData = {
@@ -108,8 +109,22 @@ const linkData = {
     ["eHam Practice Exams", "https://www.eham.net/exams/"],
     ["QRZ Practice Tests", "https://www.qrz.com/hamtest/"],
     ["NCVEC Question Pools", "https://www.ncvec.org/page.php?id=356"],
+    ["Ham Radio Prep", "https://www.hamradioprep.com/"],
+    ["LAUREL VEC Free Exams", "https://www.laurelvec.com/"],
+    ["W5YI Group Licensing Info", "https://www.w5yi.org/"]
   ],
-
+  Contesting: [
+  ["WA7BNM Contest Calendar", "https://www.contestcalendar.com/"],
+  ["ARRL Contest Calendar", "https://www.arrl.org/contest-calendar"],
+  ["CQ Contest Central", "https://www.cq-amateur-radio.com/cq_contests/index_cq_contests.html"],
+  ["N1MM Logger+", "https://n1mmwp.hamdocs.com/"],
+  ["Ham Radio Deluxe", "https://www.hamradiodeluxe.com"],
+  ["3830 Scores", "https://www.3830scores.com/"],
+  ["Contesting.com", "https://www.contesting.com/"],
+  ["Logbook of The World (LoTW)", "https://lotw.arrl.org"],
+  ["SDR Contesting Techniques (DK1MI)", "https://dk1mi.radio/blog/2022/02/sdr-contesting.html"],
+  ["Parks on the Air (POTA)", "https://parksontheair.com"]
+  ],
 };
 
 const categoryIcons = {
@@ -122,6 +137,7 @@ const categoryIcons = {
   Supplies: GiBackpack,
   Licensing: FaBookOpen,
   'Portable Ops': GiWalkieTalkie,
+  Contesting:  Megaphone,
 };
 
 export default function HamRadioResourcesWidget() {
