@@ -42,7 +42,6 @@ export default function SatellitePassWidget() {
       setLoading(true);
       try {
         const url = `https://solara-radio.onrender.com/api/satellite-passes?lat=${latitude}&lon=${longitude}`;
-        const url = `const url = `https://your-backend-url.com/api/satellite-passes?lat=${lat}&lon=${lon}`;
         const res = await fetch(url);
         const json = await res.json();
         setPasses(json.passes || []);
