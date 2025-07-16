@@ -6,6 +6,7 @@ import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { FaMapMarkedAlt } from 'react-icons/fa';
 
 import Modal from './Modal';
+import TrailMap from './TrailMap';
 
 export default function HikingMapsWidget() {
   const [states] = useState([
@@ -32,7 +33,7 @@ export default function HikingMapsWidget() {
         way["highway"="path"](around:5000,${lat},${lon});
         relation["highway"="path"](around:5000,${lat},${lon});
       );
-      out body;
+      out body geom;
       >;
       out skel qt;
     `;
@@ -218,20 +219,14 @@ export default function HikingMapsWidget() {
       )}
 
       {/* 🗺️ Trail Map Modal */}
-      {selectedTrail && (
+      {selectedTrail && selectedPark?.latitude && selectedPark?.longitude && (
         <Modal onClose={() => setSelectedTrail(null)}>
           <div className="p-4 text-tan">
             <h2 className="text-2xl font-heading mb-2 text-persian-orange flex items-center gap-2">
               <FaMapMarkedAlt size={18} className="text-coffee" />
               {selectedTrail.tags?.name || 'Trail Visualization'}
             </h2>
-            <iframe
-              title="OSM Trail Map"
-              width="100%"
-              height="500"
-              className="rounded-lg shadow-md"
-              src={`https://www.openstreetmap.org/export/embed.html?bbox=${selectedPark.longitude - 0.01},${selectedPark.latitude - 0.01},${selectedPark.longitude + 0.01},${selectedPark.latitude + 0.01}&layer=mapnik&marker=${selectedPark.latitude},${selectedPark.longitude}`}
-            />
+            <TrailMap trail={selectedTrail} park={selectedPark} />
             <p className="mt-2 text-sm">Visualizing trail area around park center.</p>
           </div>
         </Modal>
