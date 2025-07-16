@@ -143,10 +143,10 @@ export default function HikingMapsWidget() {
             <AiOutlineInfoCircle size={18} className="text-coffee" />
             Your current POTA location is:
           </p>
-          <p className="text-md font-heading text-persian-orange">
+          <p className="text-md font-heading text-coffee font-semibold">
             {nearbyPark.name} ({nearbyPark.reference})
             {userCoords && (
-              <span className="ml-2 text-xs text-tan">
+              <span className="ml-2 text-xs text-coffee">
                 ({userCoords.lat}, {userCoords.lon})
               </span>
             )}
@@ -207,7 +207,7 @@ export default function HikingMapsWidget() {
               <li key={index}>
                 <button
                   onClick={() => setSelectedTrail(trail)}
-                  className="text-amber-300 hover:underline"
+                  className="text-coffee hover:text-persian-orange font-medium hover:underline"
                 >
                   {trail.tags?.name || `Unnamed Trail (${trail.id})`}
                 </button>
