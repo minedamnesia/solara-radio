@@ -341,6 +341,26 @@ app.get('/api/nearest-park', async (req, res) => {
   }
 });
 
+app.get('/api/satellite-passes', async (req, res) => {
+  const { lat, lon } = req.query;
+  const apiKey = process.env.YOUR_N2YO_API_KEY; // Use env var for security
+
+  if (!lat || !lon || !apiKey) {
+    return res.status(400).json({ error: 'Missing parameters or API key' });
+  }
+
+  const url = `https://api.n2yo.com/rest/v1/satellite/radiopasses/25544/${lat}/${lon}/0/2/60?apiKey=${apiKey}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    res.json(data);
+  } catch (err) {
+    console.error('Error fetching from N2YO:', err);
+    res.status(500).json({ error: 'Failed to fetch satellite data' });
+  }
+});
+
 // ===== Start Server =====
 app.listen(PORT, () => {
   console.log(`QRZ backend running on port ${PORT}`);
