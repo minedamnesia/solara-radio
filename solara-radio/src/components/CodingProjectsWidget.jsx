@@ -3,17 +3,17 @@ export default function CodingProjectsWidget() {
     {
       name: 'Propagation Project',
       description: 'Real-time HF propagation predictor using solar data and QRZ lookups.',
-      link: 'https://github.com/minedamnesia/solara-prop',
+      // link: 'https://github.com/minedamnesia/solara-prop',
     },
     {
       name: 'Signal Mapper',
       description: 'Maps and logs amateur radio contacts with geolocation and signal reports.',
-      link: 'https://github.com/minedamnesia/another-project',
+      // link: 'https://github.com/minedamnesia/another-project',
     },
     {
       name: 'Spotify Radio Widget',
       description: 'React widget for playing and browsing Spotify playlists via Web Playback SDK.',
-      link: 'https://github.com/minedamnesia/solara-spotify',
+      //link: 'https://github.com/minedamnesia/solara-spotify',
     },
     // Add more projects here
   ];
@@ -33,7 +33,7 @@ export default function CodingProjectsWidget() {
               rel="noopener noreferrer"
               className="text-coffee hover:underline text-sm font-bold"
             >
-              View on GitHub →
+              View on GitHub (Coming Soon) →
             </a>
           </div>
         ))}
