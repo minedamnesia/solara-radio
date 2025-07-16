@@ -1,5 +1,4 @@
 import { useEffect, useState, useContext } from 'react';
-import { GeolocationContext } from '../context/GeolocationProvider';
 
 const getCardinalDirection = (deg) => {
   const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
