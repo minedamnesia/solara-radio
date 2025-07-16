@@ -8,7 +8,6 @@ const getCardinalDirection = (deg) => {
 
 export default function CompassWidget() {
   const [heading, setHeading] = useState(0);
-  const { enabled: geolocationEnabled } = useContext(GeolocationContext);
 
   useEffect(() => {
     const handleOrientation = (event) => {
