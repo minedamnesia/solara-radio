@@ -67,10 +67,17 @@ export default function LivePropagationWidget() {
   };
 
   const conditionBadge = (condition) => {
-    const base = "px-2 py-1 rounded text-xs font-bold text-white";
-    if (condition === "Good") return <span className={`text-sage`}>Good</span>;
-    if (condition === "Fair") return <span className={`text-amber`}>Fair</span>;
-    return <span className={`text-persian-orange`}>Poor</span>;
+    if (condition === "Good") return <span className="px-2 py-1 rounded text-xs font-bold text-sage">Good</span>;
+    if (condition === "Fair") return <span className="px-2 py-1 rounded text-xs font-bold text-amber">Fair</span>;
+    return <span className="px-2 py-1 rounded text-xs font-bold text-persian-orange">Poor</span>;
+  };
+
+  const metricColor = (name, value) => {
+    if (value == null) return "text-gunmetal";
+    if (name === "Kp") return value <= 3 ? "text-sage" : value <= 5 ? "text-amber" : "text-persian-orange";
+    if (name === "SFI") return value > 100 ? "text-sage" : value >= 70 ? "text-amber" : "text-persian-orange";
+    if (name === "Ap") return value < 15 ? "text-sage" : value < 30 ? "text-amber" : "text-persian-orange";
+    return "text-gunmetal";
   };
 
   return (
@@ -93,15 +100,23 @@ export default function LivePropagationWidget() {
         <>
           <div className="text-white space-y-4">
             <div>
-              <p>
-                <strong>Your Position:</strong> {position.lat}°, {position.lon}°
-              </p>
-              <p>
-                <strong>Geomagnetic:</strong> {propData.gScale} &nbsp;|&nbsp;
-                <strong>Solar Radiation:</strong> {propData.sScale} &nbsp;|&nbsp;
-                <strong>Radio Blackouts:</strong> {propData.rScale}
-              </p>
+              <p><strong>Your Position:</strong> {position.lat}°, {position.lon}°</p>
               <p className="text-sm italic">Updated: {propData.time}</p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <h4 className="font-semibold text-sage mb-1">Space Weather Scales</h4>
+                <p><strong>G:</strong> {propData.gScale}</p>
+                <p><strong>S:</strong> {propData.sScale}</p>
+                <p><strong>R:</strong> {propData.rScale}</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-sage mb-1">Solar Indices</h4>
+                <p><strong>Kp:</strong> <span className={metricColor("Kp", propData.kp)}>{propData.kp ?? "—"}</span></p>
+                <p><strong>Ap:</strong> <span className={metricColor("Ap", propData.ap)}>{propData.ap ?? "—"}</span></p>
+                <p><strong><span title="Solar Flux Index - 10.7 cm radio emissions">SFI:</span></strong> <span className={metricColor("SFI", propData.sfi)}>{propData.sfi ?? "—"}</span></p>
+              </div>
             </div>
 
             <div>
