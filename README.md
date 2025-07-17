@@ -55,20 +55,30 @@ This will start the Vite dev server and open the app in your browser.
 
 ## 🛠️ Built With
 - React + Vite – modern JS framework with blazing-fast development
+
 - Tailwind CSS – utility-first styling for a clean layout
+
 - Netlify – for seamless continuous deployment of the frontend
+
 - Render - for backend deployment
+
 - Open APIs – NOAA, N2YO, VOACAP, Spotify, QRZ (planned)
 
 ## Who Is This For?
 Solara Radio is made for:
 
 -Amateur radio operators (especially POTA/SOTA/portable ops)
+
 -Radio propagation nerds
+
 -DX chasers and contesters
+
 -Ham-curious techies
+
 -Weather space geeks and solar cycle watchers
+
 -People who like charts, widgets, and pretty dashboards
+
 -Me (so I can find the things I need easily)
 
 ## 👩‍💻 Author
