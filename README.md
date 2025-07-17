@@ -67,22 +67,22 @@ This will start the Vite dev server and open the app in your browser.
 ## Who Is This For?
 Solara Radio is made for:
 
--Amateur radio operators (especially POTA/SOTA/portable ops)
+- Amateur radio operators (especially POTA/SOTA/portable ops)
 
--Radio propagation nerds
+- Radio propagation nerds
 
--DX chasers and contesters
+- DX chasers and contesters
 
--Ham-curious techies
+- Ham-curious techies
 
--Weather space geeks and solar cycle watchers
+- Weather space geeks and solar cycle watchers
 
--People who like charts, widgets, and pretty dashboards
+- People who like charts, widgets, and pretty dashboards
 
--Me (so I can find the things I need easily)
+- Me (so I can find the things I need easily)
 
 ## 👩‍💻 Author
-Created by Kelly Simer — Python developer, ham radio operator (Extra class), and cosmic dashboard tinkerer.
+Created by Kelly Simer — Python developer, ham radio operator (Extra class) -- call sign KK7QEA, and cosmic dashboard tinkerer.
 
 ## 📜 License
 MIT License. See LICENSE for more info.
