@@ -19,7 +19,7 @@ Solara Radio is a web-based ham radio utility that combines real-time propagatio
 - **📡 Satellite Pass Tracker**  
   View upcoming passes from N2YO API using real-time location data (VITE_N2YO_API_KEY required).
 
-- **📃 ADIF Logbook Display**  
+- **📃 ADIF Logbook Display** *(Planned)*  
   Parses uploaded `.adi` files and visualizes contact info (callsign, flag, mode, time, etc.).
 
 - **🎶 Spotify Playlist Picker**  
