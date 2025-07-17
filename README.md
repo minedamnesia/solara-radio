@@ -44,7 +44,7 @@ To enable satellite tracking and other geolocation-dependent features, you'll ne
 VITE_N2YO_API_KEY=your_api_key_here
 ```
 You can get your free API key from N2YO.com.
-##🧪 Development
+## 🧪 Development
 ```bash
 git clone https://github.com/minedamnesia/solara-radio.git
 cd solara-radio/solara-radio
@@ -53,32 +53,26 @@ npm run dev
 ```
 This will start the Vite dev server and open the app in your browser.
 
-##🛠️ Built With
+## 🛠️ Built With
 - React + Vite – modern JS framework with blazing-fast development
 - Tailwind CSS – utility-first styling for a clean layout
-- Netlify – for seamless continuous deployment
+- Netlify – for seamless continuous deployment of the frontend
+- Render - for backend deployment
 - Open APIs – NOAA, N2YO, VOACAP, Spotify, QRZ (planned)
 
-##Who Is This For?
-
+## Who Is This For?
 Solara Radio is made for:
 
 -Amateur radio operators (especially POTA/SOTA/portable ops)
-
 -Radio propagation nerds
-
 -DX chasers and contesters
-
 -Ham-curious techies
-
 -Weather space geeks and solar cycle watchers
-
 -People who like charts, widgets, and pretty dashboards
-
 -Me (so I can find the things I need easily)
 
-##👩‍💻 Author
+## 👩‍💻 Author
 Created by Kelly Simer — Python developer, ham radio operator (Extra class), and cosmic dashboard tinkerer.
 
-#📜 License
+## 📜 License
 MIT License. See LICENSE for more info.
