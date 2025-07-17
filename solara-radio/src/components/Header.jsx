@@ -8,7 +8,7 @@ export default function Header() {
       <div className="flex items-center justify-between px-6 py-4">
         <div className="flex items-center space-x-2">
           <Radio className="text-persian-orange" size={36} />
-          <h1 className="text-3xl font-heading text-persian-orange">Solara Station</h1>
+          <h1 className="text-3xl font-heading text-persian-orange">Solara Radio</h1>
           <p className="text-lg font-sans tracking-normal">Broadcasts from the backcountry of space and sky.</p>
         </div>
       </div>
