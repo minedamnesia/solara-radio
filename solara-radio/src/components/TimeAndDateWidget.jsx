@@ -5,7 +5,6 @@ export default function TimeAndDateWidget() {
   const { location, enabled, error: geoError } = useGeolocation();
   const [localTime, setLocalTime] = useState('');
   const [utcTime, setUtcTime] = useState('');
-  const [error, setError] = useState('');
 
   // Get geolocation coordinates
   const [locationData, setLocationData] = useState({ lat: null, lon: null });
