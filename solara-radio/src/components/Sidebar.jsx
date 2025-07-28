@@ -1,5 +1,5 @@
-import CompassWidget from '../components/CompassWidget';
 import MaidenheadWidget from '../components/MaidenheadWidget';
+import TimeAndDateWidget from '../components/TimeAndDateWidget';
 import BuyMeCoffeeWidget from '../components/BuyMeCoffeeWidget';
 import PskreporterWidget from '../components/PskreporterWidget';
 import MUFMapWidget from '../components/MUFMapWidget';
@@ -14,7 +14,7 @@ export default function Sidebar() {
         <GeolocationToggle />
       </div>
       <div className="sidebar-widget">
-        <CompassWidget />
+        <TimeAndDateWidget />
       </div>
       <div className="sidebar-widget">
         <MaidenheadWidget />
